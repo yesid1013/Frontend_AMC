@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+</head>
+<body>
+
+    <section class="wrapper">
+        <div class="container">
+            <div class="col-sm-8 offset-sm-2 col-lg-6 offset-lg-3 col-xl-4 offset-xl-4 text-center">
+                <div class="logo">
+                    <img src="../../../assets/login.png" class="img-fluid" alt="logo"> 
+                </div>
+
+                <form class="rounded bg-white shadow p-5" [formGroup]="form_login" >
+                    <h3 class="text-dark fw-bolder fs-4 mb-2">Inicio de sesion</h3>
+                    <div class="fw-normal text-muted mb-4">
+                        No tienes cuenta? <a href="#" class="text-primary fw-bold text-decoration-none">Crear cuenta</a>
+                    </div>
+
+                    <div class="form-floating mb-3">
+                        <input  type="email" class="form-control" placeholder="Correo" id="floatingInput" formControlName = "correo" >
+                        <label for="floatingInput">Correo</label>
+
+                        <div *ngIf="form_login.get('correo')?.hasError('required') && (submitted)"       class="alert alert-primary" role="alert">
+                            <i class="bi bi-exclamation-triangle"></i>
+                              El correo  es requerido.
+                        </div>
+
+                        <div *ngIf="form_login.get('correo')?.hasError('email') && (submitted)" class="alert alert-primary" role="alert">
+                            <i class="bi bi-exclamation-triangle"></i>
+                              El correo  es invalido.
+                        </div>
+                        
+                    </div>
+
+                    <div class="form-floating">
+                        <input type="password" formControlName = "contrasena" class="form-control" id="floatingPassword" placeholder="Password">
+                        <label for="floatingPassword">Contraseña</label>
+
+                        <div *ngIf="form_login.get('contrasena')?.hasError('required') && (submitted)"       class="alert alert-primary" role="alert">
+                            <i class="bi bi-exclamation-triangle"></i>
+                              La contraseña es requerida.
+                        </div>
+
+                    </div>
+
+                    <div class="mt-2 text-end">
+                        <a href="#" class="text-primary fw-bold text-decoration-none">Olvidé mi contraseña</a>
+                    </div>
+
+                    <button type="submit" (click)="login(form_login.value)" class="btn btn-primary submit_btn w-100 my-4">Iniciar sesión</button>
+
+                    <div class="text-center text-muted text-uppercase mb-3"><hr></div>
+                    <a href="#" class="btn btn-light login_with w-100 mb-3">
+                        <img src="../../../assets/google.png" class="img-fluid me-3">Continuar con Google
+                    </a>
+
+                </form>
+
+            </div>
+        </div>
+    </section>
+
+
+</body>
+</html>
