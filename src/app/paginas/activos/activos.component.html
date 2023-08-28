@@ -18,16 +18,15 @@
         <!--Componente sidebar (Barra lateral)-->
         <app-sidebar></app-sidebar> 
 
-        <div class="content">
+        <div class="content" [ngClass]="{'open': isOpen}">
             <!--Componente navbar-->
             <app-navbar></app-navbar>
 
             <!-- Contenido -->
             <div class="container-fluid pt-4 px-4">
-                <div class="row vh-100 bg-light rounded align-items-center justify-content-center mx-0">
-                    <div class="col-md-6 text-center">
-                        <h3>Registrar equipo</h3>
-                    </div>
+                <div class="row vh-100 bg-light rounded mx-0">
+                    <h3 class="h3 mb-4">Activos</h3>
+
                 </div>
             </div>
             <!-- Fin de contenido -->

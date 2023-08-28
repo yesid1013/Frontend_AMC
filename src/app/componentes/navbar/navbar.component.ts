@@ -1,4 +1,5 @@
 import { Component,ElementRef, Renderer2 } from '@angular/core';
+import { ComunicationService } from 'src/app/servicios/comunication.service';
 
 @Component({ 
   selector: 'app-navbar',
@@ -6,14 +7,12 @@ import { Component,ElementRef, Renderer2 } from '@angular/core';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent {
-  constructor(private elementRef: ElementRef, private renderer: Renderer2){}
+  constructor(private communicationService: ComunicationService){}
 
-  onSidebarToggle() {
-    const sidebar = this.elementRef.nativeElement.querySelector('.sidebar');
-    const content = this.elementRef.nativeElement.querySelector('.content');
-
-    this.renderer.addClass(sidebar, 'open');
-    this.renderer.addClass(content, 'open');
+  toggleSidebar() {
+    this.communicationService.toggleSidebar();
   }
+
+  
 
 }
