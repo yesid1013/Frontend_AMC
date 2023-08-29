@@ -12,6 +12,7 @@ import { NavbarComponent } from './componentes/navbar/navbar.component';
 import { ActivosComponent } from './paginas/activos/activos.component';
 import { FooterComponent } from './componentes/footer/footer.component';
 import { ServiciosComponent } from './paginas/servicios/servicios.component';
+import { FichaTecnicaComponent } from './paginas/ficha-tecnica/ficha-tecnica.component';
 
 
 
@@ -23,7 +24,8 @@ import { ServiciosComponent } from './paginas/servicios/servicios.component';
     NavbarComponent,
     ActivosComponent,
     FooterComponent,
-    ServiciosComponent
+    ServiciosComponent,
+    FichaTecnicaComponent
   ],
   imports: [
     BrowserModule,
