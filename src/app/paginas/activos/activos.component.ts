@@ -8,6 +8,7 @@ import { ComunicationService } from 'src/app/servicios/comunication.service';
 })
 export class ActivosComponent {
   isOpen = false;
+  info = "xd";
 
   constructor(private communicationService: ComunicationService) {}
 
@@ -15,6 +16,10 @@ export class ActivosComponent {
     this.communicationService.sidebarOpen$.subscribe(isOpen => {
       this.isOpen = isOpen;
     });
+  }
+
+  ver_mas(){
+    this.info = "HOLAAA";
   }
 
 
