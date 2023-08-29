@@ -2,14 +2,12 @@ import { Component } from '@angular/core';
 import { ComunicationService } from 'src/app/servicios/comunication.service';
 
 @Component({
-  selector: 'app-activos',
-  templateUrl: './activos.component.html',
-  styleUrls: ['./activos.component.css']
+  selector: 'app-servicios',
+  templateUrl: './servicios.component.html',
+  styleUrls: ['./servicios.component.css']
 })
-export class ActivosComponent {
+export class ServiciosComponent {
   isOpen = false;
-  info = "xd";
-
   constructor(private communicationService: ComunicationService) {}
 
   ngOnInit() {
@@ -17,10 +15,5 @@ export class ActivosComponent {
       this.isOpen = isOpen;
     });
   }
-
-  ver_mas(){
-    this.info = "https://drive.google.com/uc?id=1P3BipsTduRWUSSMTG-tOH0OjgEHbGLXH&export=download";
-  }
-
 
 }

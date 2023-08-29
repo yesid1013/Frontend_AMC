@@ -11,6 +11,7 @@ import { SidebarComponent } from './componentes/sidebar/sidebar.component';
 import { NavbarComponent } from './componentes/navbar/navbar.component';
 import { ActivosComponent } from './paginas/activos/activos.component';
 import { FooterComponent } from './componentes/footer/footer.component';
+import { ServiciosComponent } from './paginas/servicios/servicios.component';
 
 
 
@@ -21,7 +22,8 @@ import { FooterComponent } from './componentes/footer/footer.component';
     SidebarComponent,
     NavbarComponent,
     ActivosComponent,
-    FooterComponent
+    FooterComponent,
+    ServiciosComponent
   ],
   imports: [
     BrowserModule,

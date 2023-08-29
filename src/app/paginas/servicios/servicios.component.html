@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+
+</head>
+
+<body>
+    <div class="container-xxl position-relative bg-white d-flex p-0">
+        <app-sidebar></app-sidebar>
+
+        <div class="content" [ngClass]="{'open': isOpen}">
+            <!--Componente navbar-->
+            <app-navbar></app-navbar>
+
+            <div class="container-fluid pt-4 px-4">
+                <div class="bg-light rounded h-100">
+                    <h1 class="h3 mb-4 text-gray-800">Servicios</h1>
+
+                    <div class="col-md-2 pe-0">
+                        <!-- Button trigger modal -->
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                            data-bs-target="#Modal_registar_servicio">
+                            <i class="fas fa-plus-circle"></i> Registrar servicio
+                        </button>
+
+                        <!-- Modal Registrar servicio -->
+                        <div class="modal fade" id="Modal_registar_servicio" tabindex="-1"
+                            aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Registrar servicio</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form>
+                                            <div class="row p-1">
+
+                                                <div class="col-md-6 ">
+                                                    <label for="exampleDataList" class="form-label">Seleccione el
+                                                        activo</label>
+                                                    <input class="form-control" list="datalistOptions"
+                                                        id="exampleDataList" placeholder="Escriba para buscar">
+                                                    <datalist id="datalistOptions">
+                                                        <option value="San Francisco">
+                                                        <option value="New York">
+                                                        <option value="Seattle">
+                                                        <option value="Los Angeles">
+                                                        <option value="Chicago">
+                                                    </datalist>
+                                                </div>
+
+                                                <div class="col-md-6 ">
+                                                    <div class="mb-3">
+                                                        <select class="form-select form-select"
+                                                            aria-label=".form-select-sm example"
+                                                            id="select_tipo_servicio">
+                                                            <option selected>Tipo de servicio</option>
+                                                            <option value="1">Mantenimiento preventivo</option>
+                                                            <option value="2">Mantenimiento correctivo</option>
+                                                            <option value="3">Inspección y/o diagnostico</option>
+                                                        </select>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+
+
+                                            <div class="row p-1">
+                                                <div class="col-md-6 ">
+                                                    <div class="form-floating mb-3">
+                                                        <textarea class="form-control" id="floatingInput"></textarea>
+                                                        <label for="floatingInput">Descripcion</label>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-6 ">
+                                                    <div class="form-floating mb-3">
+                                                        <textarea class="form-control" id="floatingInput"></textarea>
+                                                        <label for="floatingInput">Observaciones</label>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                            <div class="row p-1">
+                                                <div class="col-md-6 ">
+                                                    <div class="form-floating mb-3">
+                                                        <textarea class="form-control" id="floatingInput"></textarea>
+                                                        <label for="floatingInput">Observación de usuario</label>
+                                                        <i class="fas fa-question-circle" data-bs-toggle="tooltip"
+                                                            title="Si no eres un tecnico y quieres registrar un servicio, por favor escriba su nombre u observacion"></i>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-6 ">
+                                                    <label for="start">Fecha de ejecución:</label><br>
+                                                    <input type="datetime-local" name="horareunion">
+                                                </div>
+
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary"
+                                            data-bs-dismiss="modal">Cerrar</button>
+                                        <button type="button" class="btn btn-primary">Registrar</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Fin Modal Registrar servicio -->
+
+                    </div>
+
+                    <div class="col-12 pt-4">
+                        <h6 class="mb-4">Historial de servicios</h6>
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Activo</th>
+                                    <th scope="col">Fecha de ejecución</th>
+                                    <th scope="col">Tipo de servicio</th>
+                                    <th scope="col">Descripción</th>
+                                    <th scope="col">Observaciones</th>
+                                    <th scope="col">Usuario</th>
+                                    <th scope="col">informe</th>
+                                    <th scope="col">Editar</th>
+                                    <th scope="col">Eliminar</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th>1</th>
+                                    <td>John</td>
+                                    <td>Doe</td>
+                                    <td>jhon@email.com</td>
+                                    <td>Doe</td>
+                                    <td>Doe</td>
+                                    <td>Doe</td>
+                                    <td><button type="button" class="btn btn-success" data-bs-toggle="modal"
+                                            data-bs-target="#Modal_editar_servicio">
+                                            <i class="fas fa-edit"></i> Editar
+                                        </button></td>
+                                    <td><a class="btn btn-danger"><i class="fas fa-trash-alt"></i> Eliminar</a></td>
+                                </tr>
+
+
+                            </tbody>
+                        </table>
+                        <!-- Modal Editar servicio  -->
+                        <div class="modal fade" id="Modal_editar_servicio" tabindex="-1" aria-labelledby="exampleModalLabel"
+                            aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Editar servicio</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+
+                                        <form>
+                                            <div class="row p-1">
+
+                                                <div class="col-md-6 ">
+                                                    <label for="exampleDataList" class="form-label">Seleccione el
+                                                        activo</label>
+                                                    <input class="form-control" list="datalistOptions"
+                                                        id="exampleDataList" placeholder="Escriba para buscar">
+                                                    <datalist id="datalistOptions">
+                                                        <option value="San Francisco">
+                                                        <option value="New York">
+                                                        <option value="Seattle">
+                                                        <option value="Los Angeles">
+                                                        <option value="Chicago">
+                                                    </datalist>
+                                                </div>
+
+                                                <div class="col-md-6 ">
+                                                    <div class="mb-3">
+                                                        <select class="form-select form-select"
+                                                            aria-label=".form-select-sm example"
+                                                            id="select_tipo_servicio">
+                                                            <option selected>Tipo de servicio</option>
+                                                            <option value="1">Mantenimiento preventivo</option>
+                                                            <option value="2">Mantenimiento correctivo</option>
+                                                            <option value="3">Inspección y/o diagnostico</option>
+                                                        </select>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+
+
+                                            <div class="row p-1">
+                                                <div class="col-md-6 ">
+                                                    <div class="form-floating mb-3">
+                                                        <textarea class="form-control" id="floatingInput"></textarea>
+                                                        <label for="floatingInput">Descripcion</label>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-6 ">
+                                                    <div class="form-floating mb-3">
+                                                        <textarea class="form-control" id="floatingInput"></textarea>
+                                                        <label for="floatingInput">Observaciones</label>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                            <div class="row p-1">
+                                                <div class="col-md-6 ">
+                                                    <div class="form-floating mb-3">
+                                                        <textarea class="form-control" id="floatingInput"></textarea>
+                                                        <label for="floatingInput">Observación de usuario</label>
+                                                        <i class="fas fa-question-circle" data-bs-toggle="tooltip"
+                                                            title="Si no eres un tecnico y quieres registrar un servicio, por favor escriba su nombre u observacion"></i>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-6 ">
+                                                    <label for="start">Fecha de ejecución:</label><br>
+                                                    <input type="datetime-local" name="horareunion">
+                                                </div>
+
+                                            </div>
+
+                                        </form>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary"
+                                            data-bs-dismiss="modal">Close</button>
+                                        <button type="button" class="btn btn-primary">Editar</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+</body>
+
+</html>
