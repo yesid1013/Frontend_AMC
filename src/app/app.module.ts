@@ -3,16 +3,23 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { LoginComponent } from './paginas/login/login.component';
 
+//Modulos
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+
+// Componentes
+import { LoginComponent } from './paginas/login/login.component';
 import { SidebarComponent } from './componentes/sidebar/sidebar.component';
 import { NavbarComponent } from './componentes/navbar/navbar.component';
 import { ActivosComponent } from './paginas/activos/activos.component';
 import { FooterComponent } from './componentes/footer/footer.component';
 import { ServiciosComponent } from './paginas/servicios/servicios.component';
 import { FichaTecnicaComponent } from './paginas/ficha-tecnica/ficha-tecnica.component';
+import { InformeServicioComponent } from './paginas/informe-servicio/informe-servicio.component';
+import { SpinnerComponent } from './componentes/spinner/spinner.component';
+import { AddTokenInterceptor } from './utils/add-token.interceptor';
 
 
 
@@ -25,15 +32,20 @@ import { FichaTecnicaComponent } from './paginas/ficha-tecnica/ficha-tecnica.com
     ActivosComponent,
     FooterComponent,
     ServiciosComponent,
-    FichaTecnicaComponent
+    FichaTecnicaComponent,
+    InformeServicioComponent,
+    SpinnerComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [
+    {provide : HTTP_INTERCEPTORS, useClass: AddTokenInterceptor, multi : true}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

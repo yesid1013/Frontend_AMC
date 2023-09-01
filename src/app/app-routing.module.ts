@@ -5,14 +5,25 @@ import { LoginComponent } from './paginas/login/login.component';
 import { ActivosComponent } from './paginas/activos/activos.component';
 import { ServiciosComponent } from './paginas/servicios/servicios.component';
 import { FichaTecnicaComponent } from './paginas/ficha-tecnica/ficha-tecnica.component';
+import { InformeServicioComponent } from './paginas/informe-servicio/informe-servicio.component';
+import { SpinnerComponent } from './componentes/spinner/spinner.component';
+import { AuthGuard } from './utils/auth.guard';
+
 
 const routes: Routes = [
+
   {
     path:'activos',
-    component: ActivosComponent
+    component: ActivosComponent,
+    canActivate : [AuthGuard]
   },
   {
     path:'',
+    redirectTo : 'login',
+    pathMatch : 'full'
+  },
+  {
+    path: 'login',
     component: LoginComponent
   },
   {
@@ -22,6 +33,14 @@ const routes: Routes = [
   {
     path: 'ficha_tecnica',
     component : FichaTecnicaComponent
+  },
+  {
+    path: 'informe_servicio',
+    component: InformeServicioComponent
+  },
+  {
+    path : 'spinner',
+    component: SpinnerComponent
   }
 ];
 

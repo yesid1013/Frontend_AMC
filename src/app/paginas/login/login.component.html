@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
 </head>
-<body>
+<body >
 
-    <section class="wrapper">
+    <section class="wrapper" *ngIf="!loading">
         <div class="container">
             <div class="col-sm-8 offset-sm-2 col-lg-6 offset-lg-3 col-xl-4 offset-xl-4 text-center">
                 <div class="logo">
@@ -62,8 +62,8 @@
 
             </div>
         </div>
+        
     </section>
-
-
+    <app-spinner *ngIf="loading"></app-spinner>
 </body>
 </html>

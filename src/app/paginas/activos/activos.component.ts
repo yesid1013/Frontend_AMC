@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ActivoService } from 'src/app/servicios/activo/activo.service';
 import { ComunicationService } from 'src/app/servicios/comunication.service';
 
 @Component({
@@ -10,12 +11,19 @@ export class ActivosComponent {
   isOpen = false;
   info = "xd";
 
-  constructor(private communicationService: ComunicationService) {}
+  constructor(private communicationService: ComunicationService, private activo_service : ActivoService) {}
 
-  ngOnInit() {
+  ngOnInit() : void {
+    this.listar_activos();
     this.communicationService.sidebarOpen$.subscribe(isOpen => {
       this.isOpen = isOpen;
     });
+  }
+
+  listar_activos(){
+    this.activo_service.listar_activos().subscribe(data => {
+      console.log(data)
+    })
   }
 
   ver_mas(){
