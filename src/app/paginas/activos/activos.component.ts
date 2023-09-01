@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Activo } from 'src/app/interfaces/activo';
 import { ActivoService } from 'src/app/servicios/activo/activo.service';
 import { ComunicationService } from 'src/app/servicios/comunication.service';
 
@@ -10,6 +11,7 @@ import { ComunicationService } from 'src/app/servicios/comunication.service';
 export class ActivosComponent {
   isOpen = false;
   info = "xd";
+  listaActivos : Activo[] = [];
 
   constructor(private communicationService: ComunicationService, private activo_service : ActivoService) {}
 
@@ -22,7 +24,7 @@ export class ActivosComponent {
 
   listar_activos(){
     this.activo_service.listar_activos().subscribe(data => {
-      console.log(data)
+      this.listaActivos = data;
     })
   }
 

@@ -183,11 +183,11 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <th>1</th>
-                                    <td>John</td>
-                                    <td>Doe</td>
-                                    <td>jhon@email.com</td>
+                                <tr *ngFor="let activo of listaActivos">
+                                    <th>{{activo.id_primario}}</th>
+                                    <td>{{activo.id_secundario}}</td>
+                                    <td>{{activo.tipo_de_equipo}}</td>
+                                    <td>{{activo.fecha_registro}}</td>
                                     <td><button type="button" class="btn btn-success" data-bs-toggle="modal"
                                             data-bs-target="#Modal_editar_activo">
                                             <i class="fas fa-edit"></i> Editar

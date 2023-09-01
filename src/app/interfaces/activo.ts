@@ -8,6 +8,7 @@ export interface Activo {
     modelo: string;
     num_serie: string;
     datos_relevantes: string;
+    fecha_registro : string;
 
     imagen_equipo: {
       name : string;  
