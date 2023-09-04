@@ -10,7 +10,15 @@ import { ComunicationService } from 'src/app/servicios/comunication.service';
 })
 export class ActivosComponent {
   isOpen = false;
-  info : string = "";
+  info_subcliente : string = "";
+  info_modelo : string = "";
+  info_fabricante : string = "";
+  info_num_serie : string = "";
+  info_datos_relevantes : string = "";
+  info_ubicacion : string = "";
+  info_imagen : string = "";
+  info_ficha_tecnica : string = ""
+  info_codigo_qr : string = "";
   listaActivos : Activo[] = [];
 
   constructor(private communicationService: ComunicationService, private activo_service : ActivoService) {}
@@ -28,8 +36,16 @@ export class ActivosComponent {
     })
   }
 
-  ver_mas(modelo : string){
-    this.info = modelo;
+  ver_mas(subcliente : string, modelo : string, fabricante : string, num_serie : string, datos_relevantes : string, ubicacion : string, imagen : string, ficha_tecnica : string, codigo_qr : string){
+    this.info_imagen = imagen;
+    this.info_subcliente = subcliente;
+    this.info_modelo = modelo;
+    this.info_fabricante = fabricante;
+    this.info_num_serie = num_serie;
+    this.info_datos_relevantes = datos_relevantes;
+    this.info_ubicacion = ubicacion;
+    this.info_ficha_tecnica = ficha_tecnica;
+    this.info_codigo_qr = codigo_qr;
 
   }
 
