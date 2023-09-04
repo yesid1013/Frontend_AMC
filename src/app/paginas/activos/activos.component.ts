@@ -10,7 +10,7 @@ import { ComunicationService } from 'src/app/servicios/comunication.service';
 })
 export class ActivosComponent {
   isOpen = false;
-  info = "xd";
+  info : string = "";
   listaActivos : Activo[] = [];
 
   constructor(private communicationService: ComunicationService, private activo_service : ActivoService) {}
@@ -28,8 +28,9 @@ export class ActivosComponent {
     })
   }
 
-  ver_mas(){
-    this.info = "https://drive.google.com/uc?id=1P3BipsTduRWUSSMTG-tOH0OjgEHbGLXH&export=download";
+  ver_mas(modelo : string){
+    this.info = modelo;
+
   }
 
 

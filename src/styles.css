@@ -269,3 +269,19 @@
     background: var(--dark);
     border-color: var(--primary);
 }
+
+
+.btn.btn-danger:hover {
+    outline-offset: 3px;
+    outline: 3px solid #c23636;
+  }
+
+  .btn.btn-success:hover {
+    outline-offset: 3px;
+    outline: 3px solid #198754;
+  }
+
+  .btn.btn-info:hover {
+    outline-offset: 3px;
+    outline: 3px solid #0dcaf0;
+  }

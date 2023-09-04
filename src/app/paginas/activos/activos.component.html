@@ -12,6 +12,7 @@
 
     <!-- Icon Font Stylesheet -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/uicons-bold-rounded/css/uicons-bold-rounded.css'>
 
 </head>
 
@@ -190,14 +191,15 @@
                                     <td>{{activo.fecha_registro}}</td>
                                     <td><button type="button" class="btn btn-success" data-bs-toggle="modal"
                                             data-bs-target="#Modal_editar_activo">
-                                            <i class="fas fa-edit"></i> Editar
+                                            <i class="fi fi-br-edit me-2"></i>Editar
                                         </button></td>
-                                    <td><a class="btn btn-danger"><i class="fas fa-trash-alt"></i> Eliminar</a></td>
-                                    <td><button type="button" (click)="ver_mas()" class="btn btn-info" data-bs-toggle="modal"
+                                    <td><a class="btn btn-danger"><i class="fi fi-br-trash me-2"></i>Eliminar</a></td>
+                                    <td><button type="button" (click)="ver_mas(activo.modelo)" class="btn btn-info" data-bs-toggle="modal"
                                         data-bs-target="#Modal_ver_mas">
-                                        <i class="far fa-eye"></i> Ver más
+                                        <i class="fi fi-br-eye me-2"></i>Ver más
                                     </button></td>
                                 </tr>
+                                
                                 
 
                             </tbody>
@@ -343,7 +345,7 @@
                                             aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
-                                        <img src={{info}} width="50px" height="50px">
+                                        <h4>{{info}}</h4>
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary"
