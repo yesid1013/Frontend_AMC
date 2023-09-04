@@ -5,6 +5,7 @@ import { ComunicationService } from 'src/app/servicios/comunication.service';
 import { ADTSettings } from 'angular-datatables/src/models/settings';
 import { Subject } from 'rxjs';
 import { DataTableDirective } from 'angular-datatables';
+import { FormBuilder, FormControl, FormGroup, Validator, Validators } from '@angular/forms';
 
 
 @Component({
@@ -30,7 +31,21 @@ export class ActivosComponent {
   @ViewChild(DataTableDirective, {static: false})
   dtElement!: DataTableDirective;
 
-  constructor(private communicationService: ComunicationService, private activo_service : ActivoService) {}
+  constructor(private communicationService: ComunicationService, private activo_service : ActivoService,private fb: FormBuilder) {}
+
+  // Formulario de login
+  form_activo: FormGroup = this.fb.group({
+    id_primario: this.fb.control('', [Validators.required,Validators.minLength(3)]),
+    id_secundario: this.fb.control(null, [Validators.minLength(3)]),
+    ubicacion: this.fb.control(null, [Validators.required]),
+    tipo_de_equipo : this.fb.control(null, [Validators.required]),
+    fabricante : this.fb.control(null, [Validators.required]),
+    modelo : this.fb.control(null, []),
+    num_serie : this.fb.control(null,[]),
+    datos_relevantes: this.fb.control(null,[]),
+    imagen_equipo: this.fb.control(null),
+    subcliente :this.fb.control(null, [Validators.required])
+  });
 
   ngOnInit() : void {
     this.listar_activos();
