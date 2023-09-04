@@ -1,7 +1,11 @@
-import { Component } from '@angular/core';
+import { Component,ViewChild } from '@angular/core';
 import { Activo } from 'src/app/interfaces/activo';
 import { ActivoService } from 'src/app/servicios/activo/activo.service';
 import { ComunicationService } from 'src/app/servicios/comunication.service';
+import { ADTSettings } from 'angular-datatables/src/models/settings';
+import { Subject } from 'rxjs';
+import { DataTableDirective } from 'angular-datatables';
+
 
 @Component({
   selector: 'app-activos',
@@ -21,10 +25,18 @@ export class ActivosComponent {
   info_codigo_qr : string = "";
   listaActivos : Activo[] = [];
 
+  dtOptions: ADTSettings = {};
+  dtTrigger: Subject<any> = new Subject;
+  @ViewChild(DataTableDirective, {static: false})
+  dtElement!: DataTableDirective;
+
   constructor(private communicationService: ComunicationService, private activo_service : ActivoService) {}
 
   ngOnInit() : void {
     this.listar_activos();
+    this.dtOptions = {
+      language:{url:'//cdn.datatables.net/plug-ins/1.13.4/i18n/es-ES.json'}      
+    };
     this.communicationService.sidebarOpen$.subscribe(isOpen => {
       this.isOpen = isOpen;
     });
@@ -33,7 +45,8 @@ export class ActivosComponent {
   listar_activos(){
     this.activo_service.listar_activos().subscribe(data => {
       this.listaActivos = data;
-    })
+      this.dtTrigger.next(null);
+    });
   }
 
   ver_mas(subcliente : string, modelo : string, fabricante : string, num_serie : string, datos_relevantes : string, ubicacion : string, imagen : string, ficha_tecnica : string, codigo_qr : string){

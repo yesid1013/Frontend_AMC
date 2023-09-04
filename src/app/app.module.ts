@@ -8,6 +8,7 @@ import { AppComponent } from './app.component';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { DataTablesModule } from "angular-datatables";
 
 // Componentes
 import { LoginComponent } from './paginas/login/login.component';
@@ -41,7 +42,8 @@ import { AddTokenInterceptor } from './utils/add-token.interceptor';
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    DataTablesModule
   ],
   providers: [
     {provide : HTTP_INTERCEPTORS, useClass: AddTokenInterceptor, multi : true}
