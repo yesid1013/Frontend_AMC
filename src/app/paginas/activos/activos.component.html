@@ -58,6 +58,17 @@
                                                             placeholder="">
                                                         <label for="floatingInput">ID primario</label>
                                                     </div>
+
+                                                    <div *ngIf="form_activo.get('id_primario')?.hasError('required') && (submitted)" class="alert alert-primary" role="alert">
+                                                        <i class="fi fi-br-exclamation"></i>
+                                                          El ID primario  es requerido.
+                                                    </div>
+
+                                                    <div *ngIf="form_activo.get('id_primario')?.hasError('minlength') && (submitted)" class="alert alert-primary" role="alert">
+                                                        <i class="fi fi-br-exclamation"></i>
+                                                          Debe escribir como minimo tres caracteres.
+                                                    </div>
+
                                                 </div>
 
                                                 <div class="col-md-6 ">
@@ -66,6 +77,12 @@
                                                             placeholder="">
                                                         <label for="floatingInput">ID secundario</label>
                                                     </div>
+
+                                                    <div *ngIf="form_activo.get('id_secundario')?.hasError('minlength') && (submitted)" class="alert alert-primary" role="alert">
+                                                        <i class="fi fi-br-exclamation"></i>
+                                                          Debe escribir como minimo tres caracteres.
+                                                    </div>
+
                                                 </div>
 
                                             </div>
@@ -78,6 +95,12 @@
                                                             placeholder="">
                                                         <label for="floatingInput">Ubicación</label>
                                                     </div>
+
+                                                    <div *ngIf="form_activo.get('ubicacion')?.hasError('required') && (submitted)" class="alert alert-primary" role="alert">
+                                                        <i class="fi fi-br-exclamation"></i>
+                                                          La ubicación  es requerida.
+                                                    </div>
+
                                                 </div>
 
                                                 <div class="col-md-6 ">
@@ -85,6 +108,10 @@
                                                         <input formControlName="tipo_de_equipo" type="text" class="form-control" id="floatingInput"
                                                             placeholder="">
                                                         <label for="floatingInput">Tipo de equipo</label>
+                                                    </div>
+                                                    <div *ngIf="form_activo.get('tipo_de_equipo')?.hasError('required') && (submitted)" class="alert alert-primary" role="alert">
+                                                        <i class="fi fi-br-exclamation"></i>
+                                                          El tipo de equipo  es requerido.
                                                     </div>
                                                 </div>
 
@@ -97,6 +124,10 @@
                                                         <input formControlName="fabricante" type="text" class="form-control" id="floatingInput"
                                                             placeholder="">
                                                         <label for="floatingInput">Fabricante</label>
+                                                    </div>
+                                                    <div *ngIf="form_activo.get('fabricante')?.hasError('required') && (submitted)" class="alert alert-primary" role="alert">
+                                                        <i class="fi fi-br-exclamation"></i>
+                                                          El fabricante  es requerido.
                                                     </div>
                                                 </div>
 
@@ -141,12 +172,17 @@
 
                                                 <div class="col-md-6 ">
                                                     <div class="mb-3">
-                                                        <input formControlName="subcliente" class="form-control" list="subclientes" id="exampleDataLis" placeholder="Ingrese el nombre del cliente">
-                                                        <datalist id="subclientes">
-                                                            <option>Subcliente 1</option>
-                                                        </datalist>
+                                                        <label for="">Selecciona el subcliente</label>
+                                                        <select formControlName="subcliente" class="form-select" aria-label="Default select example">
+                                                            <option value="1">One</option>
+                                                            <option value="2">Two</option>
+                                                            <option value="3">Three</option>
+                                                          </select>
                                                     </div>
-
+                                                    <div *ngIf="form_activo.get('subcliente')?.hasError('required') && (submitted)" class="alert alert-primary" role="alert">
+                                                        <i class="fi fi-br-exclamation"></i>
+                                                          El cliente  es requerido.
+                                                    </div>
                                                 </div>
 
                                             </div>
@@ -157,7 +193,7 @@
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary"
                                             data-bs-dismiss="modal">Cerrar</button>
-                                        <button type="button" class="btn btn-primary">Registrar</button>
+                                        <button (click)="registrar_activo()" type="button" class="btn btn-primary">Registrar</button>
                                     </div>
                                 </div>
                             </div>

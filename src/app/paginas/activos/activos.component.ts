@@ -14,6 +14,7 @@ import { FormBuilder, FormControl, FormGroup, Validator, Validators } from '@ang
   styleUrls: ['./activos.component.css']
 })
 export class ActivosComponent {
+  submitted = false;
   isOpen = false;
   info_subcliente : string = "";
   info_modelo : string = "";
@@ -74,7 +75,13 @@ export class ActivosComponent {
     this.info_ubicacion = ubicacion;
     this.info_ficha_tecnica = ficha_tecnica;
     this.info_codigo_qr = codigo_qr;
+  }
 
+  registrar_activo(){ 
+    this.submitted = true;
+    if (this.form_activo.valid){
+      
+    }
   }
 
 
