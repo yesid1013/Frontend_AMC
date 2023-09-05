@@ -6,6 +6,8 @@ import { ADTSettings } from 'angular-datatables/src/models/settings';
 import { Subject } from 'rxjs';
 import { DataTableDirective } from 'angular-datatables';
 import { FormBuilder, FormControl, FormGroup, Validator, Validators } from '@angular/forms';
+import { SubclienteService } from 'src/app/servicios/subcliente/subcliente.service';
+import { Subcliente } from 'src/app/interfaces/subcliente';
 
 
 @Component({
@@ -26,13 +28,14 @@ export class ActivosComponent {
   info_ficha_tecnica : string = ""
   info_codigo_qr : string = "";
   listaActivos : Activo[] = [];
+  listaSubclientes : Subcliente[] = [];
 
   dtOptions: ADTSettings = {};
   dtTrigger: Subject<any> = new Subject;
   @ViewChild(DataTableDirective, {static: false})
   dtElement!: DataTableDirective;
 
-  constructor(private communicationService: ComunicationService, private activo_service : ActivoService,private fb: FormBuilder) {}
+  constructor(private communicationService: ComunicationService, private activo_service : ActivoService,private fb: FormBuilder, private subclienteService:SubclienteService) {}
 
   // Formulario de login
   form_activo: FormGroup = this.fb.group({
@@ -56,6 +59,7 @@ export class ActivosComponent {
     this.communicationService.sidebarOpen$.subscribe(isOpen => {
       this.isOpen = isOpen;
     });
+    this.listar_subclientes();
   }
 
   listar_activos(){
@@ -63,6 +67,12 @@ export class ActivosComponent {
       this.listaActivos = data;
       this.dtTrigger.next(null);
     });
+  };
+
+  listar_subclientes(){ //Funcion para listar los subclientes y mostrarlos en el select del formulario
+    this.subclienteService.listar_subclientes().subscribe(data => {
+      this.listaSubclientes = data;
+      });
   }
 
   ver_mas(subcliente : string, modelo : string, fabricante : string, num_serie : string, datos_relevantes : string, ubicacion : string, imagen : string, ficha_tecnica : string, codigo_qr : string){
@@ -77,10 +87,15 @@ export class ActivosComponent {
     this.info_codigo_qr = codigo_qr;
   }
 
-  registrar_activo(){ 
+  registrar_activo(value : any){ 
     this.submitted = true;
     if (this.form_activo.valid){
       
+
+      /*this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {  //Renderizar datatable
+        dtInstance.destroy();
+        this.listar_activos();
+      }); */
     }
   }
 

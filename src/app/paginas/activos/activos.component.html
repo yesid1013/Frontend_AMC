@@ -174,9 +174,7 @@
                                                     <div class="mb-3">
                                                         <label for="">Selecciona el subcliente</label>
                                                         <select formControlName="subcliente" class="form-select" aria-label="Default select example">
-                                                            <option value="1">One</option>
-                                                            <option value="2">Two</option>
-                                                            <option value="3">Three</option>
+                                                            <option *ngFor="let subcliente of listaSubclientes" [value]="subcliente.id_subcliente">{{subcliente.nombre}}</option>
                                                           </select>
                                                     </div>
                                                     <div *ngIf="form_activo.get('subcliente')?.hasError('required') && (submitted)" class="alert alert-primary" role="alert">
@@ -193,7 +191,7 @@
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary"
                                             data-bs-dismiss="modal">Cerrar</button>
-                                        <button (click)="registrar_activo()" type="button" class="btn btn-primary">Registrar</button>
+                                        <button (click)="registrar_activo(form_activo.value)" type="button" class="btn btn-primary">Registrar</button>
                                     </div>
                                 </div>
                             </div>
