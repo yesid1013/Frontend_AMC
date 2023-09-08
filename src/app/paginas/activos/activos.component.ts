@@ -1,5 +1,5 @@
 import { Component,ViewChild } from '@angular/core';
-import { Activo } from 'src/app/interfaces/activo';
+import { Activo, Registro_activo } from 'src/app/interfaces/activo';
 import { ActivoService } from 'src/app/servicios/activo/activo.service';
 import { ComunicationService } from 'src/app/servicios/comunication.service';
 import { ADTSettings } from 'angular-datatables/src/models/settings';
@@ -8,6 +8,10 @@ import { DataTableDirective } from 'angular-datatables';
 import { FormBuilder, FormControl, FormGroup, Validator, Validators } from '@angular/forms';
 import { SubclienteService } from 'src/app/servicios/subcliente/subcliente.service';
 import { Subcliente } from 'src/app/interfaces/subcliente';
+import Swal from 'sweetalert2';
+import { HttpErrorResponse } from '@angular/common/http';
+
+import { data } from 'jquery';
 
 
 @Component({
@@ -30,6 +34,11 @@ export class ActivosComponent {
   listaActivos : Activo[] = [];
   listaSubclientes : Subcliente[] = [];
 
+  selectedFile: File | null = null;
+  imageName: string = '';
+  imageMimeType: string = '';
+  imageContent: string = '';
+
   dtOptions: ADTSettings = {};
   dtTrigger: Subject<any> = new Subject;
   @ViewChild(DataTableDirective, {static: false})
@@ -37,7 +46,7 @@ export class ActivosComponent {
 
   constructor(private communicationService: ComunicationService, private activo_service : ActivoService,private fb: FormBuilder, private subclienteService:SubclienteService) {}
 
-  // Formulario de login
+  // Formulario de registrar activo
   form_activo: FormGroup = this.fb.group({
     id_primario: this.fb.control('', [Validators.required,Validators.minLength(3)]),
     id_secundario: this.fb.control(null, [Validators.minLength(3)]),
@@ -87,15 +96,63 @@ export class ActivosComponent {
     this.info_codigo_qr = codigo_qr;
   }
 
+  onFileSelected(event: any) {
+    const file = event.target.files[0];
+  
+    if (file) {
+      this.selectedFile = file;
+      this.imageName = file.name;
+      this.imageMimeType = file.type;
+  
+      const reader = new FileReader();
+      reader.onload = (e: any) => {
+        this.imageContent = e.target.result.split(',')[1];
+      };
+      reader.readAsDataURL(file);
+    }
+  }
+
+  
   registrar_activo(value : any){ 
     this.submitted = true;
     if (this.form_activo.valid){
+
+      const activo : Registro_activo  = {
+        id_primario : value.id_primario,
+        id_secundario : value.id_secundario,
+        ubicacion : value.ubicacion,
+        tipo_de_equipo : value.tipo_de_equipo,
+        fabricante : value.fabricante,
+        modelo : value.modelo,
+        num_serie : value.num_serie,
+        datos_relevantes : value.datos_relevantes,
+        id_subcliente : value.subcliente,
+
+        imagen_equipo: {
+          name: this.imageName,
+          mimeType: this.imageMimeType,
+          content: this.imageContent
+        }
+      }
+      
+      this.activo_service.registrar_activo(activo).subscribe(data => {
+          Swal.fire({
+            icon: 'success',
+            title: 'Servicio exitoso',
+            text: 'Activo creado correctamente',
+            allowOutsideClick : false
+          }).then((result) => {
+            if (result.isConfirmed) {
+              this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {  //Renderizar datatable
+                dtInstance.destroy();
+                this.listar_activos();
+              });
+              
+            }
+          });
+      })
       
 
-      /*this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {  //Renderizar datatable
-        dtInstance.destroy();
-        this.listar_activos();
-      }); */
     }
   }
 

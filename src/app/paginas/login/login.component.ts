@@ -49,7 +49,7 @@ export class LoginComponent {
 
           }).then((result) => {
             if (result.isConfirmed) {
-              this.router.navigate(['/activos'])
+              this.router.navigate(['/equipos'])
             }
           });
         },

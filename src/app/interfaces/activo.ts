@@ -31,15 +31,10 @@ export interface Activo {
     datos_relevantes: string;
 
     imagen_equipo: {
+      name : string;
       mimeType: string;
       content: string;
     };
 
     id_subcliente: string;
-
-    ficha_tecnica: {
-      name: string;
-      mimeType: string;
-      content: string;
-    };
   }

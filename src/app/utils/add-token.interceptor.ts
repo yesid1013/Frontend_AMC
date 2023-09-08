@@ -32,7 +32,7 @@ export class AddTokenInterceptor implements HttpInterceptor {
           });
           this.router.navigate(['/login'])
         } if (error.error.message) {
-          this.errorService.msjError(error); 
+          this.errorService.msjError(error);
         } else {
           Swal.fire({
             icon: 'error',

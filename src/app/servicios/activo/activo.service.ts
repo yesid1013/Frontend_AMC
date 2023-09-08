@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Activo } from 'src/app/interfaces/activo';
+import { Activo, Registro_activo } from 'src/app/interfaces/activo';
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +12,14 @@ export class ActivoService {
   constructor(private http: HttpClient) { }
 
   listar_activos():Observable<Activo[]>{
-    return this.http.get<Activo[]>(`${this.url}activos`);
+    // const token = localStorage.getItem('token');
+    // const headers = new HttpHeaders().set('Authorization',`Bearer ${token}`);
+    return this.http.get<Activo[]>(`${this.url}listar_activos`);
+  }
+
+  registrar_activo(activo : Registro_activo):Observable<any>{
+    // const token = localStorage.getItem('token');
+    // const headers = new HttpHeaders().set('Authorization',`Bearer ${token}`);
+    return this.http.post(`${this.url}create_activo`,activo);
   }
 }

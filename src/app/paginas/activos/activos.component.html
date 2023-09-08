@@ -164,7 +164,7 @@
 
                                                 <div class="col-md-6 ">
                                                     <div class="mb-3">
-                                                        <input formControlName="imagen_equipo" class="form-control" type="file"
+                                                        <input formControlName="imagen_equipo" class="form-control" type="file" (change)="onFileSelected($event)"
                                                             accept="image/jpeg, image/png" id="formFile">
                                                         <label for="formFile" class="form-label">Cargar imagen</label>
                                                     </div>

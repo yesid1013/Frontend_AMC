@@ -13,7 +13,7 @@ import { AuthGuard } from './utils/auth.guard';
 const routes: Routes = [
 
   {
-    path:'activos',
+    path:'equipos',
     component: ActivosComponent,
     canActivate : [AuthGuard]
   },
