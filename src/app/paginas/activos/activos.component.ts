@@ -9,9 +9,6 @@ import { FormBuilder, FormControl, FormGroup, Validator, Validators } from '@ang
 import { SubclienteService } from 'src/app/servicios/subcliente/subcliente.service';
 import { Subcliente } from 'src/app/interfaces/subcliente';
 import Swal from 'sweetalert2';
-import { HttpErrorResponse } from '@angular/common/http';
-
-import { data } from 'jquery';
 
 
 @Component({
@@ -133,14 +130,24 @@ export class ActivosComponent {
           mimeType: this.imageMimeType,
           content: this.imageContent
         }
-      }
+      };
+
+       Swal.fire({
+        title: 'Cargando...',
+        allowOutsideClick: false,  // Impide que el usuario cierre el diálogo haciendo clic fuera
+        didOpen: () => {
+          Swal.showLoading();  // Muestra el spinner
+        }
+      });
       
       this.activo_service.registrar_activo(activo).subscribe(data => {
+        Swal.close();
           Swal.fire({
             icon: 'success',
             title: 'Servicio exitoso',
             text: 'Activo creado correctamente',
-            allowOutsideClick : false
+            allowOutsideClick : false,
+            
           }).then((result) => {
             if (result.isConfirmed) {
               this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {  //Renderizar datatable
@@ -150,7 +157,7 @@ export class ActivosComponent {
               
             }
           });
-      })
+      });
       
 
     }
