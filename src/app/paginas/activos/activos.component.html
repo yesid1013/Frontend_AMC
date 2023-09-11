@@ -54,33 +54,36 @@
 
                                                 <div class="col-md-6 ">
                                                     <div class="form-floating mb-3">
-                                                        <input formControlName="id_primario" type="text" class="form-control" id="floatingInput"
-                                                            placeholder="">
+                                                        <input formControlName="id_primario" type="text"
+                                                            class="form-control" id="floatingInput" placeholder="">
                                                         <label for="floatingInput">ID primario</label>
                                                     </div>
 
-                                                    <div *ngIf="form_activo.get('id_primario')?.hasError('required') && (submitted)" class="alert alert-primary" role="alert">
+                                                    <div *ngIf="form_activo.get('id_primario')?.hasError('required') && (submitted)"
+                                                        class="alert alert-primary" role="alert">
                                                         <i class="fi fi-br-exclamation"></i>
-                                                          El ID primario  es requerido.
+                                                        El ID primario es requerido.
                                                     </div>
 
-                                                    <div *ngIf="form_activo.get('id_primario')?.hasError('minlength') && (submitted)" class="alert alert-primary" role="alert">
+                                                    <div *ngIf="form_activo.get('id_primario')?.hasError('minlength') && (submitted)"
+                                                        class="alert alert-primary" role="alert">
                                                         <i class="fi fi-br-exclamation"></i>
-                                                          Debe escribir como minimo tres caracteres.
+                                                        Debe escribir como minimo tres caracteres.
                                                     </div>
 
                                                 </div>
 
                                                 <div class="col-md-6 ">
                                                     <div class="form-floating mb-3">
-                                                        <input formControlName="id_secundario" type="text" class="form-control" id="floatingInput"
-                                                            placeholder="">
+                                                        <input formControlName="id_secundario" type="text"
+                                                            class="form-control" id="floatingInput" placeholder="">
                                                         <label for="floatingInput">ID secundario</label>
                                                     </div>
 
-                                                    <div *ngIf="form_activo.get('id_secundario')?.hasError('minlength') && (submitted)" class="alert alert-primary" role="alert">
+                                                    <div *ngIf="form_activo.get('id_secundario')?.hasError('minlength') && (submitted)"
+                                                        class="alert alert-primary" role="alert">
                                                         <i class="fi fi-br-exclamation"></i>
-                                                          Debe escribir como minimo tres caracteres.
+                                                        Debe escribir como minimo tres caracteres.
                                                     </div>
 
                                                 </div>
@@ -91,27 +94,29 @@
 
                                                 <div class="col-md-6 ">
                                                     <div class="form-floating mb-3">
-                                                        <input formControlName="ubicacion" type="text" class="form-control" id="floatingInput"
-                                                            placeholder="">
+                                                        <input formControlName="ubicacion" type="text"
+                                                            class="form-control" id="floatingInput" placeholder="">
                                                         <label for="floatingInput">Ubicación</label>
                                                     </div>
 
-                                                    <div *ngIf="form_activo.get('ubicacion')?.hasError('required') && (submitted)" class="alert alert-primary" role="alert">
+                                                    <div *ngIf="form_activo.get('ubicacion')?.hasError('required') && (submitted)"
+                                                        class="alert alert-primary" role="alert">
                                                         <i class="fi fi-br-exclamation"></i>
-                                                          La ubicación  es requerida.
+                                                        La ubicación es requerida.
                                                     </div>
 
                                                 </div>
 
                                                 <div class="col-md-6 ">
                                                     <div class="form-floating mb-3">
-                                                        <input formControlName="tipo_de_equipo" type="text" class="form-control" id="floatingInput"
-                                                            placeholder="">
+                                                        <input formControlName="tipo_de_equipo" type="text"
+                                                            class="form-control" id="floatingInput" placeholder="">
                                                         <label for="floatingInput">Tipo de equipo</label>
                                                     </div>
-                                                    <div *ngIf="form_activo.get('tipo_de_equipo')?.hasError('required') && (submitted)" class="alert alert-primary" role="alert">
+                                                    <div *ngIf="form_activo.get('tipo_de_equipo')?.hasError('required') && (submitted)"
+                                                        class="alert alert-primary" role="alert">
                                                         <i class="fi fi-br-exclamation"></i>
-                                                          El tipo de equipo  es requerido.
+                                                        El tipo de equipo es requerido.
                                                     </div>
                                                 </div>
 
@@ -121,20 +126,21 @@
 
                                                 <div class="col-md-6 ">
                                                     <div class="form-floating mb-3">
-                                                        <input formControlName="fabricante" type="text" class="form-control" id="floatingInput"
-                                                            placeholder="">
+                                                        <input formControlName="fabricante" type="text"
+                                                            class="form-control" id="floatingInput" placeholder="">
                                                         <label for="floatingInput">Fabricante</label>
                                                     </div>
-                                                    <div *ngIf="form_activo.get('fabricante')?.hasError('required') && (submitted)" class="alert alert-primary" role="alert">
+                                                    <div *ngIf="form_activo.get('fabricante')?.hasError('required') && (submitted)"
+                                                        class="alert alert-primary" role="alert">
                                                         <i class="fi fi-br-exclamation"></i>
-                                                          El fabricante  es requerido.
+                                                        El fabricante es requerido.
                                                     </div>
                                                 </div>
 
                                                 <div class="col-md-6 ">
                                                     <div class="form-floating mb-3">
-                                                        <input formControlName="modelo" type="text" class="form-control" id="floatingInput"
-                                                            placeholder="">
+                                                        <input formControlName="modelo" type="text" class="form-control"
+                                                            id="floatingInput" placeholder="">
                                                         <label for="floatingInput">Modelo</label>
                                                     </div>
                                                 </div>
@@ -145,15 +151,16 @@
 
                                                 <div class="col-md-6 ">
                                                     <div class="form-floating mb-3">
-                                                        <input formControlName="num_serie" type="text" class="form-control" id="floatingInput"
-                                                            placeholder="">
+                                                        <input formControlName="num_serie" type="text"
+                                                            class="form-control" id="floatingInput" placeholder="">
                                                         <label for="floatingInput">Numero de serie</label>
                                                     </div>
                                                 </div>
 
                                                 <div class="col-md-6 ">
                                                     <div class="form-floating mb-3">
-                                                        <textarea formControlName="datos_relevantes" class="form-control" id="floatingInput"></textarea>
+                                                        <textarea formControlName="datos_relevantes"
+                                                            class="form-control" id="floatingInput"></textarea>
                                                         <label for="floatingInput">Datos relevantes</label>
                                                     </div>
                                                 </div>
@@ -164,7 +171,8 @@
 
                                                 <div class="col-md-6 ">
                                                     <div class="mb-3">
-                                                        <input formControlName="imagen_equipo" class="form-control" type="file" (change)="onFileSelected($event)"
+                                                        <input formControlName="imagen_equipo" class="form-control"
+                                                            type="file" (change)="onFileSelected($event)"
                                                             accept="image/jpeg, image/png" id="formFile">
                                                         <label for="formFile" class="form-label">Cargar imagen</label>
                                                     </div>
@@ -173,13 +181,17 @@
                                                 <div class="col-md-6 ">
                                                     <div class="mb-3">
                                                         <label for="">Selecciona el subcliente</label>
-                                                        <select formControlName="subcliente" class="form-select" aria-label="Default select example">
-                                                            <option *ngFor="let subcliente of listaSubclientes" [value]="subcliente.id_subcliente">{{subcliente.nombre}}</option>
-                                                          </select>
+                                                        <select formControlName="subcliente" class="form-select"
+                                                            aria-label="Default select example">
+                                                            <option *ngFor="let subcliente of listaSubclientes"
+                                                                [value]="subcliente.id_subcliente">{{subcliente.nombre}}
+                                                            </option>
+                                                        </select>
                                                     </div>
-                                                    <div *ngIf="form_activo.get('subcliente')?.hasError('required') && (submitted)" class="alert alert-primary" role="alert">
+                                                    <div *ngIf="form_activo.get('subcliente')?.hasError('required') && (submitted)"
+                                                        class="alert alert-primary" role="alert">
                                                         <i class="fi fi-br-exclamation"></i>
-                                                          El cliente  es requerido.
+                                                        El cliente es requerido.
                                                     </div>
                                                 </div>
 
@@ -191,7 +203,8 @@
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary"
                                             data-bs-dismiss="modal">Cerrar</button>
-                                        <button (click)="registrar_activo(form_activo.value)" type="button" class="btn btn-primary">Registrar</button>
+                                        <button (click)="registrar_activo(form_activo.value)" type="button"
+                                            class="btn btn-primary">Registrar</button>
                                     </div>
                                 </div>
                             </div>
@@ -220,13 +233,15 @@
                                     <td>{{activo.id_secundario}}</td>
                                     <td>{{activo.tipo_de_equipo}}</td>
                                     <td>{{activo.fecha_registro}}</td>
-                                    <td><button type="button" class="btn btn-success" (click)="set_form_edit_activo(activo)" data-bs-toggle="modal"
+                                    <td><button type="button" class="btn btn-success"
+                                            (click)="set_form_edit_activo(activo)" data-bs-toggle="modal"
                                             data-bs-target="#Modal_editar_activo">
                                             <i class="fi fi-br-edit me-2"></i>Editar
                                         </button></td>
                                     <td><a class="btn btn-danger"><i class="fi fi-br-trash me-2"></i>Eliminar</a></td>
-                                    <td><button type="button" (click)="ver_mas(activo.subcliente,activo.modelo,activo.fabricante,activo.num_serie,activo.datos_relevantes,activo.ubicacion,activo.imagen_equipo, activo.ficha_tecnica, activo.codigo_qr)" class="btn btn-info"
-                                            data-bs-toggle="modal" data-bs-target="#Modal_ver_mas">
+                                    <td><button type="button"
+                                            (click)="ver_mas(activo.subcliente,activo.modelo,activo.fabricante,activo.num_serie,activo.datos_relevantes,activo.ubicacion,activo.imagen_equipo, activo.ficha_tecnica, activo.codigo_qr)"
+                                            class="btn btn-info" data-bs-toggle="modal" data-bs-target="#Modal_ver_mas">
                                             <i class="fi fi-br-eye me-2"></i>Ver más
                                         </button></td>
                                 </tr>
@@ -249,38 +264,72 @@
 
                                                 <div class="col-md-6 ">
                                                     <div class="form-floating mb-3">
-                                                        <input type="text" formControlName="id_primario" class="form-control" id="floatingInput"
-                                                            placeholder="">
+                                                        <input type="text" formControlName="id_primario"
+                                                            class="form-control" id="floatingInput" placeholder="">
                                                         <label for="floatingInput">ID primario</label>
+
+                                                        <div *ngIf="form_edit_activo.get('id_primario')?.hasError('required') && (submitted)"
+                                                            class="alert alert-primary" role="alert">
+                                                            <i class="fi fi-br-exclamation"></i>
+                                                            El ID primario es requerido.
+                                                        </div>
+
+                                                        <div *ngIf="form_edit_activo.get('id_primario')?.hasError('minlength') && (submitted)"
+                                                            class="alert alert-primary" role="alert">
+                                                            <i class="fi fi-br-exclamation"></i>
+                                                            Debe escribir como minimo tres caracteres.
+                                                        </div>
+
                                                     </div>
                                                 </div>
 
                                                 <div class="col-md-6 ">
                                                     <div class="form-floating mb-3">
-                                                        <input formControlName="id_secundario"  type="text" class="form-control" id="floatingInput"
-                                                            placeholder="">
+                                                        <input formControlName="id_secundario" type="text"
+                                                            class="form-control" id="floatingInput" placeholder="">
                                                         <label for="floatingInput">ID secundario</label>
+
+                                                        <div *ngIf="form_edit_activo.get('id_secundario')?.hasError('minlength') && (submitted)"
+                                                            class="alert alert-primary" role="alert">
+                                                            <i class="fi fi-br-exclamation"></i>
+                                                            Debe escribir como minimo tres caracteres.
+                                                        </div>
+
                                                     </div>
                                                 </div>
-
+                                                S
                                             </div>
 
                                             <div class="row p-1">
 
                                                 <div class="col-md-6 ">
                                                     <div class="form-floating mb-3">
-                                                        <input formControlName="ubicacion"  type="text" class="form-control" id="floatingInput"
-                                                            placeholder="">
+                                                        <input formControlName="ubicacion" type="text"
+                                                            class="form-control" id="floatingInput" placeholder="">
                                                         <label for="floatingInput">Ubicación</label>
                                                     </div>
+
+                                                    <div *ngIf="form_edit_activo.get('ubicacion')?.hasError('required') && (submitted)"
+                                                        class="alert alert-primary" role="alert">
+                                                        <i class="fi fi-br-exclamation"></i>
+                                                        La ubicación es requerida.
+                                                    </div>
+
                                                 </div>
 
                                                 <div class="col-md-6 ">
                                                     <div class="form-floating mb-3">
-                                                        <input formControlName="tipo_de_equipo"  type="text" class="form-control" id="floatingInput"
-                                                            placeholder="">
+                                                        <input formControlName="tipo_de_equipo" type="text"
+                                                            class="form-control" id="floatingInput" placeholder="">
                                                         <label for="floatingInput">Tipo de equipo</label>
                                                     </div>
+
+                                                    <div *ngIf="form_edit_activo.get('tipo_de_equipo')?.hasError('required') && (submitted)"
+                                                        class="alert alert-primary" role="alert">
+                                                        <i class="fi fi-br-exclamation"></i>
+                                                        El tipo de equipo es requerido.
+                                                    </div>
+
                                                 </div>
 
                                             </div>
@@ -289,16 +338,22 @@
 
                                                 <div class="col-md-6 ">
                                                     <div class="form-floating mb-3">
-                                                        <input formControlName="fabricante"  type="text" class="form-control" id="floatingInput"
-                                                            placeholder="">
+                                                        <input formControlName="fabricante" type="text"
+                                                            class="form-control" id="floatingInput" placeholder="">
                                                         <label for="floatingInput">Fabricante</label>
+                                                    </div>
+
+                                                    <div *ngIf="form_edit_activo.get('fabricante')?.hasError('required') && (submitted)"
+                                                        class="alert alert-primary" role="alert">
+                                                        <i class="fi fi-br-exclamation"></i>
+                                                        El fabricante es requerido.
                                                     </div>
                                                 </div>
 
                                                 <div class="col-md-6 ">
                                                     <div class="form-floating mb-3">
-                                                        <input formControlName="modelo"  type="text" class="form-control" id="floatingInput"
-                                                            placeholder="">
+                                                        <input formControlName="modelo" type="text" class="form-control"
+                                                            id="floatingInput" placeholder="">
                                                         <label for="floatingInput">Modelo</label>
                                                     </div>
                                                 </div>
@@ -309,16 +364,16 @@
 
                                                 <div class="col-md-6 ">
                                                     <div class="form-floating mb-3">
-                                                        <input formControlName="num_serie"  type="text" class="form-control" id="floatingInput"
-                                                            placeholder="">
+                                                        <input formControlName="num_serie" type="text"
+                                                            class="form-control" id="floatingInput" placeholder="">
                                                         <label for="floatingInput">Numero de serie</label>
                                                     </div>
                                                 </div>
 
                                                 <div class="col-md-6 ">
                                                     <div class="form-floating mb-3">
-                                                        <input formControlName="datos_relevantes"  type="text" class="form-control" id="floatingInput"
-                                                            placeholder="">
+                                                        <input formControlName="datos_relevantes" type="text"
+                                                            class="form-control" id="floatingInput" placeholder="">
                                                         <label for="floatingInput">Datos relevantes</label>
                                                     </div>
                                                 </div>
@@ -329,10 +384,20 @@
 
                                                 <div class="col-md-6 ">
                                                     <div class="mb-3">
-                                                        <select formControlName="subcliente"  class="form-select form-select"
+                                                        <select formControlName="subcliente"
+                                                            class="form-select form-select"
                                                             aria-label=".form-select-sm example">
-                                                            <option *ngFor="let subcliente of listaSubclientes" [value]="subcliente.id_subcliente">{{subcliente.nombre}}</option>
+                                                            <option *ngFor="let subcliente of listaSubclientes"
+                                                                [value]="subcliente.id_subcliente">{{subcliente.nombre}}
+                                                            </option>
                                                         </select>
+
+                                                        <div *ngIf="form_edit_activo.get('subcliente')?.hasError('required') && (submitted)"
+                                                            class="alert alert-primary" role="alert">
+                                                            <i class="fi fi-br-exclamation"></i>
+                                                            El cliente es requerido.
+                                                        </div>
+
                                                     </div>
 
                                                 </div>
@@ -345,7 +410,8 @@
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary"
                                             data-bs-dismiss="modal">Cerrar</button>
-                                        <button type="button" (click)="editar_activo(form_edit_activo.value)" class="btn btn-primary">Editar</button>
+                                        <button type="button" (click)="editar_activo(form_edit_activo.value)"
+                                            class="btn btn-primary">Editar</button>
                                     </div>
                                 </div>
                             </div>
@@ -363,8 +429,8 @@
                                     </div>
                                     <div class="modal-body">
                                         <!-- Mostrar la imagen de portada del activo centrada -->
-                                        <img id="imagenPortadaActivo" src={{info_imagen}} width="100px" height="100px" alt="Imagen de Portada"
-                                            class="img-fluid mx-auto d-block">
+                                        <img id="imagenPortadaActivo" src={{info_imagen}} width="100px" height="100px"
+                                            alt="Imagen de Portada" class="img-fluid mx-auto d-block">
                                         <div class="row mt-3">
                                             <div class="col-md-12">
                                                 <!-- Mostrar el número de serie del activo -->
@@ -402,8 +468,12 @@
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary"
                                             data-bs-dismiss="modal">Cerrar</button>
-                                        <a href={{info_ficha_tecnica}} target="_blank" rel="noopener noreferrer" type="button" class="btn btn-primary"><i class="fi fi-br-document me-2"></i>Ver ficha técnica</a>
-                                        <a href={{info_codigo_qr}} target="_blank" rel="noopener noreferrer" type="button" class="btn btn-primary"><i class="fas fa-qrcode me-2"></i>Ver código QR</a>
+                                        <a href={{info_ficha_tecnica}} target="_blank" rel="noopener noreferrer"
+                                            type="button" class="btn btn-primary"><i
+                                                class="fi fi-br-document me-2"></i>Ver ficha técnica</a>
+                                        <a href={{info_codigo_qr}} target="_blank" rel="noopener noreferrer"
+                                            type="button" class="btn btn-primary"><i class="fas fa-qrcode me-2"></i>Ver
+                                            código QR</a>
                                     </div>
                                 </div>
                             </div>
