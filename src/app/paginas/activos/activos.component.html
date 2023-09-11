@@ -220,7 +220,7 @@
                                     <td>{{activo.id_secundario}}</td>
                                     <td>{{activo.tipo_de_equipo}}</td>
                                     <td>{{activo.fecha_registro}}</td>
-                                    <td><button type="button" class="btn btn-success" data-bs-toggle="modal"
+                                    <td><button type="button" class="btn btn-success" (click)="set_form_edit_activo(activo)" data-bs-toggle="modal"
                                             data-bs-target="#Modal_editar_activo">
                                             <i class="fi fi-br-edit me-2"></i>Editar
                                         </button></td>
@@ -230,9 +230,6 @@
                                             <i class="fi fi-br-eye me-2"></i>Ver más
                                         </button></td>
                                 </tr>
-
-
-
                             </tbody>
                         </table>
 
@@ -247,12 +244,12 @@
                                             aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
-                                        <form>
+                                        <form [formGroup]="form_edit_activo">
                                             <div class="row p-1">
 
                                                 <div class="col-md-6 ">
                                                     <div class="form-floating mb-3">
-                                                        <input type="text" class="form-control" id="floatingInput"
+                                                        <input type="text" formControlName="id_primario" class="form-control" id="floatingInput"
                                                             placeholder="">
                                                         <label for="floatingInput">ID primario</label>
                                                     </div>
@@ -260,7 +257,7 @@
 
                                                 <div class="col-md-6 ">
                                                     <div class="form-floating mb-3">
-                                                        <input type="text" class="form-control" id="floatingInput"
+                                                        <input formControlName="id_secundario"  type="text" class="form-control" id="floatingInput"
                                                             placeholder="">
                                                         <label for="floatingInput">ID secundario</label>
                                                     </div>
@@ -272,7 +269,7 @@
 
                                                 <div class="col-md-6 ">
                                                     <div class="form-floating mb-3">
-                                                        <input type="text" class="form-control" id="floatingInput"
+                                                        <input formControlName="ubicacion"  type="text" class="form-control" id="floatingInput"
                                                             placeholder="">
                                                         <label for="floatingInput">Ubicación</label>
                                                     </div>
@@ -280,7 +277,7 @@
 
                                                 <div class="col-md-6 ">
                                                     <div class="form-floating mb-3">
-                                                        <input type="text" class="form-control" id="floatingInput"
+                                                        <input formControlName="tipo_de_equipo"  type="text" class="form-control" id="floatingInput"
                                                             placeholder="">
                                                         <label for="floatingInput">Tipo de equipo</label>
                                                     </div>
@@ -292,7 +289,7 @@
 
                                                 <div class="col-md-6 ">
                                                     <div class="form-floating mb-3">
-                                                        <input type="text" class="form-control" id="floatingInput"
+                                                        <input formControlName="fabricante"  type="text" class="form-control" id="floatingInput"
                                                             placeholder="">
                                                         <label for="floatingInput">Fabricante</label>
                                                     </div>
@@ -300,7 +297,7 @@
 
                                                 <div class="col-md-6 ">
                                                     <div class="form-floating mb-3">
-                                                        <input type="text" class="form-control" id="floatingInput"
+                                                        <input formControlName="modelo"  type="text" class="form-control" id="floatingInput"
                                                             placeholder="">
                                                         <label for="floatingInput">Modelo</label>
                                                     </div>
@@ -312,7 +309,7 @@
 
                                                 <div class="col-md-6 ">
                                                     <div class="form-floating mb-3">
-                                                        <input type="text" class="form-control" id="floatingInput"
+                                                        <input formControlName="num_serie"  type="text" class="form-control" id="floatingInput"
                                                             placeholder="">
                                                         <label for="floatingInput">Numero de serie</label>
                                                     </div>
@@ -320,7 +317,7 @@
 
                                                 <div class="col-md-6 ">
                                                     <div class="form-floating mb-3">
-                                                        <input type="text" class="form-control" id="floatingInput"
+                                                        <input formControlName="datos_relevantes"  type="text" class="form-control" id="floatingInput"
                                                             placeholder="">
                                                         <label for="floatingInput">Datos relevantes</label>
                                                     </div>
@@ -332,20 +329,9 @@
 
                                                 <div class="col-md-6 ">
                                                     <div class="mb-3">
-                                                        <input class="form-control" type="file"
-                                                            accept="image/jpeg, image/png" id="formFile">
-                                                        <label for="formFile" class="form-label">Cargar imagen</label>
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-md-6 ">
-                                                    <div class="mb-3">
-                                                        <select class="form-select form-select"
+                                                        <select formControlName="subcliente"  class="form-select form-select"
                                                             aria-label=".form-select-sm example">
-                                                            <option selected>Seleccionar cliente</option>
-                                                            <option value="1">One</option>
-                                                            <option value="2">Two</option>
-                                                            <option value="3">Three</option>
+                                                            <option *ngFor="let subcliente of listaSubclientes" [value]="subcliente.id_subcliente">{{subcliente.nombre}}</option>
                                                         </select>
                                                     </div>
 
@@ -359,7 +345,7 @@
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary"
                                             data-bs-dismiss="modal">Cerrar</button>
-                                        <button type="button" class="btn btn-primary">Editar</button>
+                                        <button type="button" (click)="editar_activo(form_edit_activo.value)" class="btn btn-primary">Editar</button>
                                     </div>
                                 </div>
                             </div>

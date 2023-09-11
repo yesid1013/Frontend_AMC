@@ -1,5 +1,5 @@
 import { Component,ViewChild } from '@angular/core';
-import { Activo, Registro_activo } from 'src/app/interfaces/activo';
+import { Activo, Editar_activo, Registro_activo } from 'src/app/interfaces/activo';
 import { ActivoService } from 'src/app/servicios/activo/activo.service';
 import { ComunicationService } from 'src/app/servicios/comunication.service';
 import { ADTSettings } from 'angular-datatables/src/models/settings';
@@ -9,6 +9,7 @@ import { FormBuilder, FormControl, FormGroup, Validator, Validators } from '@ang
 import { SubclienteService } from 'src/app/servicios/subcliente/subcliente.service';
 import { Subcliente } from 'src/app/interfaces/subcliente';
 import Swal from 'sweetalert2';
+import { data } from 'jquery';
 
 
 @Component({
@@ -28,6 +29,7 @@ export class ActivosComponent {
   info_imagen : string = "";
   info_ficha_tecnica : string = ""
   info_codigo_qr : string = "";
+  id_activo : any = null;
   listaActivos : Activo[] = [];
   listaSubclientes : Subcliente[] = [];
 
@@ -54,6 +56,19 @@ export class ActivosComponent {
     num_serie : this.fb.control(null,[]),
     datos_relevantes: this.fb.control(null,[]),
     imagen_equipo: this.fb.control(null),
+    subcliente :this.fb.control(null, [Validators.required])
+  });
+
+  // Formulario de editar activo
+  form_edit_activo: FormGroup = this.fb.group({
+    id_primario: this.fb.control('', [Validators.required,Validators.minLength(3)]),
+    id_secundario: this.fb.control(null, [Validators.minLength(3)]),
+    ubicacion: this.fb.control(null, [Validators.required]),
+    tipo_de_equipo : this.fb.control(null, [Validators.required]),
+    fabricante : this.fb.control(null, [Validators.required]),
+    modelo : this.fb.control(null, []),
+    num_serie : this.fb.control(null,[]),
+    datos_relevantes: this.fb.control(null,[]),
     subcliente :this.fb.control(null, [Validators.required])
   });
 
@@ -161,6 +176,74 @@ export class ActivosComponent {
       
 
     }
+  }
+
+  set_form_edit_activo(activo : any){
+    this.form_edit_activo.setValue({
+      id_primario : activo['id_primario'],
+      id_secundario : activo['id_secundario'],
+      ubicacion : activo['ubicacion'],
+      tipo_de_equipo : activo['tipo_de_equipo'],
+      fabricante : activo['fabricante'],
+      modelo : activo['modelo'],
+      num_serie : activo['num_serie'],
+      datos_relevantes : activo['datos_relevantes'],
+      subcliente :activo['id_subcliente']
+      
+    });
+    this.id_activo = activo.id_activo;
+
+  }
+
+  editar_activo(value : any){
+    this.submitted = true;
+    if (this.id_activo) {
+      if (this.form_edit_activo.valid){
+        Swal.fire({
+          title: '¿Estas seguro de editar este activo?',
+          showDenyButton: true,
+          confirmButtonText: 'Editar',
+          denyButtonText: `Cancelar`,
+        }).then((result) => {
+          if (result.isConfirmed){
+            const editar_activo : Editar_activo = {
+              id_primario : value.id_primario,
+              id_secundario : value.id_secundario,
+              ubicacion : value.ubicacion,
+              tipo_de_equipo : value.tipo_de_equipo,
+              fabricante : value.fabricante,
+              modelo : value.modelo,
+              num_serie : value.num_serie,
+              datos_relevantes : value.datos_relevantes,
+              id_subcliente : value.subcliente
+            }
+            this.activo_service.editar_activo(this.id_activo,editar_activo).subscribe({
+              next : (data) => {
+                Swal.fire({
+                  icon: 'success',
+                  title: 'Servicio exitoso',
+                  text: 'Activo editado correctamente',
+                  allowOutsideClick : false,
+                }).then((result) => {
+                  if (result.isConfirmed) {
+                    this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {  //Renderizar datatable
+                      dtInstance.destroy();
+                      this.listar_activos();
+                    });
+                    
+                  }
+                });
+              }
+            })
+          } else if (result.isDenied) {
+            Swal.fire('Activo no editado', '', 'info')
+          }
+        })
+        
+      }
+      
+    }
+
   }
 
 
