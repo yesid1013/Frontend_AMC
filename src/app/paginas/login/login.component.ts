@@ -43,8 +43,8 @@ export class LoginComponent {
           localStorage.setItem('token', data.token)
           Swal.fire({
             icon: 'success',
-            title: 'Inicio de sesion exitoso',
-            text: 'Bienvenido',
+            title: 'Inicio de sesión exitoso',
+            text: 'Bienvenido '+data.nombre,
             allowOutsideClick : false
 
           }).then((result) => {
