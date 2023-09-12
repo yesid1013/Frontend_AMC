@@ -1,5 +1,5 @@
 export interface Activo {
-
+    id_activo : string;
     id_primario: string;
     id_secundario: string;
     ubicacion: string;

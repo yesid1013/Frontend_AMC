@@ -85,6 +85,7 @@ export class ActivosComponent {
 
   listar_activos(){
     this.activo_service.listar_activos().subscribe(data => {
+      console.log(data);
       this.listaActivos = data;
       this.dtTrigger.next(null);
     });
@@ -229,6 +230,7 @@ export class ActivosComponent {
                     this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {  //Renderizar datatable
                       dtInstance.destroy();
                       this.listar_activos();
+                      this.submitted = false;
                     });
                     
                   }
@@ -243,6 +245,30 @@ export class ActivosComponent {
       }
       
     }
+
+  }
+
+  eliminar_activo(id_activo : string){
+    Swal.fire({
+      title: '¿Estas seguro de eliminar este producto?',
+      showDenyButton: true,
+      confirmButtonText: 'Eliminar',
+      denyButtonText: `Cancelar`,
+    }).then((result) => {
+      if (result.isConfirmed){
+        this.activo_service.eliminar_activo(id_activo).subscribe({
+          next : (data) => {
+            console.log(data)
+            Swal.fire('Activo eliminado', '', 'success');
+            this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {  //Renderizar datatable
+              dtInstance.destroy();
+              this.listar_activos();
+            });
+            
+          }
+        })
+      }
+    })
 
   }
 

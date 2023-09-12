@@ -238,7 +238,7 @@
                                             data-bs-target="#Modal_editar_activo">
                                             <i class="fi fi-br-edit me-2"></i>Editar
                                         </button></td>
-                                    <td><a class="btn btn-danger"><i class="fi fi-br-trash me-2"></i>Eliminar</a></td>
+                                    <td><a class="btn btn-danger" (click)="eliminar_activo(activo.id_activo)"><i class="fi fi-br-trash me-2"></i>Eliminar</a></td>
                                     <td><button type="button"
                                             (click)="ver_mas(activo.subcliente,activo.modelo,activo.fabricante,activo.num_serie,activo.datos_relevantes,activo.ubicacion,activo.imagen_equipo, activo.ficha_tecnica, activo.codigo_qr)"
                                             class="btn btn-info" data-bs-toggle="modal" data-bs-target="#Modal_ver_mas">

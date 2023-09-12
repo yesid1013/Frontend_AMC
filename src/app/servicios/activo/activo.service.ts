@@ -22,4 +22,8 @@ export class ActivoService {
   editar_activo(id_activo : any, activo : Editar_activo){
     return this.http.put(`${this.url}activo/${id_activo}`,activo);
   }
+
+  eliminar_activo(id_activo : string){
+    return this.http.delete(`${this.url}activo/${id_activo}`);
+  }
 }
