@@ -252,7 +252,7 @@
                                                 <td>{{activo.id_secundario}}</td>
                                                 <td>{{activo.tipo_de_equipo}}</td>
                                                 <td>{{activo.ubicacion}}</td>
-                                                <td><button type="button" class="btn btn-success"><i class="fi fi-br-time-past me-2"></i>Restaurar</button></td>
+                                                <td><button type="button" (click)="restaurar_activo(activo.id_activo)" class="btn btn-success"><i class="fi fi-br-time-past me-2"></i>Restaurar</button></td>
                                               </tr>
                                             </tbody>
                                           </table>
@@ -260,6 +260,7 @@
                                 </div>
                             </div>
                         </div>
+                        <!--Fin modal de activos eliminados-->
 
                     </div>
 

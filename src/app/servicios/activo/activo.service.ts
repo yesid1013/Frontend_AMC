@@ -30,4 +30,8 @@ export class ActivoService {
   activos_eliminados():Observable<Activo[]>{
     return this.http.get<Activo[]>(`${this.url}activos_eliminados`);
   }
+
+  restaurar_activo(id_activo : string){
+    return this.http.put(`${this.url}activos/${id_activo}/restaurar`,null);
+  }
 }
