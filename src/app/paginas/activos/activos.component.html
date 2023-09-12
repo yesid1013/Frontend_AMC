@@ -31,12 +31,27 @@
                 <div class="bg-light rounded h-100">
                     <h1 class="h3 mb-4 text-gray-800">Activos</h1>
 
+                    <div class="row">
+                        <div class="col-md-2 pe-0">
+                            <!-- Button trigger modal -->
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                data-bs-target="#Modal_registar_activo">
+                                <i class="fas fa-plus-circle"></i> Registrar activo
+                            </button>
+                        </div>
+
+                        <div class="col-md-2
+                        ">
+                            <!-- Segundo botón -->
+                            <button type="button" (click)="listar_activos_eliminados()" class="btn btn-primary" data-bs-toggle="modal"
+                                data-bs-target="#ModalActivosEliminados">
+                                <i class="fi fi-br-time-delete me-2"></i>Activos eliminados
+                            </button>
+                        </div>
+                    </div>
+
                     <div class="col-md-2 pe-0">
-                        <!-- Button trigger modal -->
-                        <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                            data-bs-target="#Modal_registar_activo">
-                            <i class="fas fa-plus-circle"></i> Registrar activo
-                        </button>
+
 
                         <!-- Modal registrar ativo -->
                         <div class="modal fade" id="Modal_registar_activo" tabindex="-1"
@@ -211,6 +226,41 @@
                         </div>
                         <!--Fin Modal registar activo-->
 
+                        <!-- Modal activos eliminados -->
+                        <div class="modal fade" id="ModalActivosEliminados" tabindex="-1" aria-labelledby="exampleModalLabel"
+                            aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Activos eliminados</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <table class="table table-hover">
+                                            <thead>
+                                              <tr>
+                                                <th scope="col">Id primario</th>
+                                                <th scope="col">Id secundario</th>
+                                                <th scope="col">Tipo de equipo</th>
+                                                <th scope="col">Ubicación</th>
+                                              </tr>
+                                            </thead>
+                                            <tbody>
+                                              <tr *ngFor="let activo of listaActivosEliminados">
+                                                <td>{{activo.id_primario}}</td>
+                                                <td>{{activo.id_secundario}}</td>
+                                                <td>{{activo.tipo_de_equipo}}</td>
+                                                <td>{{activo.ubicacion}}</td>
+                                                <td><button type="button" class="btn btn-success"><i class="fi fi-br-time-past me-2"></i>Restaurar</button></td>
+                                              </tr>
+                                            </tbody>
+                                          </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
 
                     <div class="col-12 pt-4">
@@ -238,7 +288,8 @@
                                             data-bs-target="#Modal_editar_activo">
                                             <i class="fi fi-br-edit me-2"></i>Editar
                                         </button></td>
-                                    <td><a class="btn btn-danger" (click)="eliminar_activo(activo.id_activo)"><i class="fi fi-br-trash me-2"></i>Eliminar</a></td>
+                                    <td><a class="btn btn-danger" (click)="eliminar_activo(activo.id_activo)"><i
+                                                class="fi fi-br-trash me-2"></i>Eliminar</a></td>
                                     <td><button type="button"
                                             (click)="ver_mas(activo.subcliente,activo.modelo,activo.fabricante,activo.num_serie,activo.datos_relevantes,activo.ubicacion,activo.imagen_equipo, activo.ficha_tecnica, activo.codigo_qr)"
                                             class="btn btn-info" data-bs-toggle="modal" data-bs-target="#Modal_ver_mas">
@@ -297,7 +348,7 @@
 
                                                     </div>
                                                 </div>
-                                                S
+
                                             </div>
 
                                             <div class="row p-1">

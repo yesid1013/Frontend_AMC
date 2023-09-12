@@ -31,6 +31,7 @@ export class ActivosComponent {
   info_codigo_qr : string = "";
   id_activo : any = null;
   listaActivos : Activo[] = [];
+  listaActivosEliminados : Activo[] = [];
   listaSubclientes : Subcliente[] = [];
 
   selectedFile: File | null = null;
@@ -85,7 +86,6 @@ export class ActivosComponent {
 
   listar_activos(){
     this.activo_service.listar_activos().subscribe(data => {
-      console.log(data);
       this.listaActivos = data;
       this.dtTrigger.next(null);
     });
@@ -269,8 +269,13 @@ export class ActivosComponent {
         })
       }
     })
-
   }
+
+  listar_activos_eliminados(){
+    this.activo_service.activos_eliminados().subscribe(data => {
+      this.listaActivosEliminados = data;
+    });
+  };
 
 
 }

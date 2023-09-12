@@ -26,4 +26,8 @@ export class ActivoService {
   eliminar_activo(id_activo : string){
     return this.http.delete(`${this.url}activo/${id_activo}`);
   }
+
+  activos_eliminados():Observable<Activo[]>{
+    return this.http.get<Activo[]>(`${this.url}activos_eliminados`);
+  }
 }
