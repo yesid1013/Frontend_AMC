@@ -31,9 +31,9 @@ export interface Activo {
     datos_relevantes: string;
 
     imagen_equipo: {
-      name : string;
-      mimeType: string;
-      content: string;
+      name : string | null;
+      mimeType: string | null;
+      content: string | null;
     };
 
     id_subcliente: string;

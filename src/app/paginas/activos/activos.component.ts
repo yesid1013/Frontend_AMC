@@ -36,10 +36,11 @@ export class ActivosComponent {
   listaSubclientes: Subcliente[] = [];
 
   selectedFile: File | null = null;
-  imageName: string = '';
-  imageMimeType: string = '';
-  imageContent: string = '';
+  imageName: string | null = null;
+  imageMimeType: string | null = null;
+  imageContent: string | null = null;
 
+  // DataTable
   dtOptions: ADTSettings = {};
   dtTrigger: Subject<any> = new Subject;
   @ViewChild(DataTableDirective, { static: false })
@@ -123,6 +124,12 @@ export class ActivosComponent {
         this.imageContent = e.target.result.split(',')[1];
       };
       reader.readAsDataURL(file);
+    } else {
+      // Si no se seleccionó un archivo, asignar valores nulos
+      this.selectedFile = null;
+      this.imageName = null;
+      this.imageMimeType = null;
+      this.imageContent = null;
     }
   }
 
