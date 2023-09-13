@@ -12,6 +12,7 @@
 
     <!-- Icon Font Stylesheet -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/uicons-bold-rounded/css/uicons-bold-rounded.css'>
 
 </head>
 
@@ -130,38 +131,38 @@
                         <table class="table table-striped">
                             <thead>
                                 <tr>
-                                    <th>ID servicio</th>
+                                    <th>No servicio</th>
                                     <th scope="col">Activo</th>
                                     <th scope="col">Fecha de ejecución</th>
                                     <th scope="col">Tipo de servicio</th>
                                     <th scope="col">Descripción</th>
                                     <th scope="col">Observaciones</th>
                                     <th scope="col">Usuario</th>
-                                    <th scope="col">informe</th>
                                     <th scope="col">Editar</th>
                                     <th scope="col">Eliminar</th>
+                                    <th scope="col">Informe</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <th>1233</th>
-                                    <th>1</th>
-                                    <td>John</td>
-                                    <td>Doe</td>
-                                    <td>jhon@email.com</td>
-                                    <td>Doe</td>
-                                    <td>Doe</td>
-                                    <td>Doe</td>
+                                <tr *ngFor="let servicio of listaServicios">
+                                    <td>{{servicio.numero_servicio}}</td>
+                                    <td>{{servicio.activo}}</td>
+                                    <td>{{servicio.fecha_ejecucion}}</td>
+                                    <td>{{servicio.tipo_servicio}}</td>
+                                    <td>{{servicio.descripcion}}</td>
+                                    <td>{{servicio.observaciones}}</td>
+                                    <td>{{servicio.nombre_usuario}}</td>
                                     <td><button type="button" class="btn btn-success" data-bs-toggle="modal"
                                             data-bs-target="#Modal_editar_servicio">
-                                            <i class="fas fa-edit"></i> Editar
+                                            <i class="fi fi-br-edit me-2"></i>Editar
                                         </button></td>
-                                    <td><a class="btn btn-danger"><i class="fas fa-trash-alt"></i> Eliminar</a></td>
+                                    <td><a class="btn btn-danger"><i
+                                        class="fi fi-br-trash"></i>Eliminar</a></td>
+                                    <td><a href={{servicio.informe}} *ngIf="servicio.informe" type="button" target="_blank" class="btn btn-info"><i class="fi fi-br-eye me-2"></i>Ver informe</a> <p *ngIf="!servicio.informe">No hay informe</p></td>
                                 </tr>
-
-
                             </tbody>
                         </table>
+
                         <!-- Modal Editar servicio  -->
                         <div class="modal fade" id="Modal_editar_servicio" tabindex="-1" aria-labelledby="exampleModalLabel"
                             aria-hidden="true">
