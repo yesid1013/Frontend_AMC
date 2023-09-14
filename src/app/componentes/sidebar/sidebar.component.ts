@@ -9,9 +9,10 @@ import jwt_decode from 'jwt-decode';
 })
 export class SidebarComponent implements OnInit {
   isOpen = false;
+  token : string | null = '';
 
   constructor(private communicationService:ComunicationService){}
-  token : string | null = '';
+  
 
   ngOnInit() {
     this.communicationService.sidebarOpen$.subscribe(isOpen => {
@@ -25,7 +26,6 @@ export class SidebarComponent implements OnInit {
     if (this.token){
       const decodedToken: any = jwt_decode(this.token);
       const rol = decodedToken?.perfil;
-      console.log(rol);
       return  rol
     }
     

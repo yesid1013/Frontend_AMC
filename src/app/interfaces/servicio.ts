@@ -8,4 +8,5 @@ export interface Servicio {
     numero_servicio: number;
     observaciones:   string;
     tipo_servicio:   string;
+    orden_de_servicio: string;
 }

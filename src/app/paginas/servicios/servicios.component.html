@@ -140,7 +140,8 @@
                                     <th scope="col">Usuario</th>
                                     <th scope="col">Editar</th>
                                     <th scope="col">Eliminar</th>
-                                    <th scope="col">Informe</th>
+                                    <th scope="col" *ngIf="obtener_rol() == 1">Informe</th>
+                                    <th scope="col">Orden de servicio</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -158,7 +159,10 @@
                                         </button></td>
                                     <td><a class="btn btn-danger"><i
                                         class="fi fi-br-trash"></i>Eliminar</a></td>
-                                    <td><a href={{servicio.informe}} *ngIf="servicio.informe" type="button" target="_blank" class="btn btn-info"><i class="fi fi-br-eye me-2"></i>Ver informe</a> <p *ngIf="!servicio.informe">No hay informe</p></td>
+
+                                    <td *ngIf="obtener_rol() == 1"><a href={{servicio.informe}} *ngIf="servicio.informe"  type="button" target="_blank" class="btn btn-info"><i class="fi fi-br-eye me-2"></i>Ver informe</a> <p *ngIf="!servicio.informe">No hay informe</p></td>
+
+                                    <td><a href={{servicio.orden_de_servicio}} *ngIf="servicio.orden_de_servicio" type="button" target="_blank" class="btn btn-info"><i class="fi fi-br-eye me-2"></i>Ver orden</a> <p *ngIf="!servicio.orden_de_servicio">No hay orden de servicio</p></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -257,6 +261,7 @@
                 </div>
 
             </div>
+            <app-footer></app-footer>
 
         </div>
     </div>

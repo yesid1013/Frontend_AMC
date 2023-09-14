@@ -5,6 +5,7 @@ import { Subject } from 'rxjs';
 import { Servicio } from 'src/app/interfaces/servicio';
 import { ComunicationService } from 'src/app/servicios/comunication.service';
 import { ServicioService } from 'src/app/servicios/servicio/servicio.service';
+import jwt_decode from 'jwt-decode';
 
 @Component({
   selector: 'app-servicios',
@@ -19,6 +20,8 @@ export class ServiciosComponent {
   dtTrigger: Subject<any> = new Subject;
   @ViewChild(DataTableDirective, { static: false })
   dtElement!: DataTableDirective;
+
+  token : string | null = '';
   
   constructor(private communicationService: ComunicationService,private servicio_service : ServicioService) {}
 
@@ -30,6 +33,7 @@ export class ServiciosComponent {
       this.isOpen = isOpen;
     });
     this.obtener_servicios();
+    this.obtener_rol();
   }
 
   obtener_servicios(){
@@ -37,6 +41,16 @@ export class ServiciosComponent {
       this.listaServicios = data;
       this.dtTrigger.next(null);
     })
+  }
+
+  obtener_rol(){
+    this.token = localStorage.getItem('token');
+    if (this.token){
+      const decodedToken: any = jwt_decode(this.token);
+      const rol = decodedToken?.perfil;
+      return  rol
+    }
+    
   }
 
 }
