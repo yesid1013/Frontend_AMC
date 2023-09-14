@@ -30,7 +30,7 @@
 
                     <div class="col-md-2 pe-0">
                         <!-- Button trigger modal -->
-                        <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                        <button type="button" (click)="obtener_activos()" class="btn btn-primary" data-bs-toggle="modal"
                             data-bs-target="#Modal_registar_servicio">
                             <i class="fas fa-plus-circle"></i> Registrar servicio
                         </button>
@@ -46,33 +46,42 @@
                                             aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
-                                        <form>
-                                            <div class="row p-1">
+                                        <form [formGroup]="form_servicio">
 
+                                            <div class="row p-1">
                                                 <div class="col-md-6 ">
                                                     <label for="exampleDataList" class="form-label">Seleccione el
                                                         activo</label>
-                                                    <input class="form-control" list="datalistOptions"
-                                                        id="exampleDataList" placeholder="Escriba para buscar">
+                                                    <input formControlName="activo" (change)="onActivoSelect($event)"
+                                                        class="form-control" list="datalistOptions" id="exampleDataList"
+                                                        placeholder="Escriba para buscar">
                                                     <datalist id="datalistOptions">
-                                                        <option value="San Francisco">
-                                                        <option value="New York">
-                                                        <option value="Seattle">
-                                                        <option value="Los Angeles">
-                                                        <option value="Chicago">
+                                                        <option *ngFor="let activo of listaActivos"
+                                                            [value]="activo.id_primario">
+                                                            {{activo.tipo_de_equipo}}</option>
                                                     </datalist>
+
+                                                    <div *ngIf="form_servicio.get('activo')?.hasError('required') && (submitted)"
+                                                        class="alert alert-primary" role="alert">
+                                                        <i class="fi fi-br-exclamation"></i>
+                                                        El activo es requerido.
+                                                    </div>
                                                 </div>
 
                                                 <div class="col-md-6 ">
-                                                    <div class="mb-3">
-                                                        <select class="form-select form-select"
-                                                            aria-label=".form-select-sm example"
-                                                            id="select_tipo_servicio">
-                                                            <option selected>Tipo de servicio</option>
-                                                            <option value="1">Mantenimiento preventivo</option>
-                                                            <option value="2">Mantenimiento correctivo</option>
-                                                            <option value="3">Inspección y/o diagnostico</option>
-                                                        </select>
+                                                    <select formControlName="tipo_de_servicio"
+                                                        class="form-select form-select"
+                                                        aria-label=".form-select-sm example" id="select_tipo_servicio">
+                                                        <option selected>Seleccione tipo de servicio</option>
+                                                        <option value="1">Mantenimiento preventivo</option>
+                                                        <option value="2">Mantenimiento correctivo</option>
+                                                        <option value="3">Inspección y/o diagnostico</option>
+                                                    </select>
+
+                                                    <div *ngIf="form_servicio.get('tipo_de_servicio')?.hasError('required') && (submitted)"
+                                                        class="alert alert-primary" role="alert">
+                                                        <i class="fi fi-br-exclamation"></i>
+                                                        El tipo de servicio es requerido.
                                                     </div>
 
                                                 </div>
@@ -82,9 +91,17 @@
                                             <div class="row p-1">
                                                 <div class="col-md-6 ">
                                                     <div class="form-floating mb-3">
-                                                        <textarea class="form-control" id="floatingInput"></textarea>
+                                                        <textarea formControlName="descripcion" class="form-control"
+                                                            id="floatingInput"></textarea>
                                                         <label for="floatingInput">Descripcion</label>
                                                     </div>
+
+                                                    <div *ngIf="form_servicio.get('descripcion')?.hasError('required') && (submitted)"
+                                                        class="alert alert-primary" role="alert">
+                                                        <i class="fi fi-br-exclamation"></i>
+                                                        La descripcion es requerida.
+                                                    </div>
+
                                                 </div>
 
                                                 <div class="col-md-6 ">
@@ -108,9 +125,23 @@
 
                                                 <div class="col-md-6 ">
                                                     <label for="start">Fecha de ejecución:</label><br>
-                                                    <input type="datetime-local" name="horareunion">
+                                                    <input formControlName="fecha_de_ejecucion" type="datetime-local"
+                                                        name="horareunion">
+
+                                                    <div *ngIf="form_servicio.get('fecha_de_ejecucion')?.hasError('required') && (submitted)"
+                                                        class="alert alert-primary" role="alert">
+                                                        <i class="fi fi-br-exclamation"></i>
+                                                        La fecha de ejecucion es requerida.
+                                                    </div>
                                                 </div>
 
+                                            </div>
+
+                                            <div class="row p-1">
+                                                <input formControlName="orden_de_servicio" class="form-control"
+                                                    type="file" accept="application/pdf" id="formFile">
+                                                <label for="formFile" class="form-label">Adjuntar orden de
+                                                    servicio</label>
                                             </div>
                                         </form>
                                     </div>
@@ -157,19 +188,26 @@
                                             data-bs-target="#Modal_editar_servicio">
                                             <i class="fi fi-br-edit me-2"></i>Editar
                                         </button></td>
-                                    <td><a class="btn btn-danger"><i
-                                        class="fi fi-br-trash"></i>Eliminar</a></td>
+                                    <td><a class="btn btn-danger"><i class="fi fi-br-trash"></i>Eliminar</a></td>
 
-                                    <td *ngIf="obtener_rol() == 1"><a href={{servicio.informe}} *ngIf="servicio.informe"  type="button" target="_blank" class="btn btn-info"><i class="fi fi-br-eye me-2"></i>Ver informe</a> <p *ngIf="!servicio.informe">No hay informe</p></td>
+                                    <td *ngIf="obtener_rol() == 1"><a href={{servicio.informe}} *ngIf="servicio.informe"
+                                            type="button" target="_blank" class="btn btn-info"><i
+                                                class="fi fi-br-eye me-2"></i>Ver informe</a>
+                                        <p *ngIf="!servicio.informe">No hay informe</p>
+                                    </td>
 
-                                    <td><a href={{servicio.orden_de_servicio}} *ngIf="servicio.orden_de_servicio" type="button" target="_blank" class="btn btn-info"><i class="fi fi-br-eye me-2"></i>Ver orden</a> <p *ngIf="!servicio.orden_de_servicio">No hay orden de servicio</p></td>
+                                    <td><a href={{servicio.orden_de_servicio}} *ngIf="servicio.orden_de_servicio"
+                                            type="button" target="_blank" class="btn btn-info"><i
+                                                class="fi fi-br-eye me-2"></i>Ver orden</a>
+                                        <p *ngIf="!servicio.orden_de_servicio">No hay orden de servicio</p>
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
 
                         <!-- Modal Editar servicio  -->
-                        <div class="modal fade" id="Modal_editar_servicio" tabindex="-1" aria-labelledby="exampleModalLabel"
-                            aria-hidden="true">
+                        <div class="modal fade" id="Modal_editar_servicio" tabindex="-1"
+                            aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
