@@ -25,11 +25,12 @@ export class NavbarComponent {
     Swal.fire({
       title: '¿Estas seguro de cerrar sesión?',
       text: "",
-      icon: 'warning',
+      icon: 'question',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
-      confirmButtonText: 'Sí, cerrar sesión'
+      confirmButtonText: 'Sí, cerrar sesión',
+      cancelButtonText : 'No'
     }).then((result)=> {
       if (result.isConfirmed){
         Swal.fire({
