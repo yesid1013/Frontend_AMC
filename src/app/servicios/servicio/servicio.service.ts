@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Servicio } from 'src/app/interfaces/servicio';
+import { RegistroServicio, Servicio } from 'src/app/interfaces/servicio';
 
 @Injectable({
   providedIn: 'root'
@@ -13,5 +13,9 @@ export class ServicioService {
 
   obtener_servicios():Observable<Servicio[]>{
     return this.http.get<Servicio[]>(`${this.url}servicios`);
+  }
+
+  registrar_servicio(servicio : RegistroServicio, id_activo : string):Observable<any>{
+    return this.http.post(`${this.url}servicios/${id_activo}`,servicio);
   }
 }

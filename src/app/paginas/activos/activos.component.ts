@@ -8,10 +8,7 @@ import { DataTableDirective } from 'angular-datatables';
 import { FormBuilder, FormControl, FormGroup, Validator, Validators } from '@angular/forms';
 import { SubclienteService } from 'src/app/servicios/subcliente/subcliente.service';
 import { Subcliente } from 'src/app/interfaces/subcliente';
-
 import Swal from 'sweetalert2';
-import { data } from 'jquery';
-
 
 @Component({
   selector: 'app-activos',

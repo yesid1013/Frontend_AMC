@@ -2,7 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { DataTableDirective } from 'angular-datatables';
 import { ADTSettings } from 'angular-datatables/src/models/settings';
 import { Subject } from 'rxjs';
-import { Servicio } from 'src/app/interfaces/servicio';
+import { RegistroServicio, Servicio } from 'src/app/interfaces/servicio';
 import { ComunicationService } from 'src/app/servicios/comunication.service';
 import { ServicioService } from 'src/app/servicios/servicio/servicio.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -10,6 +10,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import jwt_decode from 'jwt-decode';
 import { ActivoService } from 'src/app/servicios/activo/activo.service';
 import { Activo } from 'src/app/interfaces/activo';
+import Swal from 'sweetalert2';
+
 
 @Component({
   selector: 'app-servicios',
@@ -29,6 +31,11 @@ export class ServiciosComponent {
   token: string | null = '';
   submitted = false;
 
+  selectedFile: File | null = null;
+  fileName: string | null = null;
+  fileMimeType: string | null = null;
+  fileContent: string | null = null;
+
   constructor(private communicationService: ComunicationService, private servicio_service: ServicioService, private fb: FormBuilder, private activo_service: ActivoService) { }
 
   // Formulario de registrar servicio
@@ -37,8 +44,8 @@ export class ServiciosComponent {
     tipo_de_servicio: this.fb.control("Seleccione tipo de servicio",[Validators.required]),
     descripcion: this.fb.control(null, [Validators.required]),
     observaciones: this.fb.control(null, []),
-    observacion_usuario: this.fb.control(null, []),
-    fecha_de_ejecucion: this.fb.control('', [Validators.required]),
+    observaciones_usuario: this.fb.control(null, []),
+    fecha_ejecucion: this.fb.control('', [Validators.required]),
     orden_de_servicio: this.fb.control('', [])
   });
 
@@ -69,7 +76,7 @@ export class ServiciosComponent {
     }
   }
 
-  obtener_activos() { //Para mostrarlos en el formulario
+  obtener_activos() { //Para mostrar los activos en el formulario
     this.activo_service.listar_activos().subscribe(data => {
       this.listaActivos = data;
     })
@@ -84,6 +91,73 @@ export class ServiciosComponent {
     if (selectedOption) {
       this.selectedActivoId = selectedOption.id_activo;
       console.log('ID de activo seleccionado:', this.selectedActivoId);
+    }
+  }
+
+  onFileSelected(event: any) {
+    const file = event.target.files[0];
+
+    if (file) {
+      this.selectedFile = file;
+      this.fileName = file.name;
+      this.fileMimeType = file.type;
+
+      const reader = new FileReader();
+      reader.onload = (e: any) => {
+        this.fileContent = e.target.result.split(',')[1];
+      };
+      reader.readAsDataURL(file);
+    } else {
+      // Si no se seleccionó un archivo, asignar valores nulos
+      this.selectedFile = null;
+      this.fileName = null;
+      this.fileMimeType = null;
+      this.fileContent = null;
+    }
+  }
+
+  registrar_servicio(value : any){
+    this.submitted = true;
+    const fecha = new Date(value.fecha_ejecucion);
+    const fechaFormateada = fecha.toISOString(); // Formato 'YYYY-MM-DD HH:MM:SS'
+    if (this.form_servicio.valid){
+      const servicio : RegistroServicio = {
+        fecha_ejecucion : fechaFormateada,
+        descripcion : value.descripcion,
+        id_tipo_servicio: value.tipo_de_servicio,
+        observaciones : value.observaciones,
+        observaciones_usuario : value.observaciones_usuario,
+
+        orden_de_servicio : {
+          name :this.fileName,
+          content : this.fileContent,
+          mimeType : this.fileMimeType
+        }
+      };
+
+      Swal.fire({
+        title: 'Cargando...',
+        allowOutsideClick: false,  // Impide que el usuario cierre el diálogo haciendo clic fuera
+        didOpen: () => {
+          Swal.showLoading();  // Muestra el spinner
+        }
+      });
+      
+      this.servicio_service.registrar_servicio(servicio,this.selectedActivoId).subscribe(data => {
+        Swal.fire({
+          icon: 'success',
+          title: 'Registro exitoso',
+          text: 'Servicio creado correctamente',
+          allowOutsideClick: false,
+        }).then((result) => {
+          if (result.isConfirmed) {
+            this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {  //Renderizar datatable
+              dtInstance.destroy();
+              this.obtener_servicios();
+            });
+          }
+        });
+      });
     }
   }
 

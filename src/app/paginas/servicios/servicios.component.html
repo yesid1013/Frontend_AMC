@@ -73,9 +73,9 @@
                                                         class="form-select form-select"
                                                         aria-label=".form-select-sm example" id="select_tipo_servicio">
                                                         <option selected>Seleccione tipo de servicio</option>
-                                                        <option value="1">Mantenimiento preventivo</option>
-                                                        <option value="2">Mantenimiento correctivo</option>
-                                                        <option value="3">Inspección y/o diagnostico</option>
+                                                        <option [value]="1">Mantenimiento preventivo</option>
+                                                        <option [value]="2">Mantenimiento correctivo</option>
+                                                        <option [value]="3">Inspección y/o diagnostico</option>
                                                     </select>
 
                                                     <div *ngIf="form_servicio.get('tipo_de_servicio')?.hasError('required') && (submitted)"
@@ -106,7 +106,7 @@
 
                                                 <div class="col-md-6 ">
                                                     <div class="form-floating mb-3">
-                                                        <textarea class="form-control" id="floatingInput"></textarea>
+                                                        <textarea formControlName="observaciones"  class="form-control" id="floatingInput"></textarea>
                                                         <label for="floatingInput">Observaciones</label>
                                                     </div>
                                                 </div>
@@ -116,7 +116,7 @@
                                             <div class="row p-1">
                                                 <div class="col-md-6 ">
                                                     <div class="form-floating mb-3">
-                                                        <textarea class="form-control" id="floatingInput"></textarea>
+                                                        <textarea formControlName="observaciones_usuario"  class="form-control" id="floatingInput"></textarea>
                                                         <label for="floatingInput">Observación de usuario</label>
                                                         <i class="fas fa-question-circle" data-bs-toggle="tooltip"
                                                             title="Si no eres un tecnico y quieres registrar un servicio, por favor escriba su nombre u observacion"></i>
@@ -125,10 +125,10 @@
 
                                                 <div class="col-md-6 ">
                                                     <label for="start">Fecha de ejecución:</label><br>
-                                                    <input formControlName="fecha_de_ejecucion" type="datetime-local"
+                                                    <input formControlName="fecha_ejecucion" type="datetime-local"
                                                         name="horareunion">
 
-                                                    <div *ngIf="form_servicio.get('fecha_de_ejecucion')?.hasError('required') && (submitted)"
+                                                    <div *ngIf="form_servicio.get('fecha_ejecucion')?.hasError('required') && (submitted)"
                                                         class="alert alert-primary" role="alert">
                                                         <i class="fi fi-br-exclamation"></i>
                                                         La fecha de ejecucion es requerida.
@@ -138,7 +138,7 @@
                                             </div>
 
                                             <div class="row p-1">
-                                                <input formControlName="orden_de_servicio" class="form-control"
+                                                <input formControlName="orden_de_servicio" (change)="onFileSelected($event)" class="form-control"
                                                     type="file" accept="application/pdf" id="formFile">
                                                 <label for="formFile" class="form-label">Adjuntar orden de
                                                     servicio</label>
@@ -148,7 +148,7 @@
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary"
                                             data-bs-dismiss="modal">Cerrar</button>
-                                        <button type="button" class="btn btn-primary">Registrar</button>
+                                        <button type="button" class="btn btn-primary" (click)="registrar_servicio(form_servicio.value)">Registrar</button>
                                     </div>
                                 </div>
                             </div>

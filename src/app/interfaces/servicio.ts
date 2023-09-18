@@ -10,3 +10,19 @@ export interface Servicio {
     tipo_servicio:   string;
     orden_de_servicio: string;
 }
+
+export interface RegistroServicio {
+    fecha_ejecucion:   string;
+    id_tipo_servicio:  number;
+    descripcion:       string;
+    observaciones:     string | null;
+    observaciones_usuario:     string | null;
+    orden_de_servicio: OrdenDeServicio;
+}
+
+export interface OrdenDeServicio {
+    name:     string | null;
+    mimeType: string | null;
+    content:  string | null;
+}
+
