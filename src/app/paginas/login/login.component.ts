@@ -40,7 +40,8 @@ export class LoginComponent {
       this.usarioService.login(usuario).subscribe({
         next: (data) => {
           this.loading = false;
-          localStorage.setItem('token', data.token)
+          localStorage.setItem('token', data.token);
+          localStorage.setItem('nombre', data.nombre)
           Swal.fire({
             icon: 'success',
             title: 'Inicio de sesión exitoso',

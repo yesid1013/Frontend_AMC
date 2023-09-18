@@ -26,7 +26,8 @@
 
             <div class="container-fluid pt-4 px-4">
                 <div class="bg-light rounded h-100">
-                    <h1 class="h3 mb-4 text-gray-800">Servicios</h1>
+                    <h1 *ngIf="obtener_rol() == 1" class="h3 mb-4 text-gray-800">Servicios</h1>
+                    <h1 *ngIf="obtener_rol() == 2" class="h3 mb-4 text-gray-800">Mi Servicios</h1>
 
                     <div class="col-md-2 pe-0">
                         <!-- Button trigger modal -->
@@ -119,7 +120,7 @@
                                                         <textarea formControlName="observaciones_usuario"  class="form-control" id="floatingInput"></textarea>
                                                         <label for="floatingInput">Observación de usuario</label>
                                                         <i class="fas fa-question-circle" data-bs-toggle="tooltip"
-                                                            title="Si no eres un tecnico y quieres registrar un servicio, por favor escriba su nombre u observacion"></i>
+                                                            title="Si no eres un usuario tecnico, por favor indicalo aquí"></i>
                                                     </div>
                                                 </div>
 
@@ -168,7 +169,7 @@
                                     <th scope="col">Tipo de servicio</th>
                                     <th scope="col">Descripción</th>
                                     <th scope="col">Observaciones</th>
-                                    <th scope="col">Usuario</th>
+                                    <th scope="col" *ngIf="obtener_rol() == 1">Usuario</th>
                                     <th scope="col">Editar</th>
                                     <th scope="col">Eliminar</th>
                                     <th scope="col" *ngIf="obtener_rol() == 1">Informe</th>
@@ -183,7 +184,7 @@
                                     <td>{{servicio.tipo_servicio}}</td>
                                     <td>{{servicio.descripcion}}</td>
                                     <td>{{servicio.observaciones}}</td>
-                                    <td>{{servicio.nombre_usuario}}</td>
+                                    <td *ngIf="obtener_rol() == 1">{{servicio.nombre_usuario}}</td>
                                     <td><button type="button" class="btn btn-success" data-bs-toggle="modal"
                                             data-bs-target="#Modal_editar_servicio">
                                             <i class="fi fi-br-edit me-2"></i>Editar
@@ -273,7 +274,7 @@
                                                         <textarea class="form-control" id="floatingInput"></textarea>
                                                         <label for="floatingInput">Observación de usuario</label>
                                                         <i class="fas fa-question-circle" data-bs-toggle="tooltip"
-                                                            title="Si no eres un tecnico y quieres registrar un servicio, por favor escriba su nombre u observacion"></i>
+                                                            title="Si no eres un usuario tecnico, por favor indicalo aquí"></i>
                                                     </div>
                                                 </div>
 
