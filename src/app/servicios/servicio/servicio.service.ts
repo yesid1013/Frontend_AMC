@@ -22,4 +22,8 @@ export class ServicioService {
   editar_servicio(id_servicio : any, servicio : EditarServicio){
     return this.http.put(`${this.url}servicio/${id_servicio}`,servicio);
   }
+
+  eliminar_servicio(id_servicio : string){
+    return this.http.delete(`${this.url}servicio/${id_servicio}`);
+  }
 }

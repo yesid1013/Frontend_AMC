@@ -191,7 +191,7 @@
                                             <i class="fi fi-br-edit me-2"></i>Editar
                                         </button></td>
 
-                                    <td><a class="btn btn-danger"><i class="fi fi-br-trash"></i>Eliminar</a></td>
+                                    <td><a class="btn btn-danger" (click)="eliminar_servicio(servicio.id_servicio)"><i class="fi fi-br-trash"></i>Eliminar</a></td>
 
                                     <td *ngIf="obtener_rol() == 1"><a href={{servicio.informe}} *ngIf="servicio.informe"
                                             type="button" target="_blank" class="btn btn-info"><i

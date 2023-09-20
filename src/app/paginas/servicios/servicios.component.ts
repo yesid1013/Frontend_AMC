@@ -236,7 +236,7 @@ export class ServiciosComponent {
                 mimeType : this.fileMimeType
               }
             };
-            
+
             Swal.fire({
               title: 'Cargando...',
               allowOutsideClick: false,  // Impide que el usuario cierre el diálogo haciendo clic fuera
@@ -268,6 +268,27 @@ export class ServiciosComponent {
       }
     }
 
+  }
+
+  eliminar_servicio(id_servicio : string){
+    Swal.fire({
+      title: '¿Estás seguro de eliminar este servicio?',
+      showDenyButton: true,
+      confirmButtonText: 'Eliminar',
+      denyButtonText: `Cancelar`,
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.servicio_service.eliminar_servicio(id_servicio).subscribe({
+          next: (data) => {
+            Swal.fire('Servicio eliminado', '', 'success');
+            this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {  //Renderizar datatable
+              dtInstance.destroy();
+              this.obtener_servicios();
+            });
+          }
+        })
+      }
+    })
   }
 
   
