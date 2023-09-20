@@ -2,7 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { DataTableDirective } from 'angular-datatables';
 import { ADTSettings } from 'angular-datatables/src/models/settings';
 import { Subject } from 'rxjs';
-import { RegistroServicio, Servicio } from 'src/app/interfaces/servicio';
+import { EditarServicio, RegistroServicio, Servicio } from 'src/app/interfaces/servicio';
 import { ComunicationService } from 'src/app/servicios/comunication.service';
 import { ServicioService } from 'src/app/servicios/servicio/servicio.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -36,6 +36,8 @@ export class ServiciosComponent {
   fileMimeType: string | null = null;
   fileContent: string | null = null;
 
+  id_activo_editar : string = ""
+
   constructor(private communicationService: ComunicationService, private servicio_service: ServicioService, private fb: FormBuilder, private activo_service: ActivoService) { }
 
   // Formulario de registrar servicio
@@ -49,6 +51,16 @@ export class ServiciosComponent {
     orden_de_servicio: this.fb.control('', [])
   });
 
+  // Formulario de editar servicio
+  form_edit_servicio: FormGroup = this.fb.group({
+    activo: this.fb.control('', [Validators.required]),
+    tipo_de_servicio: this.fb.control("Seleccione tipo de servicio",[Validators.required]),
+    descripcion: this.fb.control(null, [Validators.required]),
+    observaciones: this.fb.control(null, []),
+    observaciones_usuario: this.fb.control(null, []),
+    fecha_ejecucion: this.fb.control('', [Validators.required]),
+  });
+
   ngOnInit() {
     this.dtOptions = {
       language: { url: '//cdn.datatables.net/plug-ins/1.13.4/i18n/es-ES.json' }
@@ -58,6 +70,7 @@ export class ServiciosComponent {
     });
     this.obtener_servicios();
     this.obtener_rol();
+    this.obtener_activos()
   }
 
   obtener_servicios() {
@@ -83,7 +96,7 @@ export class ServiciosComponent {
   }
 
   selectedActivoId: string = '';
-
+  seEjecuto_ActivoSelect = false;
   onActivoSelect(event: Event) { //Para saber el id_activo seleccionado en el datalist del formulario de registro
     const selectedText = (event.target as HTMLInputElement).value;
     const selectedOption = this.listaActivos.find(activo => activo.id_primario === selectedText);
@@ -91,6 +104,7 @@ export class ServiciosComponent {
     if (selectedOption) {
       this.selectedActivoId = selectedOption.id_activo;
       console.log('ID de activo seleccionado:', this.selectedActivoId);
+      this.seEjecuto_ActivoSelect = true; // Se ejecutó la función
     }
   }
 
@@ -119,8 +133,9 @@ export class ServiciosComponent {
   registrar_servicio(value : any){
     this.submitted = true;
     const fecha = new Date(value.fecha_ejecucion);
-    const fechaFormateada = fecha.toISOString(); // Formato 'YYYY-MM-DD HH:MM:SS'
+    const fechaFormateada = fecha.toISOString();
     if (this.form_servicio.valid){
+
       const servicio : RegistroServicio = {
         fecha_ejecucion : fechaFormateada,
         descripcion : value.descripcion,
@@ -160,5 +175,101 @@ export class ServiciosComponent {
       });
     }
   }
+
+  orden: boolean = false;
+  edit_activo_id : string = "" 
+  set_form_edit_servicio(servicio : any){
+    if (servicio.orden_de_servicio == null){ //Para saber si el servicio tiene una orden de servicio y mostrar el input tipo file en el formulario
+      this.orden = true;
+    } else {
+      this.orden = false
+    }
+
+    const selectedOption = this.listaActivos.find(activo => activo.id_primario === servicio.activo_id_primario);
+    if (selectedOption) {
+      this.edit_activo_id = selectedOption.id_activo;
+      console.log('ID de activo seleccionado edit:', this.edit_activo_id);
+    }
+
+    this.form_edit_servicio.setValue({
+      activo : servicio.activo_id_primario,
+      tipo_de_servicio : servicio.id_tipo_servicio,
+      descripcion : servicio.descripcion,
+      observaciones : servicio.observaciones,
+      observaciones_usuario : servicio.observaciones_usuario,
+      fecha_ejecucion : servicio.fecha_ejecucion
+    })
+    this.id_servicio = servicio.id_servicio;
+  }
+
+
+  id_servicio: any = null;
+  editar_servicio(value : any){
+    if (this.id_servicio){
+      if (this.form_edit_servicio.valid){
+        Swal.fire({
+          title: '¿Estas seguro de editar este servicio?',
+          showDenyButton: true,
+          confirmButtonText: 'Editar',
+          denyButtonText: `Cancelar`,
+        }).then((result) => {
+          if (result.isConfirmed){
+            if (this.seEjecuto_ActivoSelect){ //Verifico si la funcion OnActivoSelect se ejcuto para saber si selecciono otro activo para editar y saber su id, y si no se ejecuta es que no selecciono un activo si no que dejo el que estaba por defecto
+              this.id_activo_editar = this.selectedActivoId;
+            }else{
+              this.id_activo_editar = this.edit_activo_id;
+            }
+
+            const fecha = new Date(value.fecha_ejecucion);
+            const fechaFormateada = fecha.toISOString();
+            const editar_servicio : EditarServicio = {
+              id_activo : this.id_activo_editar,
+              id_tipo_servicio : value.tipo_de_servicio,
+              descripcion : value.descripcion,
+              observaciones : value.observaciones,
+              observaciones_usuario : value.observaciones_usuario,
+              fecha_ejecucion : fechaFormateada,
+
+              orden_de_servicio : {
+                name :this.fileName,
+                content : this.fileContent,
+                mimeType : this.fileMimeType
+              }
+            };
+            
+            Swal.fire({
+              title: 'Cargando...',
+              allowOutsideClick: false,  // Impide que el usuario cierre el diálogo haciendo clic fuera
+              didOpen: () => {
+                Swal.showLoading();  // Muestra el spinner
+              }
+            });
+
+            this.servicio_service.editar_servicio(this.id_servicio,editar_servicio).subscribe({
+              next : (data) => {
+                Swal.fire({
+                  icon: 'success',
+                  title: 'Edición exitosa',
+                  text: 'Servicio editado correctamente',
+                  allowOutsideClick: false,
+                }).then((result) => {
+                  if (result.isConfirmed) {
+                    this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {  //Renderizar datatable
+                      dtInstance.destroy();
+                      this.obtener_servicios();
+                      this.submitted = false;
+                    });
+                  }
+                });
+              }
+            })
+          }
+        })
+      }
+    }
+
+  }
+
+  
 
 }

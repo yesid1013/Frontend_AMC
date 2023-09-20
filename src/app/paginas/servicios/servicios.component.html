@@ -31,7 +31,7 @@
 
                     <div class="col-md-2 pe-0">
                         <!-- Button trigger modal -->
-                        <button type="button" (click)="obtener_activos()" class="btn btn-primary" data-bs-toggle="modal"
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal"
                             data-bs-target="#Modal_registar_servicio">
                             <i class="fas fa-plus-circle"></i> Registrar servicio
                         </button>
@@ -185,10 +185,12 @@
                                     <td>{{servicio.descripcion}}</td>
                                     <td>{{servicio.observaciones}}</td>
                                     <td *ngIf="obtener_rol() == 1">{{servicio.nombre_usuario}}</td>
-                                    <td><button type="button" class="btn btn-success" data-bs-toggle="modal"
+
+                                    <td><button (click)="set_form_edit_servicio(servicio)" type="button" class="btn btn-success" data-bs-toggle="modal"
                                             data-bs-target="#Modal_editar_servicio">
                                             <i class="fi fi-br-edit me-2"></i>Editar
                                         </button></td>
+
                                     <td><a class="btn btn-danger"><i class="fi fi-br-trash"></i>Eliminar</a></td>
 
                                     <td *ngIf="obtener_rol() == 1"><a href={{servicio.informe}} *ngIf="servicio.informe"
@@ -218,32 +220,30 @@
                                     </div>
                                     <div class="modal-body">
 
-                                        <form>
+                                        <form [formGroup] = "form_edit_servicio">
                                             <div class="row p-1">
 
                                                 <div class="col-md-6 ">
                                                     <label for="exampleDataList" class="form-label">Seleccione el
                                                         activo</label>
-                                                    <input class="form-control" list="datalistOptions"
+                                                    <input formControlName="activo" (change)="onActivoSelect($event)" class="form-control" list="datalistActivos"
                                                         id="exampleDataList" placeholder="Escriba para buscar">
-                                                    <datalist id="datalistOptions">
-                                                        <option value="San Francisco">
-                                                        <option value="New York">
-                                                        <option value="Seattle">
-                                                        <option value="Los Angeles">
-                                                        <option value="Chicago">
+                                                    <datalist id="datalistActivos">
+                                                        <option *ngFor="let activo of listaActivos"
+                                                            [value]="activo.id_primario">
+                                                            {{activo.tipo_de_equipo}}</option>
                                                     </datalist>
                                                 </div>
 
                                                 <div class="col-md-6 ">
                                                     <div class="mb-3">
-                                                        <select class="form-select form-select"
+                                                        <select formControlName="tipo_de_servicio" class="form-select form-select"
                                                             aria-label=".form-select-sm example"
                                                             id="select_tipo_servicio">
                                                             <option selected>Tipo de servicio</option>
-                                                            <option value="1">Mantenimiento preventivo</option>
-                                                            <option value="2">Mantenimiento correctivo</option>
-                                                            <option value="3">Inspección y/o diagnostico</option>
+                                                            <option [value]="1">Mantenimiento preventivo</option>
+                                                            <option [value]="2">Mantenimiento correctivo</option>
+                                                            <option [value]="3">Inspección y/o diagnostico</option>
                                                         </select>
                                                     </div>
 
@@ -254,14 +254,14 @@
                                             <div class="row p-1">
                                                 <div class="col-md-6 ">
                                                     <div class="form-floating mb-3">
-                                                        <textarea class="form-control" id="floatingInput"></textarea>
+                                                        <textarea formControlName="descripcion"  class="form-control" id="floatingInput"></textarea>
                                                         <label for="floatingInput">Descripcion</label>
                                                     </div>
                                                 </div>
 
                                                 <div class="col-md-6 ">
                                                     <div class="form-floating mb-3">
-                                                        <textarea class="form-control" id="floatingInput"></textarea>
+                                                        <textarea formControlName="observaciones"  class="form-control" id="floatingInput"></textarea>
                                                         <label for="floatingInput">Observaciones</label>
                                                     </div>
                                                 </div>
@@ -271,7 +271,7 @@
                                             <div class="row p-1">
                                                 <div class="col-md-6 ">
                                                     <div class="form-floating mb-3">
-                                                        <textarea class="form-control" id="floatingInput"></textarea>
+                                                        <textarea formControlName="observaciones_usuario"  class="form-control" id="floatingInput"></textarea>
                                                         <label for="floatingInput">Observación de usuario</label>
                                                         <i class="fas fa-question-circle" data-bs-toggle="tooltip"
                                                             title="Si no eres un usuario tecnico, por favor indicalo aquí"></i>
@@ -280,17 +280,24 @@
 
                                                 <div class="col-md-6 ">
                                                     <label for="start">Fecha de ejecución:</label><br>
-                                                    <input type="datetime-local" name="horareunion">
+                                                    <input formControlName="fecha_ejecucion" type="datetime-local" name="horareunion">
                                                 </div>
 
+                                            </div>
+
+                                            <div *ngIf="orden" class="row p-1">
+                                                <input  (change)="onFileSelected($event)" class="form-control"
+                                                    type="file" accept="application/pdf" id="formFile">
+                                                <label for="formFile" class="form-label">Adjuntar orden de
+                                                    servicio</label>
                                             </div>
 
                                         </form>
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary"
+                                        <button  type="button" class="btn btn-secondary"
                                             data-bs-dismiss="modal">Close</button>
-                                        <button type="button" class="btn btn-primary">Editar</button>
+                                        <button type="button" (click)="editar_servicio(form_edit_servicio.value)" class="btn btn-primary">Editar</button>
                                     </div>
                                 </div>
                             </div>
