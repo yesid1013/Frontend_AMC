@@ -27,24 +27,24 @@
                     <h1 class="h3 mb-4 text-gray-800">Adjuntar ficha técnica</h1>
 
                     <div class="col-12 pt-4">
-                        <h6 class="mb-4">Historial de activos</h6>
-                        <table class="table table-striped">
+                        <h6 class="mb-4">Activos sin ficha técnica</h6>
+                        <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table table-striped">
                             <thead>
                                 <tr>
                                     <th scope="col">ID primario</th>
                                     <th scope="col">ID secundario</th>
                                     <th scope="col">Tipo de equipo</th>
-                                    <th scope="col">Fecha de registro</th>
+                                    <th scope="col">Subcliente</th>
                                     <th scope="col">Adjuntar</th>
                                     <th scope="col">Ver ficha</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <th>1</th>
-                                    <td>John</td>
-                                    <td>Doe</td>
-                                    <td>jhon@email.com</td>
+                                <tr *ngFor="let activo of listaActivos">
+                                    <th>{{activo.id_primario}}</th>
+                                    <td>{{activo.id_secundario}}</td>
+                                    <td>{{activo.tipo_de_equipo}}</td>
+                                    <td>{{activo.subcliente}}</td>
                                     <td><button type="button" class="btn btn-success" data-bs-toggle="modal"
                                             data-bs-target="#Modal_adjuntar_ficha">
                                             <i class="fas fa-file-invoice"></i> Adjuntar ficha técnica

@@ -34,4 +34,8 @@ export class ActivoService {
   restaurar_activo(id_activo : string){
     return this.http.put(`${this.url}activos/${id_activo}/restaurar`,null);
   }
+
+  activos_sin_ficha_tecnica():Observable<Activo[]>{
+    return this.http.get<Activo[]>(`${this.url}activos_sin_ficha`)
+  }
 }
