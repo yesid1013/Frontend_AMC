@@ -107,7 +107,8 @@
 
                                                 <div class="col-md-6 ">
                                                     <div class="form-floating mb-3">
-                                                        <textarea formControlName="observaciones"  class="form-control" id="floatingInput"></textarea>
+                                                        <textarea formControlName="observaciones" class="form-control"
+                                                            id="floatingInput"></textarea>
                                                         <label for="floatingInput">Observaciones</label>
                                                     </div>
                                                 </div>
@@ -117,7 +118,8 @@
                                             <div class="row p-1">
                                                 <div class="col-md-6 ">
                                                     <div class="form-floating mb-3">
-                                                        <textarea formControlName="observaciones_usuario"  class="form-control" id="floatingInput"></textarea>
+                                                        <textarea formControlName="observaciones_usuario"
+                                                            class="form-control" id="floatingInput"></textarea>
                                                         <label for="floatingInput">Observación de usuario</label>
                                                         <i class="fas fa-question-circle" data-bs-toggle="tooltip"
                                                             title="Si no eres un usuario tecnico, por favor indicalo aquí"></i>
@@ -139,8 +141,9 @@
                                             </div>
 
                                             <div class="row p-1">
-                                                <input formControlName="orden_de_servicio" (change)="onFileSelected($event)" class="form-control"
-                                                    type="file" accept="application/pdf" id="formFile">
+                                                <input formControlName="orden_de_servicio"
+                                                    (change)="onFileSelected($event)" class="form-control" type="file"
+                                                    accept="application/pdf" id="formFile">
                                                 <label for="formFile" class="form-label">Adjuntar orden de
                                                     servicio</label>
                                             </div>
@@ -149,7 +152,8 @@
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary"
                                             data-bs-dismiss="modal">Cerrar</button>
-                                        <button type="button" class="btn btn-primary" (click)="registrar_servicio(form_servicio.value)">Registrar</button>
+                                        <button type="button" class="btn btn-primary"
+                                            (click)="registrar_servicio(form_servicio.value)">Registrar</button>
                                     </div>
                                 </div>
                             </div>
@@ -186,12 +190,14 @@
                                     <td>{{servicio.observaciones}}</td>
                                     <td *ngIf="obtener_rol() == 1">{{servicio.nombre_usuario}}</td>
 
-                                    <td><button (click)="set_form_edit_servicio(servicio)" type="button" class="btn btn-success" data-bs-toggle="modal"
+                                    <td><button (click)="set_form_edit_servicio(servicio)" type="button"
+                                            class="btn btn-success" data-bs-toggle="modal"
                                             data-bs-target="#Modal_editar_servicio">
                                             <i class="fi fi-br-edit me-2"></i>Editar
                                         </button></td>
 
-                                    <td><a class="btn btn-danger" (click)="eliminar_servicio(servicio.id_servicio)"><i class="fi fi-br-trash"></i>Eliminar</a></td>
+                                    <td><a class="btn btn-danger" (click)="eliminar_servicio(servicio.id_servicio)"><i
+                                                class="fi fi-br-trash"></i>Eliminar</a></td>
 
                                     <td *ngIf="obtener_rol() == 1"><a href={{servicio.informe}} *ngIf="servicio.informe"
                                             type="button" target="_blank" class="btn btn-info"><i
@@ -220,24 +226,33 @@
                                     </div>
                                     <div class="modal-body">
 
-                                        <form [formGroup] = "form_edit_servicio">
+                                        <form [formGroup]="form_edit_servicio">
                                             <div class="row p-1">
 
                                                 <div class="col-md-6 ">
                                                     <label for="exampleDataList" class="form-label">Seleccione el
                                                         activo</label>
-                                                    <input formControlName="activo" (change)="onActivoSelect($event)" class="form-control" list="datalistActivos"
-                                                        id="exampleDataList" placeholder="Escriba para buscar">
+                                                    <input formControlName="activo" (change)="onActivoSelect($event)"
+                                                        class="form-control" list="datalistActivos" id="exampleDataList"
+                                                        placeholder="Escriba para buscar">
                                                     <datalist id="datalistActivos">
                                                         <option *ngFor="let activo of listaActivos"
                                                             [value]="activo.id_primario">
                                                             {{activo.tipo_de_equipo}}</option>
                                                     </datalist>
+
+                                                    <div *ngIf="form_edit_servicio.get('activo')?.hasError('required') && (submitted)"
+                                                        class="alert alert-primary" role="alert">
+                                                        <i class="fi fi-br-exclamation"></i>
+                                                        El activo es requerido.
+                                                    </div>
+
                                                 </div>
 
                                                 <div class="col-md-6 ">
                                                     <div class="mb-3">
-                                                        <select formControlName="tipo_de_servicio" class="form-select form-select"
+                                                        <select formControlName="tipo_de_servicio"
+                                                            class="form-select form-select"
                                                             aria-label=".form-select-sm example"
                                                             id="select_tipo_servicio">
                                                             <option selected>Tipo de servicio</option>
@@ -245,6 +260,12 @@
                                                             <option [value]="2">Mantenimiento correctivo</option>
                                                             <option [value]="3">Inspección y/o diagnostico</option>
                                                         </select>
+
+                                                        <div *ngIf="form_edit_servicio.get('tipo_de_servicio')?.hasError('required') && (submitted)"
+                                                            class="alert alert-primary" role="alert">
+                                                            <i class="fi fi-br-exclamation"></i>
+                                                            El tipo de servicio es requerido.
+                                                        </div>
                                                     </div>
 
                                                 </div>
@@ -254,14 +275,23 @@
                                             <div class="row p-1">
                                                 <div class="col-md-6 ">
                                                     <div class="form-floating mb-3">
-                                                        <textarea formControlName="descripcion"  class="form-control" id="floatingInput"></textarea>
+                                                        <textarea formControlName="descripcion" class="form-control"
+                                                            id="floatingInput"></textarea>
                                                         <label for="floatingInput">Descripcion</label>
                                                     </div>
+
+                                                    <div *ngIf="form_edit_servicio.get('descripcion')?.hasError('required') && (submitted)"
+                                                        class="alert alert-primary" role="alert">
+                                                        <i class="fi fi-br-exclamation"></i>
+                                                        La descripcion es requerida.
+                                                    </div>
+
                                                 </div>
 
                                                 <div class="col-md-6 ">
                                                     <div class="form-floating mb-3">
-                                                        <textarea formControlName="observaciones"  class="form-control" id="floatingInput"></textarea>
+                                                        <textarea formControlName="observaciones" class="form-control"
+                                                            id="floatingInput"></textarea>
                                                         <label for="floatingInput">Observaciones</label>
                                                     </div>
                                                 </div>
@@ -271,7 +301,8 @@
                                             <div class="row p-1">
                                                 <div class="col-md-6 ">
                                                     <div class="form-floating mb-3">
-                                                        <textarea formControlName="observaciones_usuario"  class="form-control" id="floatingInput"></textarea>
+                                                        <textarea formControlName="observaciones_usuario"
+                                                            class="form-control" id="floatingInput"></textarea>
                                                         <label for="floatingInput">Observación de usuario</label>
                                                         <i class="fas fa-question-circle" data-bs-toggle="tooltip"
                                                             title="Si no eres un usuario tecnico, por favor indicalo aquí"></i>
@@ -280,13 +311,21 @@
 
                                                 <div class="col-md-6 ">
                                                     <label for="start">Fecha de ejecución:</label><br>
-                                                    <input formControlName="fecha_ejecucion" type="datetime-local" name="horareunion">
+                                                    <input formControlName="fecha_ejecucion" type="datetime-local"
+                                                        name="horareunion">
+
+                                                    <div *ngIf="form_servicio.get('fecha_ejecucion')?.hasError('required') && (submitted)"
+                                                        class="alert alert-primary" role="alert">
+                                                        <i class="fi fi-br-exclamation"></i>
+                                                        La fecha de ejecucion es requerida.
+                                                    </div>
+                                                    
                                                 </div>
 
                                             </div>
 
                                             <div *ngIf="orden" class="row p-1">
-                                                <input  (change)="onFileSelected($event)" class="form-control"
+                                                <input (change)="onFileSelected($event)" class="form-control"
                                                     type="file" accept="application/pdf" id="formFile">
                                                 <label for="formFile" class="form-label">Adjuntar orden de
                                                     servicio</label>
@@ -295,9 +334,10 @@
                                         </form>
                                     </div>
                                     <div class="modal-footer">
-                                        <button  type="button" class="btn btn-secondary"
+                                        <button type="button" class="btn btn-secondary"
                                             data-bs-dismiss="modal">Close</button>
-                                        <button type="button" (click)="editar_servicio(form_edit_servicio.value)" class="btn btn-primary">Editar</button>
+                                        <button type="button" (click)="editar_servicio(form_edit_servicio.value)"
+                                            class="btn btn-primary">Editar</button>
                                     </div>
                                 </div>
                             </div>
