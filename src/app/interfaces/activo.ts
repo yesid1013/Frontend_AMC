@@ -50,3 +50,12 @@ export interface Activo {
     datos_relevantes: string;
     id_subcliente: string;
   }
+
+  export interface Adjuntar_ficha_tecnica {
+    ficha_tecnica: {
+      name : string | null;
+      mimeType: string | null;
+      content: string | null;
+    };
+
+  }

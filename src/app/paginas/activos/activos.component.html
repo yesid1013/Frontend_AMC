@@ -520,7 +520,7 @@
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary"
                                             data-bs-dismiss="modal">Cerrar</button>
-                                        <a href={{info_ficha_tecnica}} target="_blank" rel="noopener noreferrer"
+                                        <a *ngIf="info_ficha_tecnica" href={{info_ficha_tecnica}} target="_blank" rel="noopener noreferrer"
                                             type="button" class="btn btn-primary"><i
                                                 class="fi fi-br-document me-2"></i>Ver ficha técnica</a>
                                         <a href={{info_codigo_qr}} target="_blank" rel="noopener noreferrer"

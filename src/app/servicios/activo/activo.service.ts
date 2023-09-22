@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Activo, Editar_activo, Registro_activo } from 'src/app/interfaces/activo';
+import { Activo, Adjuntar_ficha_tecnica, Editar_activo, Registro_activo } from 'src/app/interfaces/activo';
 
 @Injectable({
   providedIn: 'root'
@@ -37,5 +37,9 @@ export class ActivoService {
 
   activos_sin_ficha_tecnica():Observable<Activo[]>{
     return this.http.get<Activo[]>(`${this.url}activos_sin_ficha`)
+  }
+
+  adjuntar_ficha_tecnica(id_activo : string, ficha_tecnica : Adjuntar_ficha_tecnica):Observable<any>{
+    return this.http.put(`${this.url}adjuntar_ficha_tecnica/${id_activo}`, ficha_tecnica);
   }
 }
