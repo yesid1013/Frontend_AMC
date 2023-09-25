@@ -50,7 +50,7 @@ export class LoginComponent {
 
           }).then((result) => {
             if (result.isConfirmed) {
-              this.router.navigate(['/equipos'])
+              this.router.navigate(['/activos'])
             }
           });
         },
