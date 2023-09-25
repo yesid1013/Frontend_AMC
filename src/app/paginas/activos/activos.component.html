@@ -43,8 +43,8 @@
                         <div class="col-md-2
                         ">
                             <!-- Segundo botón -->
-                            <button type="button" (click)="listar_activos_eliminados()" class="btn btn-primary" data-bs-toggle="modal"
-                                data-bs-target="#ModalActivosEliminados">
+                            <button type="button" (click)="listar_activos_eliminados()" class="btn btn-primary"
+                                data-bs-toggle="modal" data-bs-target="#ModalActivosEliminados">
                                 <i class="fi fi-br-time-delete me-2"></i>Activos eliminados
                             </button>
                         </div>
@@ -227,8 +227,8 @@
                         <!--Fin Modal registar activo-->
 
                         <!-- Modal activos eliminados -->
-                        <div class="modal fade" id="ModalActivosEliminados" tabindex="-1" aria-labelledby="exampleModalLabel"
-                            aria-hidden="true">
+                        <div class="modal fade" id="ModalActivosEliminados" tabindex="-1"
+                            aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
@@ -239,23 +239,27 @@
                                     <div class="modal-body">
                                         <table class="table table-hover">
                                             <thead>
-                                              <tr>
-                                                <th scope="col">Id primario</th>
-                                                <th scope="col">Id secundario</th>
-                                                <th scope="col">Tipo de equipo</th>
-                                                <th scope="col">Ubicación</th>
-                                              </tr>
+                                                <tr>
+                                                    <th scope="col">Id primario</th>
+                                                    <th scope="col">Id secundario</th>
+                                                    <th scope="col">Tipo de equipo</th>
+                                                    <th scope="col">Ubicación</th>
+                                                </tr>
                                             </thead>
                                             <tbody>
-                                              <tr *ngFor="let activo of listaActivosEliminados">
-                                                <td>{{activo.id_primario}}</td>
-                                                <td>{{activo.id_secundario}}</td>
-                                                <td>{{activo.tipo_de_equipo}}</td>
-                                                <td>{{activo.ubicacion}}</td>
-                                                <td><button type="button" (click)="restaurar_activo(activo.id_activo)" class="btn btn-success"><i class="fi fi-br-time-past me-2"></i>Restaurar</button></td>
-                                              </tr>
+                                                <tr *ngFor="let activo of listaActivosEliminados">
+                                                    <td>{{activo.id_primario}}</td>
+                                                    <td>{{activo.id_secundario}}</td>
+                                                    <td>{{activo.tipo_de_equipo}}</td>
+                                                    <td>{{activo.ubicacion}}</td>
+                                                    <td><button type="button"
+                                                            (click)="restaurar_activo(activo.id_activo)"
+                                                            class="btn btn-success"><i
+                                                                class="fi fi-br-time-past me-2"></i>Restaurar</button>
+                                                    </td>
+                                                </tr>
                                             </tbody>
-                                          </table>
+                                        </table>
                                     </div>
                                 </div>
                             </div>
@@ -451,6 +455,13 @@
                                                         </div>
 
                                                     </div>
+                                                </div>
+
+                                                <div *ngIf="imagen" class="col-md-6">
+                                                    <input class="form-control" type="file"
+                                                        (change)="onFileSelected($event)" accept="image/jpeg, image/png"
+                                                        id="formFile">
+                                                    <label for="formFile" class="form-label">Cargar imagen</label>
 
                                                 </div>
 
@@ -520,8 +531,8 @@
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary"
                                             data-bs-dismiss="modal">Cerrar</button>
-                                        <a *ngIf="info_ficha_tecnica" href={{info_ficha_tecnica}} target="_blank" rel="noopener noreferrer"
-                                            type="button" class="btn btn-primary"><i
+                                        <a *ngIf="info_ficha_tecnica" href={{info_ficha_tecnica}} target="_blank"
+                                            rel="noopener noreferrer" type="button" class="btn btn-primary"><i
                                                 class="fi fi-br-document me-2"></i>Ver ficha técnica</a>
                                         <a href={{info_codigo_qr}} target="_blank" rel="noopener noreferrer"
                                             type="button" class="btn btn-primary"><i class="fas fa-qrcode me-2"></i>Ver

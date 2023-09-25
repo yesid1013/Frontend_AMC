@@ -103,7 +103,6 @@ export class ServiciosComponent {
 
     if (selectedOption) {
       this.selectedActivoId = selectedOption.id_activo;
-      console.log('ID de activo seleccionado:', this.selectedActivoId);
       this.seEjecuto_ActivoSelect = true; // Se ejecutó la función
     }
   }

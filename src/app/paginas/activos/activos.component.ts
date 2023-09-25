@@ -184,7 +184,15 @@ export class ActivosComponent {
     }
   }
 
+  imagen: boolean = false;
   set_form_edit_activo(activo: any) {
+
+    if(activo.imagen_equipo == null){
+      this.imagen = true
+    }else{
+      this.imagen = false;
+    }
+
     this.form_edit_activo.setValue({
       id_primario: activo['id_primario'],
       id_secundario: activo['id_secundario'],
@@ -221,10 +229,26 @@ export class ActivosComponent {
               modelo: value.modelo,
               num_serie: value.num_serie,
               datos_relevantes: value.datos_relevantes,
-              id_subcliente: value.subcliente
+              id_subcliente: value.subcliente,
+
+              imagen_equipo: {
+                name: this.imageName,
+                mimeType: this.imageMimeType,
+                content: this.imageContent
+              }
             }
-            this.activo_service.editar_activo(this.id_activo, editar_activo).subscribe({
+
+            Swal.fire({
+              title: 'Cargando...',
+              allowOutsideClick: false,  // Impide que el usuario cierre el diálogo haciendo clic fuera
+              didOpen: () => {
+                Swal.showLoading();  // Muestra el spinner
+              }
+            });
+
+            this.activo_service.editar_activo(this.id_activo, editar_activo).subscribe({              
               next: (data) => {
+                Swal.close();
                 Swal.fire({
                   icon: 'success',
                   title: 'Servicio exitoso',

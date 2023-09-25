@@ -22,13 +22,13 @@ export interface Activo {
 
   export interface Registro_activo {
     id_primario: string;
-    id_secundario: string;
+    id_secundario: string | null;
     ubicacion: string;
     tipo_de_equipo: string;
     fabricante: string;
-    modelo: string;
-    num_serie: string;
-    datos_relevantes: string;
+    modelo: string | null;
+    num_serie: string | null;
+    datos_relevantes: string | null;
 
     imagen_equipo: {
       name : string | null;
@@ -41,14 +41,20 @@ export interface Activo {
 
   export interface Editar_activo {
     id_primario: string;
-    id_secundario: string;
+    id_secundario: string | null;
     ubicacion: string;
     tipo_de_equipo: string;
     fabricante: string;
-    modelo: string;
-    num_serie: string;
-    datos_relevantes: string;
+    modelo: string | null;
+    num_serie: string | null;
+    datos_relevantes: string | null;
     id_subcliente: string;
+
+    imagen_equipo: {
+      name : string | null;
+      mimeType: string | null;
+      content: string | null;
+    };
   }
 
   export interface Adjuntar_ficha_tecnica {
