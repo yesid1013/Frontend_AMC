@@ -37,21 +37,19 @@
                                     <th scope="col">Tipo de servicio</th>
                                     <th scope="col">Descripción</th>
                                     <th>Adjuntar</th>
-                                    <th>Ver informe</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <th>1</th>
-                                    <td>John</td>
-                                    <td>Doe</td>
-                                    <td>Doe</td>
-                                    <td>jhon@email.com</td>
+                                <tr *ngFor="let servicio of listaServicios">
+                                    <th>{{servicio.numero_servicio}}</th>
+                                    <td>{{servicio.activo}}</td>
+                                    <td>{{servicio.fecha_ejecucion}}</td>
+                                    <td>{{servicio.tipo_servicio}}</td>
+                                    <td>{{servicio.descripcion}}</td>
                                     <td><button type="button" class="btn btn-success" data-bs-toggle="modal"
                                             data-bs-target="#Modal_adjuntar_ficha">
                                             <i class="fas fa-file-invoice"></i> Adjuntar informe
                                         </button></td>
-                                    <td> <button type="button" class="btn btn-info"><i class="far fa-eye"></i> Ver informe</button></td>
                                 </tr>
 
 

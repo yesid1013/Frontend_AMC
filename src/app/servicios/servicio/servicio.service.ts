@@ -26,4 +26,8 @@ export class ServicioService {
   eliminar_servicio(id_servicio : string){
     return this.http.delete(`${this.url}servicio/${id_servicio}`);
   }
+
+  servicios_sin_informe():Observable<Servicio[]>{
+    return this.http.get<Servicio[]>(`${this.url}servicios_sin_informe`)
+  }
 }
