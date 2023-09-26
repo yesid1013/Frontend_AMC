@@ -29,7 +29,7 @@ export class NavbarComponent {
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
-      confirmButtonText: 'Sí, cerrar sesión',
+      confirmButtonText: 'Sí',
       cancelButtonText : 'No'
     }).then((result)=> {
       if (result.isConfirmed){

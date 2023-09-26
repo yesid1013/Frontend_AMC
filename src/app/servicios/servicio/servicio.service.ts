@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { EditarServicio, RegistroServicio, Servicio } from 'src/app/interfaces/servicio';
+import { Adjuntar_informe_servicio, EditarServicio, RegistroServicio, Servicio } from 'src/app/interfaces/servicio';
 
 @Injectable({
   providedIn: 'root'
@@ -29,5 +29,9 @@ export class ServicioService {
 
   servicios_sin_informe():Observable<Servicio[]>{
     return this.http.get<Servicio[]>(`${this.url}servicios_sin_informe`)
+  }
+
+  adjuntar_informe(id_servicio : string, informe : Adjuntar_informe_servicio):Observable<any>{
+    return this.http.post(`${this.url}informe_servicio/${id_servicio}`,informe);
   }
 }

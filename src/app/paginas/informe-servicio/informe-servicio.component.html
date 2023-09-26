@@ -46,7 +46,7 @@
                                     <td>{{servicio.fecha_ejecucion}}</td>
                                     <td>{{servicio.tipo_servicio}}</td>
                                     <td>{{servicio.descripcion}}</td>
-                                    <td><button type="button" class="btn btn-success" data-bs-toggle="modal"
+                                    <td><button (click)="obtener_id_servicio(servicio)" type="button" class="btn btn-success" data-bs-toggle="modal"
                                             data-bs-target="#Modal_adjuntar_ficha">
                                             <i class="fas fa-file-invoice"></i> Adjuntar informe
                                         </button></td>
@@ -57,8 +57,8 @@
                         </table>
 
                         <!-- Modal -->
-                        <div class="modal fade" id="Modal_adjuntar_ficha" tabindex="-1" aria-labelledby="exampleModalLabel"
-                            aria-hidden="true">
+                        <div class="modal fade" id="Modal_adjuntar_ficha" tabindex="-1"
+                            aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
@@ -68,14 +68,22 @@
                                     </div>
                                     <div class="modal-body">
                                         <div class="mb-3">
-                                            <label for="formFile" class="form-label">Seleccione el archivo</label>
-                                            <input class="form-control" type="file" id="formFile">
-                                          </div>
+                                            <form [formGroup]="form_informe_servicio">
+                                                <label for="formFile" class="form-label">Seleccione el archivo</label>
+                                                <input (change)="onFileSelected($event)" formControlName="informe" accept="application/pdf" class="form-control" type="file" id="formFile">
+
+                                                <div *ngIf="form_informe_servicio.get('informe')?.hasError('required') && (submitted)"
+                                                class="alert alert-primary" role="alert">
+                                                <i class="fi fi-br-exclamation"></i>
+                                                El archivo es requerido.
+                                            </div>
+                                            </form>
+                                        </div>
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary"
                                             data-bs-dismiss="modal">Cerrar</button>
-                                        <button type="button" class="btn btn-primary">Adjuntar</button>
+                                        <button type="button" (click)="adjuntar_informe()" class="btn btn-primary">Adjuntar</button>
                                     </div>
                                 </div>
                             </div>

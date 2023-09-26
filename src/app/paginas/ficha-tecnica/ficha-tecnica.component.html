@@ -44,7 +44,8 @@
                                     <td>{{activo.id_secundario}}</td>
                                     <td>{{activo.tipo_de_equipo}}</td>
                                     <td>{{activo.subcliente}}</td>
-                                    <td><button (click)="obtener_id_activo(activo)" type="button" class="btn btn-success" data-bs-toggle="modal"
+                                    <td><button (click)="obtener_id_activo(activo)" type="button"
+                                            class="btn btn-success" data-bs-toggle="modal"
                                             data-bs-target="#Modal_adjuntar_ficha">
                                             <i class="fas fa-file-invoice"></i> Adjuntar ficha técnica
                                         </button></td>
@@ -68,13 +69,15 @@
                                         <div class="mb-3">
                                             <form [formGroup]="form_ficha_tecnica">
                                                 <label for="formFile" class="form-label">Seleccione el archivo</label>
-                                                <input formControlName="ficha_tecnica" (change)="onFileSelected($event)" accept="application/pdf" class="form-control" type="file" id="formFile">
+                                                <input formControlName="ficha_tecnica" (change)="onFileSelected($event)"
+                                                    accept="application/pdf" class="form-control" type="file"
+                                                    id="formFile">
 
                                                 <div *ngIf="form_ficha_tecnica.get('ficha_tecnica')?.hasError('required') && (submitted)"
-                                                        class="alert alert-primary" role="alert">
-                                                        <i class="fi fi-br-exclamation"></i>
-                                                        El archivo es requerido.
-                                                    </div>
+                                                    class="alert alert-primary" role="alert">
+                                                    <i class="fi fi-br-exclamation"></i>
+                                                    El archivo es requerido.
+                                                </div>
                                             </form>
 
                                         </div>
@@ -82,7 +85,8 @@
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary"
                                             data-bs-dismiss="modal">Cerrar</button>
-                                        <button (click)="adjuntar_ficha_tecnica(form_ficha_tecnica.value)" type="button" class="btn btn-primary">Adjuntar</button>
+                                        <button (click)="adjuntar_ficha_tecnica(form_ficha_tecnica.value)" type="button"
+                                            class="btn btn-primary">Adjuntar</button>
                                     </div>
                                 </div>
                             </div>
