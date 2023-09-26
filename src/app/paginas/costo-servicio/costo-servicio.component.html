@@ -1,1 +1,40 @@
-<p>costo-servicio works!</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Costo de servicio</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Icon Font Stylesheet -->
+    <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/uicons-bold-rounded/css/uicons-bold-rounded.css'>
+</head>
+<body>
+    <div class="container-xxl position-relative bg-white d-flex p-0">
+        <app-sidebar></app-sidebar>
+
+        <div class="content" [ngClass]="{'open': isOpen}">
+            <!--Componente navbar-->
+            <app-navbar></app-navbar>
+
+            <div class="container-fluid pt-4 px-4">
+                <div class="bg-light rounded h-100">
+                    <h1 class="h3 mb-4 text-gray-800">Adjuntar cotización a un servicio</h1>
+
+                    <div class="col-12 pt-4">
+                        <h6 class="mb-4">Historial de servicios</h6>
+                        <table>
+                            
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    
+</body>
+</html>
