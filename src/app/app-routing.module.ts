@@ -8,6 +8,7 @@ import { FichaTecnicaComponent } from './paginas/ficha-tecnica/ficha-tecnica.com
 import { InformeServicioComponent } from './paginas/informe-servicio/informe-servicio.component';
 import { SpinnerComponent } from './componentes/spinner/spinner.component';
 import { AuthGuard } from './utils/auth.guard';
+import { CostoServicioComponent } from './paginas/costo-servicio/costo-servicio.component';
 
 
 const routes: Routes = [
@@ -39,6 +40,11 @@ const routes: Routes = [
   {
     path: 'informe_servicio',
     component: InformeServicioComponent,
+    canActivate : [AuthGuard]
+  },
+  {
+    path : 'costo_servicio',
+    component : CostoServicioComponent,
     canActivate : [AuthGuard]
   },
   {
