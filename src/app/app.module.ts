@@ -21,6 +21,7 @@ import { FichaTecnicaComponent } from './paginas/ficha-tecnica/ficha-tecnica.com
 import { InformeServicioComponent } from './paginas/informe-servicio/informe-servicio.component';
 import { SpinnerComponent } from './componentes/spinner/spinner.component';
 import { AddTokenInterceptor } from './utils/add-token.interceptor';
+import { CostoServicioComponent } from './paginas/costo-servicio/costo-servicio.component';
 
 
 
@@ -35,7 +36,8 @@ import { AddTokenInterceptor } from './utils/add-token.interceptor';
     ServiciosComponent,
     FichaTecnicaComponent,
     InformeServicioComponent,
-    SpinnerComponent
+    SpinnerComponent,
+    CostoServicioComponent
   ],
   imports: [
     BrowserModule,
