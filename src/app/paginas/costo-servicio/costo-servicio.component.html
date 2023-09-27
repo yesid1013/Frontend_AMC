@@ -25,8 +25,26 @@
                     <h1 class="h3 mb-4 text-gray-800">Adjuntar cotización a un servicio</h1>
 
                     <div class="col-12 pt-4">
-                        <h6 class="mb-4">Historial de servicios</h6>
-                        <table>
+                        <h6 class="mb-4">Historial de servicios sin cotización</h6>
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th scope="col">No Servicio</th>
+                                    <th scope="col">Activo</th>
+                                    <th scope="col">Fecha de ejecución</th>
+                                    <th scope="col">Descripcion</th>
+                                    <th scope="col">Tipo de servicio</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let servicio of listaServicios">
+                                    <td>{{servicio.numero_servicio}}</td>
+                                    <td>{{servicio.activo}}</td>
+                                    <td>{{servicio.fecha_ejecucion}}</td>
+                                    <td>{{servicio.descripcion}}</td>
+                                    <td>{{servicio.tipo_servicio}}</td>
+                                </tr>
+                            </tbody>
                             
                         </table>
                     </div>
