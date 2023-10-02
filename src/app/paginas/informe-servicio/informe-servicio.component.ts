@@ -79,6 +79,8 @@ export class InformeServicioComponent {
 
   obtener_id_servicio(servicio: Servicio) {
     this.id_servicio = servicio.id_servicio;
+    this.submitted = false;
+    this.form_informe_servicio.reset()
   }
 
   adjuntar_informe(){
@@ -115,7 +117,7 @@ export class InformeServicioComponent {
                 title: 'Servicio exitoso',
                 text: 'Informe adjuntado correctamente',
                 allowOutsideClick: false,
-                footer: `<a href="${data.url_archivo} target="_blank"">Ver informe</a>`
+                footer: `<a href="${data.url_archivo}" target="_blank">Ver informe</a>`
               }).then((result) => {
                 if (result.isConfirmed) {
                   this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {  //Renderizar datatable
@@ -123,6 +125,7 @@ export class InformeServicioComponent {
                     this.obtener_servicios_sin_informe();
                   });
                 }
+                this.submitted = false;
               });
 
             }

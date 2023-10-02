@@ -79,7 +79,9 @@ export class FichaTecnicaComponent {
   };
 
   obtener_id_activo(activo: any) {
-    this.id_activo = activo.id_activo
+    this.id_activo = activo.id_activo;
+    this.submitted = false;
+    this.form_ficha_tecnica.reset()
   }
 
 
@@ -117,7 +119,7 @@ export class FichaTecnicaComponent {
                 title: 'Servicio exitoso',
                 text: 'Ficha técnica adjuntada correctamente',
                 allowOutsideClick: false,
-                footer: `<a href="${data.url_archivo} target="_blank"">Ver ficha técnica</a>`
+                footer: `<a href="${data.url_archivo}" target="_blank">Ver ficha técnica</a>`
               }).then((result) => {
                 if (result.isConfirmed) {
                   this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {  //Renderizar datatable
@@ -125,6 +127,7 @@ export class FichaTecnicaComponent {
                     this.obtener_activos_sin_ficha();
                   });
                 }
+                this.submitted = false;
               });
 
             }
