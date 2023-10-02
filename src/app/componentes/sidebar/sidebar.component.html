@@ -37,11 +37,11 @@
 
                     <a [routerLink]="'/servicios'"  [routerLinkActive]="'active'" class="nav-item nav-link"><i class="fi fi-br-tool-box me-2"></i>Servicios</a> 
 
-                    <a [routerLink]="'/ficha_tecnica'" [routerLinkActive]="'active'" *ngIf="obtener_rol() == 1" class="nav-item nav-link"><i class="fi fi-br-document me-2"></i>Ficha tecnica</a>
+                    <a [routerLink]="'/ficha_tecnica'" [routerLinkActive]="'active'" class="nav-item nav-link"><i class="fi fi-br-document me-2"></i>Ficha tecnica</a>
 
-                    <a [routerLink]="'/informe_servicio'" [routerLinkActive]="'active'" *ngIf="obtener_rol() == 1" class="nav-item nav-link"><i class="fi fi-br-template me-2"></i>Informe a servicio</a>
+                    <a [routerLink]="'/informe_servicio'" [routerLinkActive]="'active'"  class="nav-item nav-link"><i class="fi fi-br-template me-2"></i>Informe a servicio</a>
 
-                    <a [routerLink]="'/costo_servicio'"  *ngIf="obtener_rol() == 1" [routerLinkActive]="'active'" class="nav-item nav-link"><i class="fi fi-br-file-invoice-dollar me-2"></i>Costo de servicio</a>
+                    <a [routerLink]="'/costo_servicio'" [routerLinkActive]="'active'" class="nav-item nav-link"><i class="fi fi-br-file-invoice-dollar me-2"></i>Costo de servicio</a>
                 </div>
             </nav>
         </div>

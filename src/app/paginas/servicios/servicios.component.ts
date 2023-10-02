@@ -69,7 +69,6 @@ export class ServiciosComponent {
       this.isOpen = isOpen;
     });
     this.obtener_servicios();
-    this.obtener_rol();
     this.obtener_activos()
   }
 
@@ -80,14 +79,6 @@ export class ServiciosComponent {
     })
   }
 
-  obtener_rol() {
-    this.token = localStorage.getItem('token');
-    if (this.token) {
-      const decodedToken: any = jwt_decode(this.token);
-      const rol = decodedToken?.perfil;
-      return rol
-    }
-  }
 
   obtener_activos() { //Para mostrar los activos en el formulario
     this.activo_service.listar_activos().subscribe(data => {

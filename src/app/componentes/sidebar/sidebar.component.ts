@@ -20,17 +20,9 @@ export class SidebarComponent implements OnInit {
     this.communicationService.sidebarOpen$.subscribe(isOpen => {
       this.isOpen = isOpen;
     });
-    this.obtener_rol();
   }
 
-  obtener_rol(){
-    this.token = localStorage.getItem('token');
-    if (this.token){
-      const decodedToken: any = jwt_decode(this.token);
-      const rol = decodedToken?.perfil;
-      return  rol
-    }
-  }
+
 
   activeColor: string = '#009CFF';
   backgroundColor: string = '#FFFFFF';
