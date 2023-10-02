@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,6 +13,7 @@
     <!-- Icon Font Stylesheet -->
     <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/uicons-bold-rounded/css/uicons-bold-rounded.css'>
 </head>
+
 <body>
     <div class="container-xxl position-relative bg-white d-flex p-0">
         <app-sidebar></app-sidebar>
@@ -34,6 +36,7 @@
                                     <th scope="col">Fecha de ejecución</th>
                                     <th scope="col">Descripcion</th>
                                     <th scope="col">Tipo de servicio</th>
+                                    <th scope="col">Adjuntar</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -43,16 +46,78 @@
                                     <td>{{servicio.fecha_ejecucion}}</td>
                                     <td>{{servicio.descripcion}}</td>
                                     <td>{{servicio.tipo_servicio}}</td>
+
+                                    <td><button type="button" (click)="obtener_id_servicio(servicio)"
+                                            class="btn btn-success" data-bs-toggle="modal"
+                                            data-bs-target="#Modal_adjuntar_cotizacion">
+                                            <i class="fi fi-br-file-invoice-dollar me-2"></i>Adjuntar cotización
+                                        </button></td>
+
                                 </tr>
                             </tbody>
-                            
+
                         </table>
+
+                        <!-- Modal -->
+                        <div class="modal fade" id="Modal_adjuntar_cotizacion" tabindex="-1"
+                            aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Adjunar cotización</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="mb-3">
+                                            <form [formGroup]="form_costo_servicio">
+                                                <div class="row p-1">
+                                                    <div class="col-md-6 ">
+                                                        <label for="">Inrese el costo</label>
+                                                        <input formControlName="costo" type="number">
+
+                                                        <div *ngIf="form_costo_servicio.get('costo')?.hasError('required') && (submitted)"
+                                                            class="alert alert-primary" role="alert">
+                                                            <i class="fi fi-br-exclamation"></i>
+                                                            El costo es requerido.
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-6 ">
+                                                        <label for="formFile" class="form-label">Seleccione la
+                                                            cotización</label>
+                                                        <input formControlName="cotizacion"
+                                                            (change)="onFileSelected($event)" accept="application/pdf"
+                                                            class="form-control" type="file" id="formFile">
+
+                                                        <div *ngIf="form_costo_servicio.get('cotizacion')?.hasError('required') && (submitted)"
+                                                            class="alert alert-primary" role="alert">
+                                                            <i class="fi fi-br-exclamation"></i>
+                                                            El archivo es requerido.
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+
+                                            </form>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary"
+                                            data-bs-dismiss="modal">Cerrar</button>
+                                        <button (click)="adjuntar_cotizacion(form_costo_servicio.value)" type="button"
+                                            class="btn btn-primary">Adjuntar</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
 
         </div>
     </div>
-    
+
 </body>
+
 </html>
