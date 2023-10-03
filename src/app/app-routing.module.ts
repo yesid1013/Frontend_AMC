@@ -9,6 +9,7 @@ import { InformeServicioComponent } from './paginas/informe-servicio/informe-ser
 import { SpinnerComponent } from './componentes/spinner/spinner.component';
 import { AuthGuard } from './utils/auth.guard';
 import { CostoServicioComponent } from './paginas/costo-servicio/costo-servicio.component';
+import { PermisosComponent } from './paginas/permisos/permisos.component';
 
 
 const routes: Routes = [
@@ -50,6 +51,11 @@ const routes: Routes = [
   {
     path : 'spinner',
     component: SpinnerComponent
+  },
+  {
+    path : 'permisos',
+    component : PermisosComponent,
+    canActivate : [AuthGuard]
   }
 ];
 

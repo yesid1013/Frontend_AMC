@@ -22,6 +22,7 @@ import { InformeServicioComponent } from './paginas/informe-servicio/informe-ser
 import { SpinnerComponent } from './componentes/spinner/spinner.component';
 import { AddTokenInterceptor } from './utils/add-token.interceptor';
 import { CostoServicioComponent } from './paginas/costo-servicio/costo-servicio.component';
+import { PermisosComponent } from './paginas/permisos/permisos.component';
 
 
 
@@ -37,7 +38,8 @@ import { CostoServicioComponent } from './paginas/costo-servicio/costo-servicio.
     FichaTecnicaComponent,
     InformeServicioComponent,
     SpinnerComponent,
-    CostoServicioComponent
+    CostoServicioComponent,
+    PermisosComponent
   ],
   imports: [
     BrowserModule,
