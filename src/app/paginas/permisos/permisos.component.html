@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,12 +13,13 @@
     <!-- Icon Font Stylesheet -->
     <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/uicons-bold-rounded/css/uicons-bold-rounded.css'>
 </head>
+
 <body>
     <div class="container-xxl position-relative bg-white d-flex p-0">
         <!--Componente sidebar (Barra lateral)-->
         <app-sidebar></app-sidebar>
 
-        <div class="content">
+        <div class="content" [ngClass]="{'open': isOpen}">
 
             <!--Componente navbar-->
             <app-navbar></app-navbar>
@@ -27,15 +29,213 @@
                 <div class="bg-light rounded h-100">
                     <h1 class="h3 mb-4 text-gray-800">Permisos</h1>
 
+                    <div class="row">
+                        <div class="col-md-2 pe-0">
+                            <!-- Button trigger modal -->
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                data-bs-target="#Modal_compartir_activo">
+                                <i class="fi fi-br-user-add me-2"></i>Compartir activo
+                            </button>
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-2 pe-0">
+                        <!-- Modal compartir activo o dar permisos -->
+                        <div class="modal fade" id="Modal_compartir_activo" tabindex="-1"
+                            aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Compartir activo</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form>
+                                            <div class="row p-1">
+                                                <div class="col-md-6 ">
+                                                    <label for="exampleDataList" class="form-label">Seleccione el
+                                                        activo</label>
+                                                    <input class="form-control" list="datalistactivos"
+                                                        id="exampleDataList" placeholder="Escriba para buscar">
+                                                    <datalist id="datalistactivos">
+                                                        <option>xd</option>
+                                                    </datalist>
+                                                </div>
+
+                                                <div class="col-md-6 ">
+                                                    <label for="exampleDataList" class="form-label">Seleccione el
+                                                        usuario</label>
+                                                    <input class="form-control" list="datalistusuarios"
+                                                        id="exampleDataList" placeholder="Escriba para buscar">
+                                                    <datalist id="datalistusuarios">
+                                                        <option>usuario 1</option>
+                                                    </datalist>
+                                                </div>
+                                            </div>
+
+                                            <div class="row p-1">
+                                                <div class="col-md-6 ">
+                                                    <label for="">Ver información basica</label>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" value=1 type="radio"
+                                                            name="flexRadioDefault" id="flexRadioDefault1">
+                                                        <label class="form-check-label" for="flexRadioDefault1">
+                                                            Sí
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" value=2 type="radio"
+                                                            name="flexRadioDefault" id="flexRadioDefault2" checked>
+                                                        <label class="form-check-label" for="flexRadioDefault2">
+                                                            No
+                                                        </label>
+                                                    </div>
+
+                                                </div>
+
+                                                <div class="col-md-6 ">
+                                                    <label for="">Ver historial de servicios</label>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" value=1 type="radio"
+                                                            name="flexRadioDefault2" id="flexRadioDefault3">
+                                                        <label class="form-check-label" for="flexRadioDefault1">
+                                                            Sí
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" value=2 type="radio"
+                                                            name="flexRadioDefault2" id="flexRadioDefault4" checked>
+                                                        <label class="form-check-label" for="flexRadioDefault2">
+                                                            No
+                                                        </label>
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+
+                                            <div class="row p-1">
+                                                <div class="col-md-6 ">
+                                                    <label for="">Ver Novedades</label>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" value=1 type="radio"
+                                                            name="flexRadioDefault3" id="flexRadioDefault5">
+                                                        <label class="form-check-label" for="flexRadioDefault1">
+                                                            Sí
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" value=2 type="radio"
+                                                            name="flexRadioDefault3" id="flexRadioDefault6" checked>
+                                                        <label class="form-check-label" for="flexRadioDefault2">
+                                                            No
+                                                        </label>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-6 ">
+                                                    <label for="">Registrar servicio</label>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" value=1 type="radio"
+                                                            name="flexRadioDefault4" id="flexRadioDefault7">
+                                                        <label class="form-check-label" for="flexRadioDefault1">
+                                                            Sí
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" value=2 type="radio"
+                                                            name="flexRadioDefault4" id="flexRadioDefault8" checked>
+                                                        <label class="form-check-label" for="flexRadioDefault2">
+                                                            No
+                                                        </label>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                            <div class="row p-1">
+                                                <div class="col-md-6 ">
+                                                    <label for="">Registrar Novedad</label>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" value=1 type="radio"
+                                                            name="flexRadioDefault5" id="flexRadioDefault8">
+                                                        <label class="form-check-label" for="flexRadioDefault1">
+                                                            Sí
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" value=2 type="radio"
+                                                            name="flexRadioDefault5" id="flexRadioDefault9" checked>
+                                                        <label class="form-check-label" for="flexRadioDefault2">
+                                                            No
+                                                        </label>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                        </form>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary"
+                                            data-bs-dismiss="modal">Cerrar</button>
+                                        <button type="button" class="btn btn-primary">Compartir</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="col-12 pt-4">
+                        <h6 class="mb-4">Historial de permisos</h6>
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th scope="col">ID permiso</th>
+                                    <th scope="col">Activo</th>
+                                    <th scope="col">Usuario</th>
+                                    <th scope="col">Información básica</th>
+                                    <th scope="col">Historial de servicios</th>
+                                    <th scope="col">Ver novedades</th>
+                                    <th scope="col">Registrar servicio</th>
+                                    <th scope="col">Registrar Novedad</th>
+                                    <th scope="col">Editar</th>
+                                    <th scope="col">Eliminar</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>123</td>
+                                    <td>Nevera</td>
+                                    <td>Usuario 1</td>
+                                    <td>Si</td>
+                                    <td>Si</td>
+                                    <td>Si</td>
+                                    <td>Si</td>
+                                    <td>Si</td>
+                                    <td><button type="button" class="btn btn-success" data-bs-toggle="modal"
+                                            data-bs-target="#Modal_editar_servicio">
+                                            <i class="fi fi-br-edit me-2"></i>Editar
+                                        </button></td>
+                                    <td><a class="btn btn-danger"><i class="fi fi-br-trash"></i>Eliminar</a></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
                 </div>
 
-                
+
 
             </div>
 
 
         </div>
     </div>
-    
+
 </body>
+
 </html>
