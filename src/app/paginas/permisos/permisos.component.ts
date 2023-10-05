@@ -4,6 +4,8 @@ import { Usuarios } from 'src/app/interfaces/usuario';
 import { ActivoService } from 'src/app/servicios/activo/activo.service';
 import { ComunicationService } from 'src/app/servicios/comunication.service';
 import { UsuarioService } from 'src/app/servicios/usuario/usuario.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
 
 @Component({
   selector: 'app-permisos',
@@ -15,7 +17,19 @@ export class PermisosComponent {
   listaActivos: Activo[] = [];
   listaUsuarios: Usuarios[] = [];
 
-  constructor(private communicationService: ComunicationService, private activo_service: ActivoService, private usuario_service : UsuarioService){}
+  constructor(private communicationService: ComunicationService, private activo_service: ActivoService, private usuario_service : UsuarioService,private fb: FormBuilder){}
+
+  form_registrar_permiso: FormGroup = this.fb.group({
+    activo: this.fb.control('', [Validators.required]),
+    usuario: this.fb.control('', [Validators.required]),
+    ver_informacion_basica: this.fb.control([Validators.required]),
+    ver_historial_servicios: this.fb.control([Validators.required]),
+    ver_novedades: this.fb.control([Validators.required]),
+    registrar_servicio: this.fb.control([Validators.required]),
+    registrar_novedad: this.fb.control([Validators.required])
+  });
+
+  
 
   ngOnInit(){
     this.communicationService.sidebarOpen$.subscribe(isOpen => {
@@ -58,8 +72,11 @@ export class PermisosComponent {
     if (selectedOption) {
       this.selectedUsuarioId = selectedOption.id_usuario;
       this.seEjecuto_UsuarioSelect = true; // Se ejecutó la función
-      console.log(this.selectedUsuarioId);
     }
+  }
+
+  registrar_permiso(value : any){
+
   }
 
 }
