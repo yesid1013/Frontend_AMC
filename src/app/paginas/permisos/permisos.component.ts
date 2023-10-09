@@ -22,11 +22,11 @@ export class PermisosComponent {
   form_registrar_permiso: FormGroup = this.fb.group({
     activo: this.fb.control('', [Validators.required]),
     usuario: this.fb.control('', [Validators.required]),
-    ver_informacion_basica: this.fb.control([Validators.required]),
-    ver_historial_servicios: this.fb.control([Validators.required]),
-    ver_novedades: this.fb.control([Validators.required]),
-    registrar_servicio: this.fb.control([Validators.required]),
-    registrar_novedad: this.fb.control([Validators.required])
+    ver_informacion_basica: this.fb.control(2,[Validators.required]),
+    ver_historial_servicios: this.fb.control(2,[Validators.required]),
+    ver_novedades: this.fb.control(2,[Validators.required]),
+    registrar_servicio: this.fb.control(2,[Validators.required]),
+    registrar_novedad: this.fb.control(2,[Validators.required])
   });
 
   
@@ -76,6 +76,9 @@ export class PermisosComponent {
   }
 
   registrar_permiso(value : any){
+    if(this.form_registrar_permiso.valid){
+      
+    }
 
   }
 
