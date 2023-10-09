@@ -172,10 +172,10 @@
                                     <th scope="col">Tipo de servicio</th>
                                     <th scope="col">Descripción</th>
                                     <th scope="col">Observaciones</th>
-                                    <th scope="col">Editar</th>
-                                    <th scope="col">Eliminar</th>
                                     <th scope="col">Informe</th>
                                     <th scope="col">Orden de servicio</th>
+                                    <th scope="col">Editar</th>
+                                    <th scope="col">Eliminar</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -186,15 +186,6 @@
                                     <td>{{servicio.tipo_servicio}}</td>
                                     <td>{{servicio.descripcion}}</td>
                                     <td>{{servicio.observaciones}}</td>
-
-                                    <td><button (click)="set_form_edit_servicio(servicio)" type="button"
-                                            class="btn btn-success" data-bs-toggle="modal"
-                                            data-bs-target="#Modal_editar_servicio">
-                                            <i class="fi fi-br-edit me-2"></i>Editar
-                                        </button></td>
-
-                                    <td><a class="btn btn-danger" (click)="eliminar_servicio(servicio.id_servicio)"><i
-                                                class="fi fi-br-trash"></i>Eliminar</a></td>
 
                                     <td><a href={{servicio.informe}} *ngIf="servicio.informe"
                                             type="button" target="_blank" class="btn btn-info"><i
@@ -207,6 +198,15 @@
                                                 class="fi fi-br-eye me-2"></i>Ver orden</a>
                                         <p *ngIf="!servicio.orden_de_servicio">No hay orden de servicio</p>
                                     </td>
+
+                                    <td><button (click)="set_form_edit_servicio(servicio)" type="button"
+                                        class="btn btn-success" data-bs-toggle="modal"
+                                        data-bs-target="#Modal_editar_servicio">
+                                        <i class="fi fi-br-edit me-2"></i>Editar
+                                    </button></td>
+
+                                <td><a class="btn btn-danger" (click)="eliminar_servicio(servicio.id_servicio)"><i
+                                            class="fi fi-br-trash"></i>Eliminar</a></td>
                                 </tr>
                             </tbody>
                         </table>
