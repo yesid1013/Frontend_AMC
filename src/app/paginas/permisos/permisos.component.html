@@ -246,14 +246,175 @@
                                         <p *ngIf="permiso.registrar_novedad == 1; else elseRegistrarNovedad">Si</p>
                                         <ng-template #elseRegistrarNovedad>No</ng-template>
                                     </td>
-                                    <td><button type="button" class="btn btn-success" data-bs-toggle="modal"
-                                            data-bs-target="#Modal_editar_servicio">
+                                    <td><button (click)="set_form_edit_permisos(permiso)" type="button" class="btn btn-success" data-bs-toggle="modal"
+                                            data-bs-target="#Modal_editar_permisos">
                                             <i class="fi fi-br-edit me-2"></i>Editar
                                         </button></td>
                                     <td><a class="btn btn-danger"><i class="fi fi-br-trash"></i>Eliminar</a></td>
                                 </tr>
                             </tbody>
                         </table>
+
+                        <!-- Modal Editar permisos -->
+                        <div class="modal fade" id="Modal_editar_permisos" tabindex="-1"
+                            aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Editar Permisos</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form [formGroup]="form_editar_permiso">
+                                            <div class="row p-1">
+                                                <div class="col-md-6 ">
+                                                    <label for="exampleDataList" class="form-label">Seleccione el
+                                                        activo:</label>
+                                                    <input (change)="onActivoSelect($event)" formControlName="activo"
+                                                        class="form-control" list="datalistactivos" id="exampleDataList"
+                                                        placeholder="Escriba para buscar">
+                                                    <datalist id="datalistactivos">
+                                                        <option *ngFor="let activo of listaActivos"
+                                                            [value]="activo.id_primario">{{activo.tipo_de_equipo}}
+                                                        </option>
+                                                    </datalist>
+                                                </div>
+
+                                                <div class="col-md-6 ">
+                                                    <label for="exampleDataList" class="form-label">Seleccione el
+                                                        usuario:</label>
+                                                    <input formControlName="usuario" (change)="onUsuarioSelect($event)"
+                                                        class="form-control" list="datalistusuarios"
+                                                        id="exampleDataList" placeholder="Escriba para buscar">
+                                                    <datalist id="datalistusuarios">
+                                                        <option *ngFor="let usuario of listaUsuarios"
+                                                            [value]="usuario.correo">{{usuario.nombre}}</option>
+                                                    </datalist>
+                                                </div>
+                                            </div>
+
+                                            <div class="row p-1">
+                                                <div class="col-md-6 ">
+                                                    <label for="">Ver información basica:</label>
+                                                    <div class="form-check">
+                                                        <input formControlName="ver_informacion_basica"
+                                                            class="form-check-input" [value]="1" type="radio"
+                                                            id="flexRadioDefault1">
+                                                        <label class="form-check-label" for="flexRadioDefault1">
+                                                            Sí
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input formControlName="ver_informacion_basica"
+                                                            class="form-check-input" [value]="0" type="radio"
+                                                            id="flexRadioDefault2" checked>
+                                                        <label class="form-check-label" for="flexRadioDefault2">
+                                                            No
+                                                        </label>
+                                                    </div>
+
+                                                </div>
+
+                                                <div class="col-md-6 ">
+                                                    <label for="">Ver historial de servicios:</label>
+                                                    <div class="form-check">
+                                                        <input formControlName="ver_historial_servicios"
+                                                            class="form-check-input" [value]="1" type="radio"
+                                                            id="flexRadioDefault3">
+                                                        <label class="form-check-label" for="flexRadioDefault1">
+                                                            Sí
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input formControlName="ver_historial_servicios"
+                                                            class="form-check-input" [value]="0" type="radio"
+                                                            id="flexRadioDefault4" checked>
+                                                        <label class="form-check-label" for="flexRadioDefault2">
+                                                            No
+                                                        </label>
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+
+                                            <div class="row p-1">
+                                                <div class="col-md-6 ">
+                                                    <label for="">Ver Novedades:</label>
+                                                    <div class="form-check">
+                                                        <input formControlName="ver_novedades" class="form-check-input"
+                                                            [value]="1" type="radio" id="flexRadioDefault5">
+                                                        <label class="form-check-label" for="flexRadioDefault1">
+                                                            Sí
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input formControlName="ver_novedades" class="form-check-input"
+                                                            [value]="0" type="radio" name="ver_novedades"
+                                                            id="flexRadioDefault6" checked>
+                                                        <label class="form-check-label" for="flexRadioDefault2">
+                                                            No
+                                                        </label>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-6 ">
+                                                    <label for="">Registrar servicio:</label>
+                                                    <div class="form-check">
+                                                        <input formControlName="registrar_servicio"
+                                                            class="form-check-input" [value]="1" type="radio"
+                                                            id="flexRadioDefault7">
+                                                        <label class="form-check-label" for="flexRadioDefault1">
+                                                            Sí
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input formControlName="registrar_servicio"
+                                                            class="form-check-input" [value]="0" type="radio"
+                                                            name="registrar_servicio" id="flexRadioDefault8" checked>
+                                                        <label class="form-check-label" for="flexRadioDefault2">
+                                                            No
+                                                        </label>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                            <div class="row p-1">
+                                                <div class="col-md-6 ">
+                                                    <label for="">Registrar Novedad:</label>
+                                                    <div class="form-check">
+                                                        <input formControlName="registrar_novedad"
+                                                            class="form-check-input" [value]="1" type="radio"
+                                                            name="registrar_novedad" id="flexRadioDefault8">
+                                                        <label class="form-check-label" for="flexRadioDefault1">
+                                                            Sí
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input formControlName="registrar_novedad"
+                                                            class="form-check-input" [value]="0" type="radio"
+                                                            name="registrar_novedad" id="flexRadioDefault9" checked>
+                                                        <label class="form-check-label" for="flexRadioDefault2">
+                                                            No
+                                                        </label>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                        </form>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary"
+                                            data-bs-dismiss="modal">Cerrar</button>
+                                        <button type="button" class="btn btn-primary"
+                                            (click)="editar_permiso(form_editar_permiso.value)">Editar</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
                 </div>

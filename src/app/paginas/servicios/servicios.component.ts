@@ -177,7 +177,6 @@ export class ServiciosComponent {
     const selectedOption = this.listaActivos.find(activo => activo.id_primario === servicio.activo_id_primario);
     if (selectedOption) {
       this.edit_activo_id = selectedOption.id_activo;
-      console.log('ID de activo seleccionado edit:', this.edit_activo_id);
     }
 
     this.form_edit_servicio.setValue({
@@ -243,6 +242,7 @@ export class ServiciosComponent {
                   allowOutsideClick: false,
                 }).then((result) => {
                   if (result.isConfirmed) {
+                    this.seEjecuto_ActivoSelect = false;
                     this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {  //Renderizar datatable
                       dtInstance.destroy();
                       this.obtener_servicios();

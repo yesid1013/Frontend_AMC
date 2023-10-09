@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient} from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Permisos_creados, Registrar_permiso } from 'src/app/interfaces/permiso';
+import { Editar_permiso, Permisos_creados, Registrar_permiso } from 'src/app/interfaces/permiso';
 
 @Injectable({
   providedIn: 'root'
@@ -17,5 +17,9 @@ export class PermisosService {
 
   registrar_permiso(permiso : Registrar_permiso):Observable<any>{
     return this.http.post(`${this.url}permisos`,permiso);
+  }
+
+  editar_permiso(id_permiso : string, editar_permiso : Editar_permiso):Observable<any>{
+    return this.http.put(`${this.url}permiso/${id_permiso}`,editar_permiso);
   }
 }
