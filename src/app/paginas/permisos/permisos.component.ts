@@ -6,7 +6,9 @@ import { ComunicationService } from 'src/app/servicios/comunication.service';
 import { UsuarioService } from 'src/app/servicios/usuario/usuario.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { PermisosService } from 'src/app/servicios/permisos/permisos.service';
-import { Permisos_creados } from 'src/app/interfaces/permiso';
+import { Permisos_creados, Registrar_permiso } from 'src/app/interfaces/permiso';
+import Swal from 'sweetalert2';
+
 
 
 @Component({
@@ -25,11 +27,11 @@ export class PermisosComponent {
   form_registrar_permiso: FormGroup = this.fb.group({
     activo: this.fb.control('', [Validators.required]),
     usuario: this.fb.control('', [Validators.required]),
-    ver_informacion_basica: this.fb.control(2,[Validators.required]),
-    ver_historial_servicios: this.fb.control(2,[Validators.required]),
-    ver_novedades: this.fb.control(2,[Validators.required]),
-    registrar_servicio: this.fb.control(2,[Validators.required]),
-    registrar_novedad: this.fb.control(2,[Validators.required])
+    ver_informacion_basica: this.fb.control(0,[Validators.required]),
+    ver_historial_servicios: this.fb.control(0,[Validators.required]),
+    ver_novedades: this.fb.control(0,[Validators.required]),
+    registrar_servicio: this.fb.control(0,[Validators.required]),
+    registrar_novedad: this.fb.control(0,[Validators.required])
   });
 
   
@@ -87,6 +89,28 @@ export class PermisosComponent {
 
   registrar_permiso(value : any){
     if(this.form_registrar_permiso.valid){
+      const permiso : Registrar_permiso = {
+        id_activo : this.selectedActivoId,
+        id_usuario : this.selectedUsuarioId,
+        ver_informacion_basica : value.ver_informacion_basica,
+        ver_historial_servicios : value.ver_historial_servicios,
+        ver_novedades : value.ver_novedades,
+        registrar_servicio : value.registrar_servicio,
+        registrar_novedad : value.registrar_novedad
+      }
+
+      this.permisos_service.registrar_permiso(permiso).subscribe(data => {
+        Swal.fire({
+          icon: 'success',
+          title: 'Registro exitoso',
+          text: 'Permiso creado correctamente',
+          allowOutsideClick: false,
+        }).then((result) => {
+          if (result.isConfirmed) {
+            this.obtener_permisos_creados();
+          }
+        });
+      })
       
     }
 

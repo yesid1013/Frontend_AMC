@@ -7,7 +7,6 @@ import { ComunicationService } from 'src/app/servicios/comunication.service';
 import { ServicioService } from 'src/app/servicios/servicio/servicio.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
-import jwt_decode from 'jwt-decode';
 import { ActivoService } from 'src/app/servicios/activo/activo.service';
 import { Activo } from 'src/app/interfaces/activo';
 import Swal from 'sweetalert2';
