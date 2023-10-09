@@ -5,6 +5,8 @@ import { ActivoService } from 'src/app/servicios/activo/activo.service';
 import { ComunicationService } from 'src/app/servicios/comunication.service';
 import { UsuarioService } from 'src/app/servicios/usuario/usuario.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { PermisosService } from 'src/app/servicios/permisos/permisos.service';
+import { Permisos_creados } from 'src/app/interfaces/permiso';
 
 
 @Component({
@@ -16,8 +18,9 @@ export class PermisosComponent {
   isOpen = false;
   listaActivos: Activo[] = [];
   listaUsuarios: Usuarios[] = [];
+  listaPermisosCreados: Permisos_creados[] = [];
 
-  constructor(private communicationService: ComunicationService, private activo_service: ActivoService, private usuario_service : UsuarioService,private fb: FormBuilder){}
+  constructor(private communicationService: ComunicationService, private activo_service: ActivoService, private usuario_service : UsuarioService,private fb: FormBuilder, private permisos_service : PermisosService){}
 
   form_registrar_permiso: FormGroup = this.fb.group({
     activo: this.fb.control('', [Validators.required]),
@@ -35,6 +38,7 @@ export class PermisosComponent {
     this.communicationService.sidebarOpen$.subscribe(isOpen => {
       this.isOpen = isOpen;
     });
+    this.obtener_permisos_creados();
     this.obtener_activos();
     this.obtener_usuarios();
   }
@@ -48,6 +52,12 @@ export class PermisosComponent {
   obtener_usuarios(){
     this.usuario_service.listar_usuarios().subscribe(data => {
       this.listaUsuarios = data;
+    })
+  }
+
+  obtener_permisos_creados(){
+    this.permisos_service.permisos_creados().subscribe(data => {
+      this.listaPermisosCreados = data;
     })
   }
 

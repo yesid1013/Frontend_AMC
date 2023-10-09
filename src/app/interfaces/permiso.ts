@@ -7,3 +7,14 @@ export interface Registrar_permiso {
     registrar_servicio: number;
     registrar_novedad: number;
 }
+
+export interface Permisos_creados { 
+    id_permiso: string;
+    activo : string;
+    usuario : string;
+    ver_informacion_basica: number;
+    ver_historial_servicios: number;
+    ver_novedades: number;
+    registrar_servicio: number;
+    registrar_novedad: number;
+}
