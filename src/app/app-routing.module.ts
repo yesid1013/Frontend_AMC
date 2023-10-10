@@ -10,6 +10,7 @@ import { SpinnerComponent } from './componentes/spinner/spinner.component';
 import { AuthGuard } from './utils/auth.guard';
 import { CostoServicioComponent } from './paginas/costo-servicio/costo-servicio.component';
 import { PermisosComponent } from './paginas/permisos/permisos.component';
+import { PermisosRecibidosComponent } from './paginas/permisos-recibidos/permisos-recibidos.component';
 
 
 const routes: Routes = [
@@ -56,7 +57,13 @@ const routes: Routes = [
     path : 'permisos',
     component : PermisosComponent,
     canActivate : [AuthGuard]
+  },
+  {
+    path : 'permisos_recibidos',
+    component : PermisosRecibidosComponent,
+    canActivate : [AuthGuard]
   }
+
 ];
 
 @NgModule({

@@ -23,6 +23,7 @@ import { SpinnerComponent } from './componentes/spinner/spinner.component';
 import { AddTokenInterceptor } from './utils/add-token.interceptor';
 import { CostoServicioComponent } from './paginas/costo-servicio/costo-servicio.component';
 import { PermisosComponent } from './paginas/permisos/permisos.component';
+import { PermisosRecibidosComponent } from './paginas/permisos-recibidos/permisos-recibidos.component';
 
 
 
@@ -39,7 +40,8 @@ import { PermisosComponent } from './paginas/permisos/permisos.component';
     InformeServicioComponent,
     SpinnerComponent,
     CostoServicioComponent,
-    PermisosComponent
+    PermisosComponent,
+    PermisosRecibidosComponent
   ],
   imports: [
     BrowserModule,
