@@ -1,1 +1,52 @@
-<p>permisos-recibidos works!</p>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Permisos recibidos</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Icon Font Stylesheet -->
+    <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/uicons-bold-rounded/css/uicons-bold-rounded.css'>
+</head>
+
+<body>
+    <div class="container-xxl position-relative bg-white d-flex p-0">
+        <!--Componente sidebar (Barra lateral)-->
+        <app-sidebar></app-sidebar>
+
+        <div class="content" [ngClass]="{'open': isOpen}">
+            <!--Componente navbar-->
+            <app-navbar></app-navbar>
+
+            <!-- Contenido -->
+            <div class="container-fluid pt-4 px-4">
+                <div class="bg-light rounded h-100">
+                    <h1 class="h3 mb-4 text-gray-800">Permisos recibidos</h1>
+
+                    <div class="row">
+                        <div class="col-3 my-3">
+                            <div class="card">
+                                <div class="card-details">
+                                    <p class="text-title">Card title</p>
+                                    <p class="text-body">Here are the details of the card</p>
+                                </div>
+                                <button class="card-button">More info</button>
+                            </div>
+                        </div>  
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+</body>
+
+</html>
