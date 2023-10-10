@@ -207,4 +207,22 @@ export class PermisosComponent {
 
   }
 
+  eliminar_permiso(id_permiso : string){
+    Swal.fire({
+      title: '¿Estás seguro de eliminar este permiso?',
+      showDenyButton: true,
+      confirmButtonText: 'Eliminar',
+      denyButtonText: `Cancelar`,
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.permisos_service.eliminar_permiso(id_permiso).subscribe({
+          next: (data) => {
+            Swal.fire('Permiso eliminado', '', 'success');
+            this.obtener_permisos_creados();
+          }
+        })
+      }
+    })
+  }
+
 }

@@ -22,4 +22,8 @@ export class PermisosService {
   editar_permiso(id_permiso : string, editar_permiso : Editar_permiso):Observable<any>{
     return this.http.put(`${this.url}permiso/${id_permiso}`,editar_permiso);
   }
+
+  eliminar_permiso(id_permiso : string){
+    return this.http.delete(`${this.url}permiso/${id_permiso}`);
+  }
 }

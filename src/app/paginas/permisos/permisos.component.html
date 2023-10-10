@@ -250,7 +250,7 @@
                                             data-bs-target="#Modal_editar_permisos">
                                             <i class="fi fi-br-edit me-2"></i>Editar
                                         </button></td>
-                                    <td><a class="btn btn-danger"><i class="fi fi-br-trash"></i>Eliminar</a></td>
+                                    <td><button (click)="eliminar_permiso(permiso.id_permiso)" class="btn btn-danger"><i class="fi fi-br-trash"></i>Eliminar</button></td>
                                 </tr>
                             </tbody>
                         </table>
