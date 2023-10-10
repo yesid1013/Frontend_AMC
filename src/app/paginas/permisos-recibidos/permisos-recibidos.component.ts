@@ -17,4 +17,8 @@ export class PermisosRecibidosComponent {
     });
   }
 
+  obtener_permisos_recibidos(){
+    
+  }
+
 }
