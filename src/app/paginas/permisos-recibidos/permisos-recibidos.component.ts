@@ -10,6 +10,7 @@ import { PermisosService } from 'src/app/servicios/permisos/permisos.service';
 })
 export class PermisosRecibidosComponent {
   isOpen = false;
+  searchTerm = '';
   lista_permisos_recibidos : Permisos_recibidos[] = []
   activosFiltrados: any[] = [];
 
@@ -22,10 +23,9 @@ export class PermisosRecibidosComponent {
     });
   }
 
-  filtrarActivos(event: any) {
-    const filtro = event.target.value.toLowerCase();
+  filtrarActivos(value: string) {
     this.activosFiltrados = this.lista_permisos_recibidos.filter(permiso =>
-      permiso.activo_tipo_de_equipo.toLowerCase().includes(filtro)
+      permiso.activo_tipo_de_equipo.toLowerCase().includes(value) || permiso.activo_id_primario.toLowerCase().includes(value)
     );
   }
 
