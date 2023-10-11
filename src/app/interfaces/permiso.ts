@@ -30,3 +30,15 @@ export interface Permisos_creados {
     registrar_servicio: number;
     registrar_novedad: number;
 }
+
+export interface Permisos_recibidos {
+    activo_id_primario:      string;
+    activo_tipo_de_equipo:   string;
+    id_activo:               string;
+    id_permiso:              string;
+    registrar_novedad:       number;
+    registrar_servicio:      number;
+    ver_historial_servicios: number;
+    ver_informacion_basica:  number;
+    ver_novedades:           number;
+}
