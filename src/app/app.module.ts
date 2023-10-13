@@ -25,6 +25,7 @@ import { CostoServicioComponent } from './paginas/costo-servicio/costo-servicio.
 import { PermisosComponent } from './paginas/permisos/permisos.component';
 import { PermisosRecibidosComponent } from './paginas/permisos-recibidos/permisos-recibidos.component';
 import { SearchFilterPipe } from './utils/search-filter.pipe';
+import { InformacionPermisosComponent } from './paginas/informacion-permisos/informacion-permisos.component';
 
 
 
@@ -44,6 +45,7 @@ import { SearchFilterPipe } from './utils/search-filter.pipe';
     PermisosComponent,
     PermisosRecibidosComponent,
     SearchFilterPipe,
+    InformacionPermisosComponent,
   ],
   imports: [
     BrowserModule,

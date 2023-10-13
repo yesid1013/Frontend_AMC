@@ -11,6 +11,7 @@ import { AuthGuard } from './utils/auth.guard';
 import { CostoServicioComponent } from './paginas/costo-servicio/costo-servicio.component';
 import { PermisosComponent } from './paginas/permisos/permisos.component';
 import { PermisosRecibidosComponent } from './paginas/permisos-recibidos/permisos-recibidos.component';
+import { InformacionPermisosComponent } from './paginas/informacion-permisos/informacion-permisos.component';
 
 
 const routes: Routes = [
@@ -61,6 +62,11 @@ const routes: Routes = [
   {
     path : 'permisos_recibidos',
     component : PermisosRecibidosComponent,
+    canActivate : [AuthGuard]
+  },
+  {
+    path : 'informacion_permisos',
+    component : InformacionPermisosComponent,
     canActivate : [AuthGuard]
   }
 
