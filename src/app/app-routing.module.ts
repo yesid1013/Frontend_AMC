@@ -65,7 +65,7 @@ const routes: Routes = [
     canActivate : [AuthGuard]
   },
   {
-    path : 'informacion_permisos',
+    path : 'informacion_permisos/:id_permiso',
     component : InformacionPermisosComponent,
     canActivate : [AuthGuard]
   }
