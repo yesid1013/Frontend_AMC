@@ -19,16 +19,16 @@
         <!--Componente sidebar (Barra lateral)-->
         <app-sidebar></app-sidebar>
 
-        <div class="content">
+        <div class="content" [ngClass]="{'open': isOpen}">
             <!--Componente navbar-->
             <app-navbar></app-navbar>
 
             <!-- Contenido -->
-            <div class="container-fluid pt-4 px-4">
+            <div *ngIf="!loading" class="container-fluid pt-4 px-4">
 
                 <div class="bg-light rounded h-100">
 
-                    <div class="seccion_informacion_basica">
+                    <div *ngIf="ver_informacion_basica === 1" class="seccion_informacion_basica">
                         <!-- Sección de Información Básica -->
                         <div class="text-center mb-4">
                             <h2>Información Básica</h2>
@@ -54,12 +54,12 @@
                         </div>
                     </div>
 
-                    <button class="btn_register mb-2"><i class="fi fi-br-wrench-simple me-2"></i>Registrar
+                    <button *ngIf="registrar_servicio === 1" class="btn_register mb-2"><i class="fi fi-br-wrench-simple me-2"></i>Registrar
                         Servicio</button>
-                    <button class="btn_register mx-2 mb-2"><i class="fi fi-br-bullhorn me-2"></i> Registrar
+                    <button *ngIf="registrar_novedad === 1" class="btn_register mx-2 mb-2"><i class="fi fi-br-bullhorn me-2"></i> Registrar
                         Novedad</button>
 
-                    <div class="seccion_historial_servicios mt-4">
+                    <div *ngIf="ver_historial_servicios === 1" class="seccion_historial_servicios mt-4">
                         <!-- Sección de Historial de Servicios -->
                         <div class="text-center mb-4">
                             <h2>Historial de Servicios</h2>
@@ -110,7 +110,7 @@
 
                     </div>
 
-                    <div class="seccion_ver_novedades">
+                    <div *ngIf="ver_novedades === 1" class="seccion_ver_novedades">
                         <!-- Sección de Ver Novedades -->
                         <div class="text-center mb-4">
                             <h2>Ver Novedades</h2>
@@ -158,10 +158,8 @@
 
                     </div>
 
-
-
-
                 </div>
+                <app-spinner *ngIf="loading"></app-spinner>
             </div>
 
         </div>
