@@ -42,3 +42,15 @@ export interface Permisos_recibidos {
     ver_informacion_basica:  number;
     ver_novedades:           number;
 }
+
+export interface Permiso {
+    id_activo: string;
+    id_permiso: string;
+    id_usuario: string;
+    registrar_novedad: number;
+    registrar_servicio: number;
+    ver_historial_servicios: number;
+    ver_informacion_basica: number;
+    ver_novedades: number;
+  }
+  
