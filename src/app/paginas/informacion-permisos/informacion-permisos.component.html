@@ -36,19 +36,19 @@
 
                         <div class="row">
                             <div class="col-md-6 mb-4">
-                                <p><strong class="mx-2">ID #1:</strong>1411780</p>
-                                <p><strong class="mx-2">ID #2:</strong>1411780</p>
-                                <p><strong class="mx-2">TIPO DE ACTIVO:</strong>Empacadora al vacío</p>
-                                <p><strong class="mx-2">MARCA:</strong>CI Talsa</p>
-                                <p><strong class="mx-2">MODELO:</strong>Sammic S.L.</p>
-                                <p><strong class="mx-2">#SERIE</strong>11407911941376</p>
-                                <p><strong class="mx-2">UBICACIÓN:</strong>col-malambo</p>
+                                <p><strong class="mx-2">ID #1:</strong>{{activoData?.id_primario}}</p>
+                                <p><strong class="mx-2">ID #2:</strong>{{activoData?.id_secundario}}</p>
+                                <p><strong class="mx-2">TIPO DE ACTIVO:</strong>{{activoData?.tipo_de_equipo}}</p>
+                                <p><strong class="mx-2">FABRICANTE:</strong>{{activoData?.fabricante}}</p>
+                                <p><strong class="mx-2">MODELO:</strong>{{activoData?.modelo}}</p>
+                                <p><strong class="mx-2">#SERIE</strong>{{activoData?.num_serie}}</p>
+                                <p><strong class="mx-2">UBICACIÓN:</strong>{{activoData?.ubicacion}}</p>
                             </div>
 
                             <!-- Columna Derecha (Imagen) -->
                             <div class="col-md-6 text-center">
                                 <img width="200px" height="200px"
-                                    src="https://www.elamigodelcarnicero.com/wp-content/uploads/2020/12/EMPACADORA-AL-VACIO-DZ-300.jpg"
+                                    src={{activoData?.imagen_equipo}}
                                     alt="Imagen del Activo" class="img-fluid mx-auto d-block">
                             </div>
                         </div>

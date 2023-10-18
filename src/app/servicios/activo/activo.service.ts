@@ -15,6 +15,10 @@ export class ActivoService {
     return this.http.get<Activo[]>(`${this.url}listar_activos`);
   }
 
+  info_activo(id_activo : any):Observable<Activo>{
+    return this.http.get<Activo>(`${this.url}info_activo/${id_activo}`);
+  }
+
   registrar_activo(activo : Registro_activo):Observable<any>{
     return this.http.post(`${this.url}create_activo`,activo);
   }
