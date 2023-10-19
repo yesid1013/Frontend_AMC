@@ -82,26 +82,12 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>2023-09-18 09:43:00</td>
-                                        <td>Juan Perez</td>
-                                        <td>Mantenimiento Preventivo</td>
-                                        <td>Descripción del servicio realizado...</td>
-                                    </tr>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>2023-09-18 09:43:00</td>
-                                        <td>Juan Perez</td>
-                                        <td>Mantenimiento Preventivo</td>
-                                        <td>Descripción del servicio realizado...</td>
-                                    </tr>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>2023-09-18 09:43:00</td>
-                                        <td>Juan Perez</td>
-                                        <td>Mantenimiento Preventivo</td>
-                                        <td>Descripción del servicio realizado...</td>
+                                    <tr *ngFor="let servicio of ServicioData">
+                                        <td>{{servicio.numero_servicio}}</td>
+                                        <td>{{servicio.fecha_ejecucion}}</td>
+                                        <td>{{servicio.nombre_usuario}}</td>
+                                        <td>{{servicio.tipo}}</td>
+                                        <td>{{servicio.descripcion}}</td>
                                     </tr>
                                 </tbody>
                             </table>

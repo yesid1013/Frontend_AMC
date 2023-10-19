@@ -7,7 +7,7 @@ import { ComunicationService } from 'src/app/servicios/comunication.service';
 import { PermisosService } from 'src/app/servicios/permisos/permisos.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
-import { RegistroServicio } from 'src/app/interfaces/servicio';
+import { RegistroServicio, ServicioDeActivo } from 'src/app/interfaces/servicio';
 import { ServicioService } from 'src/app/servicios/servicio/servicio.service';
 
 
@@ -22,6 +22,7 @@ export class InformacionPermisosComponent {
   public isTablaNovedadesColapsada: boolean = false;
   permisoId : string | null = null;
   permisoData: Permiso | null = null;
+  ServicioData : ServicioDeActivo[] = [];
   activoData : Activo | null = null;
   loading: boolean = false;
   isOpen = false;
@@ -103,8 +104,11 @@ export class InformacionPermisosComponent {
       this.registrar_servicio = this.permisoData.registrar_servicio;
       this.registrar_novedad = this.registrar_novedad;
 
-      if (this.ver_informacion_basica === 1){
+      if (this.ver_informacion_basica === 1){ // si tiene permisos de ver informaciom basica, llamo la funcion para obtener la informacion de ese activo
         this.obtener_activo()
+      }
+      if(this.ver_historial_servicios === 1){
+        this.obtener_servicio()
       }
     });
     
@@ -117,46 +121,57 @@ export class InformacionPermisosComponent {
   }
 
   crear_servicio(value : any){ 
-    this.submitted = true;    
-    if (this.form_servicio.valid){
-      const fecha = new Date(value.fecha_ejecucion);
-      const fechaFormateada = fecha.toISOString();
-
-      const servicio : RegistroServicio = {
-        fecha_ejecucion : fechaFormateada,
-        descripcion : value.descripcion,
-        id_tipo_servicio: value.tipo_de_servicio,
-        observaciones : value.observaciones,
-        observaciones_usuario : value.observaciones_usuario,
-
-        orden_de_servicio : {
-          name :this.fileName,
-          content : this.fileContent,
-          mimeType : this.fileMimeType
-        }
-      };
-
-      Swal.fire({
-        title: 'Cargando...',
-        allowOutsideClick: false,  // Impide que el usuario cierre el diálogo haciendo clic fuera
-        didOpen: () => {
-          Swal.showLoading();  // Muestra el spinner
-        }
-      });
-      
-      this.servicio_service.registrar_servicio(servicio,this.id_activo).subscribe(data => {
+    this.submitted = true;
+    if (this.registrar_servicio === 1){
+      if (this.form_servicio.valid){
+        const fecha = new Date(value.fecha_ejecucion);
+        const fechaFormateada = fecha.toISOString();
+  
+        const servicio : RegistroServicio = {
+          fecha_ejecucion : fechaFormateada,
+          descripcion : value.descripcion,
+          id_tipo_servicio: value.tipo_de_servicio,
+          observaciones : value.observaciones,
+          observaciones_usuario : value.observaciones_usuario,
+  
+          orden_de_servicio : {
+            name :this.fileName,
+            content : this.fileContent,
+            mimeType : this.fileMimeType
+          }
+        };
+  
         Swal.fire({
-          icon: 'success',
-          title: 'Registro exitoso',
-          text: 'Servicio creado correctamente',
-          allowOutsideClick: false,
-        }).then((result) => {
-          if (result.isConfirmed) {
-
+          title: 'Cargando...',
+          allowOutsideClick: false,  // Impide que el usuario cierre el diálogo haciendo clic fuera
+          didOpen: () => {
+            Swal.showLoading();  // Muestra el spinner
           }
         });
-      });
-    }
+        
+        this.servicio_service.registrar_servicio(servicio,this.id_activo).subscribe(data => {
+          Swal.fire({
+            icon: 'success',
+            title: 'Registro exitoso',
+            text: 'Servicio creado correctamente',
+            allowOutsideClick: false,
+          }).then((result) => {
+            if (result.isConfirmed) {
+  
+            }
+          });
+        });
+      }
+
+    }    
+    
+  }
+
+  obtener_servicio(){ //obtiene el historial de servicios del activo
+    this.servicio_service.obtener_servicio(this.id_activo).subscribe(data => {
+      this.ServicioData = data;
+    })
+
   }
   
 

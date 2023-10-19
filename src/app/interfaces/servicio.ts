@@ -14,6 +14,17 @@ export interface Servicio {
     observaciones_usuario: string;
 }
 
+export interface ServicioDeActivo {
+    descripcion:     string;
+    fecha_ejecucion: string;
+    id_servicio:     string;
+    informe:         null;
+    nombre_usuario:  string;
+    numero_servicio: number;
+    observaciones:   string;
+    tipo:            string;
+}
+
 ////////////////////
 export interface RegistroServicio {
     fecha_ejecucion: string;
