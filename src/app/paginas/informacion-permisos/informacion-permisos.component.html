@@ -47,16 +47,17 @@
 
                             <!-- Columna Derecha (Imagen) -->
                             <div class="col-md-6 text-center">
-                                <img width="200px" height="200px"
-                                    src={{activoData?.imagen_equipo}}
+                                <img width="200px" height="200px" src={{activoData?.imagen_equipo}}
                                     alt="Imagen del Activo" class="img-fluid mx-auto d-block">
                             </div>
                         </div>
                     </div>
 
-                    <button *ngIf="registrar_servicio === 1" class="btn_register mb-2"><i class="fi fi-br-wrench-simple me-2"></i>Registrar
+                    <button data-bs-toggle="modal" data-bs-target="#Modal_registar_servicio" *ngIf="registrar_servicio === 1" class="btn_register mb-2"><i
+                            class="fi fi-br-wrench-simple me-2" ></i>Registrar
                         Servicio</button>
-                    <button *ngIf="registrar_novedad === 1" class="btn_register mx-2 mb-2"><i class="fi fi-br-bullhorn me-2"></i> Registrar
+                    <button *ngIf="registrar_novedad === 1" class="btn_register mx-2 mb-2"><i
+                            class="fi fi-br-bullhorn me-2"></i> Registrar
                         Novedad</button>
 
                     <div *ngIf="ver_historial_servicios === 1" class="seccion_historial_servicios mt-4">
@@ -81,7 +82,6 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <!-- Aquí irán las filas con la información del historial de servicios -->
                                     <tr>
                                         <td>1</td>
                                         <td>2023-09-18 09:43:00</td>
@@ -157,6 +157,109 @@
 
 
                     </div>
+
+                    <!-- Modal Registrar servicio -->
+                    <div class="modal fade" id="Modal_registar_servicio" tabindex="-1"
+                        aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Registrar servicio</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <form [formGroup]="form_servicio">
+
+                                        <div class="row p-1">
+                                            <div class="col-md-6 ">
+                                                <label class="form-label">Seleccione el tipo de servicio</label>
+                                                <select formControlName="tipo_de_servicio"
+                                                    class="form-select form-select" aria-label=".form-select-sm example"
+                                                    id="select_tipo_servicio">
+                                                    <option [value]="1">Mantenimiento preventivo</option>
+                                                    <option [value]="2">Mantenimiento correctivo</option>
+                                                    <option [value]="3">Inspección y/o diagnostico</option>
+                                                </select>
+
+                                                <div *ngIf="form_servicio.get('tipo_de_servicio')?.hasError('required') && (submitted)"
+                                                    class="alert alert-primary" role="alert">
+                                                    <i class="fi fi-br-exclamation"></i>
+                                                    El tipo de servicio es requerido.
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+
+                                        <div class="row p-1">
+                                            <div class="col-md-6 ">
+                                                <div class="form-floating mb-3">
+                                                    <textarea formControlName="descripcion" class="form-control"
+                                                        id="floatingInput"></textarea>
+                                                    <label for="floatingInput">Descripcion</label>
+                                                </div>
+
+                                                <div *ngIf="form_servicio.get('descripcion')?.hasError('required') && (submitted)"
+                                                    class="alert alert-primary" role="alert">
+                                                    <i class="fi fi-br-exclamation"></i>
+                                                    La descripcion es requerida.
+                                                </div>
+
+                                            </div>
+
+                                            <div class="col-md-6 ">
+                                                <div class="form-floating mb-3">
+                                                    <textarea formControlName="observaciones" class="form-control"
+                                                        id="floatingInput"></textarea>
+                                                    <label for="floatingInput">Observaciones</label>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="row p-1">
+                                            <div class="col-md-6 ">
+                                                <div class="form-floating mb-3">
+                                                    <textarea formControlName="observaciones_usuario"
+                                                        class="form-control" id="floatingInput"></textarea>
+                                                    <label for="floatingInput">Observación de usuario</label>
+                                                    <i class="fas fa-question-circle" data-bs-toggle="tooltip"
+                                                        title="Si no eres un usuario tecnico, por favor indicalo aquí"></i>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6 ">
+                                                <label for="start">Fecha de ejecución:</label><br>
+                                                <input formControlName="fecha_ejecucion" type="datetime-local"
+                                                    name="horareunion">
+
+                                                <div *ngIf="form_servicio.get('fecha_ejecucion')?.hasError('required') && (submitted)"
+                                                    class="alert alert-primary" role="alert">
+                                                    <i class="fi fi-br-exclamation"></i>
+                                                    La fecha de ejecucion es requerida.
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="row p-1">
+                                            <input formControlName="orden_de_servicio" (change)="onFileSelected($event)"
+                                                class="form-control" type="file" accept="application/pdf" id="formFile">
+                                            <label for="formFile" class="form-label">Adjuntar orden de
+                                                servicio</label>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary"
+                                        data-bs-dismiss="modal">Cerrar</button>
+                                    <button (click)="crear_servicio(form_servicio.value)" type="button" class="btn btn-primary">Registrar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Fin Modal Registrar servicio -->
 
                 </div>
                 <app-spinner *ngIf="loading"></app-spinner>
