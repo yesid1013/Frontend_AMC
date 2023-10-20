@@ -102,7 +102,7 @@ export class InformacionPermisosComponent {
       this.ver_historial_servicios = this.permisoData.ver_historial_servicios;
       this.ver_novedades = this.permisoData.ver_novedades;
       this.registrar_servicio = this.permisoData.registrar_servicio;
-      this.registrar_novedad = this.registrar_novedad;
+      this.registrar_novedad = this.permisoData.registrar_novedad;
 
       if (this.ver_informacion_basica === 1){ // si tiene permisos de ver informaciom basica, llamo la funcion para obtener la informacion de ese activo
         this.obtener_activo()
