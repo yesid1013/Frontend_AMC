@@ -165,6 +165,7 @@ export class InformacionPermisosComponent {
             allowOutsideClick: false,
           }).then((result) => {
             if (result.isConfirmed) {
+              this.submitted = false;
   
             }
           });
@@ -180,6 +181,10 @@ export class InformacionPermisosComponent {
       this.ServicioData = data;
     })
 
+  }
+
+  crear_novedad(){
+    this.submitted = true;
   }
   
 
