@@ -49,6 +49,14 @@ export class InformacionPermisosComponent {
     fecha_ejecucion: this.fb.control('', [Validators.required]),
     orden_de_servicio: this.fb.control('', [])
   });
+  // Formulario de registrar novedad
+  form_novedad: FormGroup = this.fb.group({
+    nombre_reporta: this.fb.control(null,[Validators.required]),
+    nombre_empresa: this.fb.control(null, [Validators.required]),
+    cargo: this.fb.control(null, [Validators.required]),
+    descripcion_reporte: this.fb.control(null, [Validators.required]),
+    imagenes: this.fb.control('', [])
+  });
 
   constructor(private route: ActivatedRoute, private permisoService : PermisosService, private communicationService: ComunicationService, private activoService : ActivoService,private fb: FormBuilder,private servicio_service: ServicioService) {}
 

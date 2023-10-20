@@ -261,17 +261,29 @@
                                         aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body">
-                                    <form>
+                                    <form [formGroup]="form_novedad">
                                         <div class="row p-1">
                                             <div class="col-md-6 ">
                                                 <label class="form-label">¿Quién reporta?</label>
-                                                <input type="text" class="form-control">
+                                                <input formControlName="nombre_reporta" type="text" class="form-control">
+
+                                                <div *ngIf="form_novedad.get('nombre_reporta')?.hasError('required') && (submitted)"
+                                                    class="alert alert-primary" role="alert">
+                                                    <i class="fi fi-br-exclamation"></i>
+                                                    El tipo de servicio es requerido.
+                                                </div>
 
                                             </div>
 
                                             <div class="col-md-6 ">
                                                 <label class="form-label">Empresa</label>
-                                                <input type="text" class="form-control">
+                                                <input formControlName="nombre_empresa" type="text" class="form-control">
+
+                                                <div *ngIf="form_novedad.get('nombre_empresa')?.hasError('required') && (submitted)"
+                                                    class="alert alert-primary" role="alert">
+                                                    <i class="fi fi-br-exclamation"></i>
+                                                    El tipo de servicio es requerido.
+                                                </div>
 
                                             </div>
                                         </div>
@@ -279,20 +291,32 @@
                                         <div class="row p-1">
                                             <div class="col-md-6 ">
                                                 <label class="form-label">Cargo</label>
-                                                <input type="text" class="form-control">
+                                                <input formControlName="cargo" type="text" class="form-control">
+
+                                                <div *ngIf="form_novedad.get('cargo')?.hasError('required') && (submitted)"
+                                                    class="alert alert-primary" role="alert">
+                                                    <i class="fi fi-br-exclamation"></i>
+                                                    El tipo de servicio es requerido.
+                                                </div>
 
                                             </div>
 
                                             <div class="col-md-6 ">
                                                 <label class="form-label">Descripcion de reporte</label>
-                                                <textarea class="form-control"></textarea>
+                                                <textarea formControlName="descripcion_reporte" class="form-control"></textarea>
+
+                                                <div *ngIf="form_novedad.get('descripcion_reporte')?.hasError('required') && (submitted)"
+                                                    class="alert alert-primary" role="alert">
+                                                    <i class="fi fi-br-exclamation"></i>
+                                                    El tipo de servicio es requerido.
+                                                </div>
 
                                             </div>
                                         </div>
 
                                         <div class="row p-1">
                                             <label for="formFile" class="form-label">Adjuntar imágenes</label>
-                                            <input class="form-control" type="file" accept="application/pdf"
+                                            <input formControlName="imagenes" class="form-control" type="file" accept="application/pdf"
                                                 id="formFile">
                                         </div>
                                     </form>
