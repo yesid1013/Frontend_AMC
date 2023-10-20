@@ -316,7 +316,7 @@
 
                                         <div class="row p-1">
                                             <label for="formFile" class="form-label">Adjuntar imágenes</label>
-                                            <input formControlName="imagenes" class="form-control" type="file" accept="application/pdf"
+                                            <input (change)="onFileSelected($event)" formControlName="imagenes" class="form-control" type="file" accept="application/pdf"
                                                 id="formFile">
                                         </div>
                                     </form>
@@ -324,7 +324,7 @@
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary"
                                         data-bs-dismiss="modal">Cerrar</button>
-                                    <button (click)="crear_novedad()" type="button" class="btn btn-primary">Registrar</button>
+                                    <button (click)="crear_novedad(form_novedad.value)" type="button" class="btn btn-primary">Registrar</button>
                                 </div>
                             </div>
                         </div>
