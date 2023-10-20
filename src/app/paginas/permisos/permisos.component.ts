@@ -28,6 +28,7 @@ export class PermisosComponent {
   listaActivos: Activo[] = [];
   listaUsuarios: Usuarios[] = [];
   listaPermisosCreados: Permisos_creados[] = [];
+  submitted = false;
 
   constructor(private communicationService: ComunicationService, private activo_service: ActivoService, private usuario_service : UsuarioService,private fb: FormBuilder, private permisos_service : PermisosService){}
 
@@ -76,7 +77,12 @@ export class PermisosComponent {
 
   obtener_permisos_creados(){
     this.permisos_service.permisos_creados().subscribe(data => {
-      this.listaPermisosCreados = data;
+      if (data == null){
+        console.log("");
+      } else {
+        this.listaPermisosCreados = data;
+      }
+      
     })
   }
 
@@ -129,6 +135,7 @@ export class PermisosComponent {
   }
 
   registrar_permiso(value : any){
+    this.submitted = true;
     if(this.form_registrar_permiso.valid){
       const permiso : Registrar_permiso = {
         id_activo : this.selectedActivoId,
