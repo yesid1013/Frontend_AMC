@@ -111,7 +111,6 @@
                             <table class="table">
                                 <thead>
                                     <tr>
-                                        <th>Activo</th>
                                         <th>Fecha</th>
                                         <th>Persona que Reporta</th>
                                         <th>Empresa que Reporta</th>
@@ -120,24 +119,13 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <!-- Filas de la tabla (puedes usar un *ngFor aquí si los datos son dinámicos) -->
-                                    <tr>
-                                        <td>Activo 1</td>
-                                        <td>2023-09-20</td>
-                                        <td>Juan Pérez</td>
-                                        <td>Empresa X</td>
-                                        <td>Supervisor</td>
-                                        <td>Descripción de la novedad 1</td>
+                                    <tr *ngFor=" let novedad of NovedadData">
+                                        <td>{{novedad.fecha}}</td>
+                                        <td>{{novedad.nombre_reporta}}</td>
+                                        <td>{{novedad.nombre_empresa}}</td>
+                                        <td>{{novedad.cargo}}</td>
+                                        <td>{{novedad.descripcion_reporte}}</td>
                                     </tr>
-                                    <tr>
-                                        <td>Activo 2</td>
-                                        <td>2023-09-21</td>
-                                        <td>Maria Rodríguez</td>
-                                        <td>Empresa Y</td>
-                                        <td>Técnico</td>
-                                        <td>Descripción de la novedad 2</td>
-                                    </tr>
-                                    <!-- ... Agrega más filas según necesites ... -->
                                 </tbody>
                             </table>
 

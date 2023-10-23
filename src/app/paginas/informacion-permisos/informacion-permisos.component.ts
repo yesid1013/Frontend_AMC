@@ -9,7 +9,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
 import { RegistroServicio, ServicioDeActivo } from 'src/app/interfaces/servicio';
 import { ServicioService } from 'src/app/servicios/servicio/servicio.service';
-import { Registro_novedad } from 'src/app/interfaces/novedad';
+import { Novedad, Registro_novedad } from 'src/app/interfaces/novedad';
 import { NovedadService } from 'src/app/servicios/novedad/novedad.service';
 
 
@@ -25,6 +25,7 @@ export class InformacionPermisosComponent {
   permisoId: string | null = null;
   permisoData: Permiso | null = null;
   ServicioData: ServicioDeActivo[] = [];
+  NovedadData : Novedad[] = [];
   activoData: Activo | null = null;
   loading: boolean = false;
   isOpen = false;
@@ -118,7 +119,10 @@ export class InformacionPermisosComponent {
         this.obtener_activo()
       }
       if (this.ver_historial_servicios === 1) {
-        this.obtener_servicio()
+        this.obtener_servicios()
+      }
+      if (this.ver_novedades === 1){
+        this.obtener_novedades();
       }
     });
 
@@ -178,7 +182,7 @@ export class InformacionPermisosComponent {
 
   }
 
-  obtener_servicio() { //obtiene el historial de servicios del activo
+  obtener_servicios() { //obtiene el historial de servicios del activo
     this.servicio_service.obtener_servicio(this.id_activo).subscribe(data => {
       this.ServicioData = data;
     })
@@ -227,6 +231,14 @@ export class InformacionPermisosComponent {
 
       }
     }
+  }
+
+  obtener_novedades(){
+    this.novedad_service.novedades_de_un_activo(this.id_activo).subscribe(data => {
+      if (data != null){
+        this.NovedadData = data;
+      }
+    })
   }
 
 
