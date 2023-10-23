@@ -195,9 +195,9 @@
 
                                                 <div class="col-md-6 ">
                                                     <div class="mb-3">
-                                                        <label for="">Selecciona el subcliente</label>
-                                                        <select formControlName="subcliente" class="form-select"
-                                                            aria-label="Default select example">
+                                                        <label for="select_subcliente">Selecciona el subcliente</label>
+                                                        <select id="select_subcliente" formControlName="subcliente"
+                                                            class="form-select" aria-label="Default select example">
                                                             <option *ngFor="let subcliente of listaSubclientes"
                                                                 [value]="subcliente.id_subcliente">{{subcliente.nombre}}
                                                             </option>
@@ -440,13 +440,17 @@
 
                                                 <div class="col-md-6 ">
                                                     <div class="mb-3">
-                                                        <select formControlName="subcliente"
-                                                            class="form-select form-select"
-                                                            aria-label=".form-select-sm example">
-                                                            <option *ngFor="let subcliente of listaSubclientes"
-                                                                [value]="subcliente.id_subcliente">{{subcliente.nombre}}
-                                                            </option>
-                                                        </select>
+                                                        <label>Selecciona el subcliente
+                                                            <select formControlName="subcliente"
+                                                                class="form-select form-select"
+                                                                aria-label=".form-select-sm example">
+                                                                <option *ngFor="let subcliente of listaSubclientes"
+                                                                    [value]="subcliente.id_subcliente">
+                                                                    {{subcliente.nombre}}
+                                                                </option>
+                                                            </select>
+                                                        </label>
+
 
                                                         <div *ngIf="form_edit_activo.get('subcliente')?.hasError('required') && (submitted)"
                                                             class="alert alert-primary" role="alert">

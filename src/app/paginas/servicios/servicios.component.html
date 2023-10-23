@@ -50,10 +50,10 @@
 
                                             <div class="row p-1">
                                                 <div class="col-md-6 ">
-                                                    <label for="exampleDataList" class="form-label">Seleccione el
+                                                    <label for="DataListActivos" class="form-label">Seleccione el
                                                         activo</label>
                                                     <input formControlName="activo" (change)="onActivoSelect($event)"
-                                                        class="form-control" list="datalistOptions" id="exampleDataList"
+                                                        class="form-control" list="datalistOptions" id="DataListActivos"
                                                         placeholder="Escriba para buscar">
                                                     <datalist id="datalistOptions">
                                                         <option *ngFor="let activo of listaActivos"
@@ -126,8 +126,8 @@
                                                 </div>
 
                                                 <div class="col-md-6 ">
-                                                    <label for="start">Fecha de ejecución:</label><br>
-                                                    <input formControlName="fecha_ejecucion" type="datetime-local"
+                                                    <label for="fecha_ejecucion">Fecha de ejecución:</label><br>
+                                                    <input id="fecha_ejecucion" formControlName="fecha_ejecucion" type="datetime-local"
                                                         name="horareunion">
 
                                                     <div *ngIf="form_servicio.get('fecha_ejecucion')?.hasError('required') && (submitted)"
@@ -227,10 +227,10 @@
                                             <div class="row p-1">
 
                                                 <div class="col-md-6 ">
-                                                    <label for="exampleDataList" class="form-label">Seleccione el
+                                                    <label for="DataListEdit" class="form-label">Seleccione el
                                                         activo</label>
                                                     <input formControlName="activo" (change)="onActivoSelect($event)"
-                                                        class="form-control" list="datalistActivos" id="exampleDataList"
+                                                        class="form-control" list="datalistActivos" id="DataListEdit"
                                                         placeholder="Escriba para buscar">
                                                     <datalist id="datalistActivos">
                                                         <option *ngFor="let activo of listaActivos"
@@ -307,8 +307,8 @@
                                                 </div>
 
                                                 <div class="col-md-6 ">
-                                                    <label for="start">Fecha de ejecución:</label><br>
-                                                    <input formControlName="fecha_ejecucion" type="datetime-local"
+                                                    <label for="fecha_ejecucion_edit">Fecha de ejecución:</label><br>
+                                                    <input id="fecha_ejecucion_edit" formControlName="fecha_ejecucion" type="datetime-local"
                                                         name="horareunion">
 
                                                     <div *ngIf="form_servicio.get('fecha_ejecucion')?.hasError('required') && (submitted)"

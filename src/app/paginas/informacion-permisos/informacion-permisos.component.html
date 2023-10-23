@@ -149,7 +149,7 @@
 
                                         <div class="row p-1">
                                             <div class="col-md-6 ">
-                                                <label class="form-label">Seleccione el tipo de servicio</label>
+                                                <label for="select_tipo_servicio" class="form-label">Seleccione el tipo de servicio</label>
                                                 <select formControlName="tipo_de_servicio"
                                                     class="form-select form-select" aria-label=".form-select-sm example"
                                                     id="select_tipo_servicio">
@@ -206,9 +206,9 @@
                                             </div>
 
                                             <div class="col-md-6 ">
-                                                <label for="start">Fecha de ejecución:</label><br>
-                                                <input formControlName="fecha_ejecucion" type="datetime-local"
-                                                    name="horareunion">
+                                                <label for="fecha_ejecucion">Fecha de ejecución:</label><br>
+                                                <input id="fecha_ejecucion" formControlName="fecha_ejecucion" type="datetime-local"
+                                                    >
 
                                                 <div *ngIf="form_servicio.get('fecha_ejecucion')?.hasError('required') && (submitted)"
                                                     class="alert alert-primary" role="alert">

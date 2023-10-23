@@ -55,10 +55,10 @@
                                         <form [formGroup]="form_registrar_permiso">
                                             <div class="row p-1">
                                                 <div class="col-md-6 ">
-                                                    <label for="exampleDataList" class="form-label">Seleccione el
+                                                    <label for="DataListActivos" class="form-label">Seleccione el
                                                         activo:</label>
                                                     <input (change)="onActivoSelect($event)" formControlName="activo"
-                                                        class="form-control" list="datalistactivos" id="exampleDataList"
+                                                        class="form-control" list="datalistactivos" id="DataListActivos"
                                                         placeholder="Escriba para buscar">
                                                     <datalist id="datalistactivos">
                                                         <option *ngFor="let activo of listaActivos"
@@ -69,18 +69,18 @@
                                                     <div *ngIf="form_registrar_permiso.get('activo')?.hasError('required') && (submitted)"
                                                         class="alert alert-primary" role="alert">
                                                         <i class="fi fi-br-exclamation"></i>
-                                                        La descripcion es requerida.
+                                                        El activo es requerido.
                                                     </div>
 
 
                                                 </div>
 
                                                 <div class="col-md-6 ">
-                                                    <label for="exampleDataList" class="form-label">Seleccione el
+                                                    <label for="datalistusuarios" class="form-label">Seleccione el
                                                         usuario:</label>
                                                     <input formControlName="usuario" (change)="onUsuarioSelect($event)"
                                                         class="form-control" list="datalistusuarios"
-                                                        id="exampleDataList" placeholder="Escriba para buscar">
+                                                        id="datalistusuarios" placeholder="Escriba para buscar">
                                                     <datalist id="datalistusuarios">
                                                         <option *ngFor="let usuario of listaUsuarios"
                                                             [value]="usuario.correo">{{usuario.nombre}}</option>
@@ -89,7 +89,7 @@
                                                     <div *ngIf="form_registrar_permiso.get('usuario')?.hasError('required') && (submitted)"
                                                         class="alert alert-primary" role="alert">
                                                         <i class="fi fi-br-exclamation"></i>
-                                                        La descripcion es requerida.
+                                                        El usuario es requerido.
                                                     </div>
                                                 </div>
                                             </div>
