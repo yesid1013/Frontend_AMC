@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Activo } from 'src/app/interfaces/activo';
 import { Permiso, Permisos_recibidos } from 'src/app/interfaces/permiso';
@@ -11,6 +11,9 @@ import { RegistroServicio, ServicioDeActivo } from 'src/app/interfaces/servicio'
 import { ServicioService } from 'src/app/servicios/servicio/servicio.service';
 import { Novedad, Registro_novedad } from 'src/app/interfaces/novedad';
 import { NovedadService } from 'src/app/servicios/novedad/novedad.service';
+import { ADTSettings } from 'angular-datatables/src/models/settings';
+import { Subject } from 'rxjs';
+import { DataTableDirective } from 'angular-datatables';
 
 
 
@@ -25,7 +28,7 @@ export class InformacionPermisosComponent {
   permisoId: string | null = null;
   permisoData: Permiso | null = null;
   ServicioData: ServicioDeActivo[] = [];
-  NovedadData : Novedad[] = [];
+  NovedadData: Novedad[] = [];
   activoData: Activo | null = null;
   loading: boolean = false;
   isOpen = false;
@@ -42,6 +45,16 @@ export class InformacionPermisosComponent {
   fileName: string | null = null;
   fileMimeType: string | null = null;
   fileContent: string | null = null;
+
+  dtOptions: ADTSettings = {};
+  dtTrigger: Subject<any> = new Subject;
+  @ViewChild(DataTableDirective, { static: false })
+  dtElement!: DataTableDirective;
+
+  dtOptions2: ADTSettings = {};
+  dtTrigger2: Subject<any> = new Subject;
+  @ViewChild(DataTableDirective, { static: false })
+  dtElement2!: DataTableDirective;
 
   // Formulario de registrar servicio
   form_servicio: FormGroup = this.fb.group({
@@ -67,7 +80,17 @@ export class InformacionPermisosComponent {
     this.route.paramMap.subscribe(params => {
       this.permisoId = params.get('id_permiso');
     });
+
     this.obtener_permiso();
+
+    this.dtOptions = {
+      language: { url: '//cdn.datatables.net/plug-ins/1.13.4/i18n/es-ES.json' }
+    };
+
+    this.dtOptions2 = {
+      language: { url: '//cdn.datatables.net/plug-ins/1.13.4/i18n/es-ES.json' }
+    };
+
     this.communicationService.sidebarOpen$.subscribe(isOpen => {
       this.isOpen = isOpen;
     });
@@ -121,7 +144,7 @@ export class InformacionPermisosComponent {
       if (this.ver_historial_servicios === 1) {
         this.obtener_servicios()
       }
-      if (this.ver_novedades === 1){
+      if (this.ver_novedades === 1) {
         this.obtener_novedades();
       }
     });
@@ -172,6 +195,10 @@ export class InformacionPermisosComponent {
           }).then((result) => {
             if (result.isConfirmed) {
               this.submitted = false;
+              this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {  //Renderizar datatable
+                dtInstance.destroy();
+                this.obtener_servicios();
+              });
 
             }
           });
@@ -185,6 +212,7 @@ export class InformacionPermisosComponent {
   obtener_servicios() { //obtiene el historial de servicios del activo
     this.servicio_service.obtener_servicio(this.id_activo).subscribe(data => {
       this.ServicioData = data;
+      this.dtTrigger.next(null);
     })
 
   }
@@ -199,10 +227,10 @@ export class InformacionPermisosComponent {
           cargo: value.cargo,
           descripcion_reporte: value.descripcion_reporte,
 
-          imagenes : {
-            name :this.fileName,
-            content : this.fileContent,
-            mimeType : this.fileMimeType
+          imagenes: {
+            name: this.fileName,
+            content: this.fileContent,
+            mimeType: this.fileMimeType
           }
         }
 
@@ -223,6 +251,10 @@ export class InformacionPermisosComponent {
           }).then((result) => {
             if (result.isConfirmed) {
               this.submitted = false;
+              this.dtElement2.dtInstance.then((dtInstance: DataTables.Api) => {  //Renderizar datatable
+                dtInstance.destroy();
+                this.obtener_novedades();
+              });
             }
           });
 
@@ -233,10 +265,11 @@ export class InformacionPermisosComponent {
     }
   }
 
-  obtener_novedades(){
+  obtener_novedades() {
     this.novedad_service.novedades_de_un_activo(this.id_activo).subscribe(data => {
-      if (data != null){
+      if (data != null) {
         this.NovedadData = data;
+        this.dtTrigger2.next(null);
       }
     })
   }

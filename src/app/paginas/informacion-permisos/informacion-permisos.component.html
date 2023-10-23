@@ -73,7 +73,7 @@
 
                         <div class="transition-height" [ngClass]="{'colapsada': isTablaHistorialColapsada}">
                             <!-- Tabla de Historial de Servicios -->
-                            <table class="table">
+                            <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table">
                                 <thead>
                                     <tr>
                                         <th scope="col">ID SERV.</th>
@@ -108,7 +108,7 @@
                         </button>
 
                         <div class="transition-height" [ngClass]="{'colapsada': isTablaNovedadesColapsada}">
-                            <table class="table">
+                            <table datatable [dtOptions]="dtOptions2" [dtTrigger]="dtTrigger2"  class="table">
                                 <thead>
                                     <tr>
                                         <th>Fecha</th>
