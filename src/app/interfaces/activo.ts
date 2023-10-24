@@ -37,6 +37,7 @@ export interface Activo {
     };
 
     id_subcliente: string;
+    publico : number;
   }
 
   export interface Editar_activo {

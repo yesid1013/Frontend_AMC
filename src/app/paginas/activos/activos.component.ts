@@ -56,7 +56,8 @@ export class ActivosComponent {
     num_serie: this.fb.control(null, []),
     datos_relevantes: this.fb.control(null, []),
     imagen_equipo: this.fb.control(null),
-    subcliente: this.fb.control(null, [Validators.required])
+    subcliente: this.fb.control(null, [Validators.required]),
+    publico: this.fb.control(0,[Validators.required])
   });
 
   // Formulario de editar activo
@@ -150,7 +151,9 @@ export class ActivosComponent {
           name: this.imageName,
           mimeType: this.imageMimeType,
           content: this.imageContent
-        }
+        },
+
+        publico : value.publico
       };
 
       Swal.fire({
