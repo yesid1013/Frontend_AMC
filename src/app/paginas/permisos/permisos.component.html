@@ -76,11 +76,11 @@
                                                 </div>
 
                                                 <div class="col-md-6 ">
-                                                    <label for="datalistusuarios" class="form-label">Seleccione el
+                                                    <label for="Datalistusuarios" class="form-label">Seleccione el
                                                         usuario:</label>
                                                     <input formControlName="usuario" (change)="onUsuarioSelect($event)"
                                                         class="form-control" list="datalistusuarios"
-                                                        id="datalistusuarios" placeholder="Escriba para buscar">
+                                                        id="Datalistusuarios" placeholder="Escriba para buscar">
                                                     <datalist id="datalistusuarios">
                                                         <option *ngFor="let usuario of listaUsuarios"
                                                             [value]="usuario.correo">{{usuario.nombre}}</option>
@@ -96,7 +96,7 @@
 
                                             <div class="row p-1">
                                                 <div class="col-md-6 ">
-                                                    <label for="">Ver información basica:</label>
+                                                    <label for="flexRadioDefault1">Ver información basica:</label>
                                                     <div class="form-check">
                                                         <input formControlName="ver_informacion_basica"
                                                             class="form-check-input" [value]="1" type="radio"
@@ -122,12 +122,12 @@
                                                 </div>
 
                                                 <div class="col-md-6 ">
-                                                    <label for="">Ver historial de servicios:</label>
+                                                    <label for="flexRadioDefault3">Ver historial de servicios:</label>
                                                     <div class="form-check">
                                                         <input formControlName="ver_historial_servicios"
                                                             class="form-check-input" [value]="1" type="radio"
                                                             id="flexRadioDefault3">
-                                                        <label class="form-check-label" for="flexRadioDefault1">
+                                                        <label class="form-check-label" for="flexRadioDefault3">
                                                             Sí
                                                         </label>
                                                     </div>
@@ -135,7 +135,7 @@
                                                         <input formControlName="ver_historial_servicios"
                                                             class="form-check-input" [value]="0" type="radio"
                                                             id="flexRadioDefault4" checked>
-                                                        <label class="form-check-label" for="flexRadioDefault2">
+                                                        <label class="form-check-label" for="flexRadioDefault4">
                                                             No
                                                         </label>
                                                     </div>
@@ -152,11 +152,11 @@
 
                                             <div class="row p-1">
                                                 <div class="col-md-6 ">
-                                                    <label for="">Ver Novedades:</label>
+                                                    <label for="flexRadioDefault5">Ver Novedades:</label>
                                                     <div class="form-check">
                                                         <input formControlName="ver_novedades" class="form-check-input"
                                                             [value]="1" type="radio" id="flexRadioDefault5">
-                                                        <label class="form-check-label" for="flexRadioDefault1">
+                                                        <label class="form-check-label" for="flexRadioDefault5">
                                                             Sí
                                                         </label>
                                                     </div>
@@ -164,7 +164,7 @@
                                                         <input formControlName="ver_novedades" class="form-check-input"
                                                             [value]="0" type="radio" name="ver_novedades"
                                                             id="flexRadioDefault6" checked>
-                                                        <label class="form-check-label" for="flexRadioDefault2">
+                                                        <label class="form-check-label" for="flexRadioDefault6">
                                                             No
                                                         </label>
                                                     </div>
@@ -177,12 +177,12 @@
                                                 </div>
 
                                                 <div class="col-md-6 ">
-                                                    <label for="">Registrar servicio:</label>
+                                                    <label for="flexRadioDefault7">Registrar servicio:</label>
                                                     <div class="form-check">
                                                         <input formControlName="registrar_servicio"
                                                             class="form-check-input" [value]="1" type="radio"
                                                             id="flexRadioDefault7">
-                                                        <label class="form-check-label" for="flexRadioDefault1">
+                                                        <label class="form-check-label" for="flexRadioDefault7">
                                                             Sí
                                                         </label>
                                                     </div>
@@ -190,7 +190,7 @@
                                                         <input formControlName="registrar_servicio"
                                                             class="form-check-input" [value]="0" type="radio"
                                                             name="registrar_servicio" id="flexRadioDefault8" checked>
-                                                        <label class="form-check-label" for="flexRadioDefault2">
+                                                        <label class="form-check-label" for="flexRadioDefault8">
                                                             No
                                                         </label>
                                                     </div>
@@ -206,11 +206,11 @@
 
                                             <div class="row p-1">
                                                 <div class="col-md-6 ">
-                                                    <label for="">Registrar Novedad:</label>
+                                                    <label for="flexRadioDefault9">Registrar Novedad:</label>
                                                     <div class="form-check">
                                                         <input formControlName="registrar_novedad"
                                                             class="form-check-input" [value]="1" type="radio"
-                                                            name="registrar_novedad" id="flexRadioDefault8">
+                                                            name="registrar_novedad" id="flexRadioDefault9">
                                                         <label class="form-check-label" for="flexRadioDefault1">
                                                             Sí
                                                         </label>
@@ -218,7 +218,7 @@
                                                     <div class="form-check">
                                                         <input formControlName="registrar_novedad"
                                                             class="form-check-input" [value]="0" type="radio"
-                                                            name="registrar_novedad" id="flexRadioDefault9" checked>
+                                                            name="registrar_novedad" id="flexRadioDefault10" checked>
                                                         <label class="form-check-label" for="flexRadioDefault2">
                                                             No
                                                         </label>
@@ -314,10 +314,10 @@
                                         <form [formGroup]="form_editar_permiso">
                                             <div class="row p-1">
                                                 <div class="col-md-6 ">
-                                                    <label for="exampleDataList" class="form-label">Seleccione el
+                                                    <label for="DatalistActivos" class="form-label">Seleccione el
                                                         activo:</label>
                                                     <input (change)="onActivoSelect($event)" formControlName="activo"
-                                                        class="form-control" list="datalistactivos" id="exampleDataList"
+                                                        class="form-control" list="datalistactivos" id="DatalistActivos"
                                                         placeholder="Escriba para buscar">
                                                     <datalist id="datalistactivos">
                                                         <option *ngFor="let activo of listaActivos"
@@ -327,11 +327,11 @@
                                                 </div>
 
                                                 <div class="col-md-6 ">
-                                                    <label for="exampleDataList" class="form-label">Seleccione el
+                                                    <label for="Datalistusuarios" class="form-label">Seleccione el
                                                         usuario:</label>
                                                     <input formControlName="usuario" (change)="onUsuarioSelect($event)"
                                                         class="form-control" list="datalistusuarios"
-                                                        id="exampleDataList" placeholder="Escriba para buscar">
+                                                        id="Datalistusuarios" placeholder="Escriba para buscar">
                                                     <datalist id="datalistusuarios">
                                                         <option *ngFor="let usuario of listaUsuarios"
                                                             [value]="usuario.correo">{{usuario.nombre}}</option>
@@ -341,7 +341,7 @@
 
                                             <div class="row p-1">
                                                 <div class="col-md-6 ">
-                                                    <label for="">Ver información basica:</label>
+                                                    <label for="flexRadioDefault1">Ver información basica:</label>
                                                     <div class="form-check">
                                                         <input formControlName="ver_informacion_basica"
                                                             class="form-check-input" [value]="1" type="radio"
@@ -362,7 +362,7 @@
                                                 </div>
 
                                                 <div class="col-md-6 ">
-                                                    <label for="">Ver historial de servicios:</label>
+                                                    <label for="flexRadioDefault3">Ver historial de servicios:</label>
                                                     <div class="form-check">
                                                         <input formControlName="ver_historial_servicios"
                                                             class="form-check-input" [value]="1" type="radio"
@@ -386,7 +386,7 @@
 
                                             <div class="row p-1">
                                                 <div class="col-md-6 ">
-                                                    <label for="">Ver Novedades:</label>
+                                                    <label for="flexRadioDefault5">Ver Novedades:</label>
                                                     <div class="form-check">
                                                         <input formControlName="ver_novedades" class="form-check-input"
                                                             [value]="1" type="radio" id="flexRadioDefault5">
@@ -405,7 +405,7 @@
                                                 </div>
 
                                                 <div class="col-md-6 ">
-                                                    <label for="">Registrar servicio:</label>
+                                                    <label for="flexRadioDefault7">Registrar servicio:</label>
                                                     <div class="form-check">
                                                         <input formControlName="registrar_servicio"
                                                             class="form-check-input" [value]="1" type="radio"
@@ -428,11 +428,11 @@
 
                                             <div class="row p-1">
                                                 <div class="col-md-6 ">
-                                                    <label for="">Registrar Novedad:</label>
+                                                    <label for="flexRadioDefault9">Registrar Novedad:</label>
                                                     <div class="form-check">
                                                         <input formControlName="registrar_novedad"
                                                             class="form-check-input" [value]="1" type="radio"
-                                                            name="registrar_novedad" id="flexRadioDefault8">
+                                                            name="registrar_novedad" id="flexRadioDefault9">
                                                         <label class="form-check-label" for="flexRadioDefault1">
                                                             Sí
                                                         </label>
@@ -440,7 +440,7 @@
                                                     <div class="form-check">
                                                         <input formControlName="registrar_novedad"
                                                             class="form-check-input" [value]="0" type="radio"
-                                                            name="registrar_novedad" id="flexRadioDefault9" checked>
+                                                            name="registrar_novedad" id="flexRadioDefault10" checked>
                                                         <label class="form-check-label" for="flexRadioDefault2">
                                                             No
                                                         </label>
