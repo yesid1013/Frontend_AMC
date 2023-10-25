@@ -70,7 +70,8 @@ export class ActivosComponent {
     modelo: this.fb.control(null, []),
     num_serie: this.fb.control(null, []),
     datos_relevantes: this.fb.control(null, []),
-    subcliente: this.fb.control(null, [Validators.required])
+    subcliente: this.fb.control(null, [Validators.required]),
+    publico: this.fb.control(0,[Validators.required])
   });
 
   ngOnInit(): void {
@@ -205,8 +206,8 @@ export class ActivosComponent {
       modelo: activo['modelo'],
       num_serie: activo['num_serie'],
       datos_relevantes: activo['datos_relevantes'],
-      subcliente: activo['id_subcliente']
-
+      subcliente: activo['id_subcliente'],
+      publico : activo['publico']
     });
     this.id_activo = activo.id_activo;
 
@@ -233,6 +234,7 @@ export class ActivosComponent {
               num_serie: value.num_serie,
               datos_relevantes: value.datos_relevantes,
               id_subcliente: value.subcliente,
+              publico : value.publico,
 
               imagen_equipo: {
                 name: this.imageName,

@@ -495,6 +495,30 @@
 
                                             </div>
 
+                                            <div class="row p-1">
+                                                <label for="">Activo publico:</label>
+                                                <div class="form-check">
+                                                    <input formControlName="publico" class="form-check-input"
+                                                        [value]="1" type="radio" id="flexRadioDefault1">
+                                                    <label class="form-check-label" for="flexRadioDefault1">
+                                                        Sí
+                                                    </label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input formControlName="publico" class="form-check-input"
+                                                        [value]="0" type="radio" id="flexRadioDefault2" checked>
+                                                    <label class="form-check-label" for="flexRadioDefault2">
+                                                        No
+                                                    </label>
+                                                </div>
+
+                                                <div *ngIf="form_edit_activo.get('publico')?.hasError('required') && (submitted)"
+                                                    class="alert alert-primary" role="alert">
+                                                    <i class="fi fi-br-exclamation"></i>
+                                                    El campo publico es requerido.
+                                                </div>
+                                            </div>
+
                                         </form>
 
                                     </div>
