@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { Activo } from 'src/app/interfaces/activo';
 import { Usuarios } from 'src/app/interfaces/usuario';
 import { ActivoService } from 'src/app/servicios/activo/activo.service';
@@ -8,6 +8,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { PermisosService } from 'src/app/servicios/permisos/permisos.service';
 import { Editar_permiso, Permisos_creados, Registrar_permiso } from 'src/app/interfaces/permiso';
 import Swal from 'sweetalert2';
+import { ADTSettings } from 'angular-datatables/src/models/settings';
+import { Subject } from 'rxjs';
+import { DataTableDirective } from 'angular-datatables';
 
 
 
@@ -29,6 +32,14 @@ export class PermisosComponent {
   listaUsuarios: Usuarios[] = [];
   listaPermisosCreados: Permisos_creados[] = [];
   submitted = false;
+
+  // DataTable
+  dtOptions: ADTSettings = {};
+  dtTrigger: Subject<any> = new Subject;
+  @ViewChild(DataTableDirective, { static: false })
+  dtElement!: DataTableDirective;
+
+
 
   constructor(private communicationService: ComunicationService, private activo_service: ActivoService, private usuario_service : UsuarioService,private fb: FormBuilder, private permisos_service : PermisosService){}
 
@@ -61,6 +72,9 @@ export class PermisosComponent {
     this.obtener_permisos_creados();
     this.obtener_activos();
     this.obtener_usuarios();
+    this.dtOptions = {
+      language: { url: '//cdn.datatables.net/plug-ins/1.13.4/i18n/es-ES.json' }
+    };
   }
 
   obtener_activos() { //Para mostrar los activos en el formulario
@@ -78,9 +92,9 @@ export class PermisosComponent {
   obtener_permisos_creados(){
     this.permisos_service.permisos_creados().subscribe(data => {
       if (data == null){
-        console.log("");
       } else {
         this.listaPermisosCreados = data;
+        this.dtTrigger.next(null);
       }
       
     })
@@ -225,7 +239,11 @@ export class PermisosComponent {
         this.permisos_service.eliminar_permiso(id_permiso).subscribe({
           next: (data) => {
             Swal.fire('Permiso eliminado', '', 'success');
-            this.obtener_permisos_creados();
+            this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {  //Renderizar datatable
+              dtInstance.destroy();
+              this.obtener_permisos_creados();
+            });
+            
           }
         })
       }
