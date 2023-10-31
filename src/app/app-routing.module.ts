@@ -72,7 +72,7 @@ const routes: Routes = [
   },
   {
 
-    path: 'detalle-activo',
+    path: 'qr_info_activo',
     component : QRInfoActivoComponent
   }
 
