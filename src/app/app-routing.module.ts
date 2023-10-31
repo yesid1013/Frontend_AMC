@@ -13,6 +13,7 @@ import { PermisosComponent } from './paginas/permisos/permisos.component';
 import { PermisosRecibidosComponent } from './paginas/permisos-recibidos/permisos-recibidos.component';
 import { InformacionPermisosComponent } from './paginas/informacion-permisos/informacion-permisos.component';
 import { QRInfoActivoComponent } from './qrinfo-activo/qrinfo-activo.component';
+import { DetalleActivoComponent } from './paginas/detalle-activo/detalle-activo.component';
 
 
 const routes: Routes = [
@@ -74,6 +75,10 @@ const routes: Routes = [
 
     path: 'qr_info_activo',
     component : QRInfoActivoComponent
+  },
+  {
+    path : 'detalle_activo/:id_activo',
+    component : DetalleActivoComponent
   }
 
 ];
