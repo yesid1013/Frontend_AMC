@@ -12,6 +12,7 @@ import { CostoServicioComponent } from './paginas/costo-servicio/costo-servicio.
 import { PermisosComponent } from './paginas/permisos/permisos.component';
 import { PermisosRecibidosComponent } from './paginas/permisos-recibidos/permisos-recibidos.component';
 import { InformacionPermisosComponent } from './paginas/informacion-permisos/informacion-permisos.component';
+import { QRInfoActivoComponent } from './qrinfo-activo/qrinfo-activo.component';
 
 
 const routes: Routes = [
@@ -68,6 +69,11 @@ const routes: Routes = [
     path : 'informacion_permisos/:id_permiso',
     component : InformacionPermisosComponent,
     canActivate : [AuthGuard]
+  },
+  {
+
+    path: 'detalle-activo',
+    component : QRInfoActivoComponent
   }
 
 ];
