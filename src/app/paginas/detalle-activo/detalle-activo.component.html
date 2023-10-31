@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,6 +13,7 @@
     <!-- Icon Font Stylesheet -->
     <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/uicons-bold-rounded/css/uicons-bold-rounded.css'>
 </head>
+
 <body>
     <!-- pagina para ver la informacion del activo al dar clic al boton ver mas -->
     <div class="container-xxl position-relative bg-white d-flex p-0">
@@ -25,12 +27,66 @@
             <!-- Contenido -->
             <div class="container-fluid pt-4 px-4">
                 <div class="bg-light rounded h-100">
+                    <div class="text-center mb-4">
+                        <h2>Información técnica</h2>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-4">
+                            <p><strong class="mx-2">ID #1:</strong>{{activoData?.id_primario}}</p>
+                            <p><strong class="mx-2">ID #2:</strong>{{activoData?.id_secundario}}</p>
+                            <p><strong class="mx-2">TIPO DE ACTIVO:</strong>{{activoData?.tipo_de_equipo}}</p>
+                            <p><strong class="mx-2">FABRICANTE:</strong>{{activoData?.fabricante}}</p>
+                            <p><strong class="mx-2">MODELO:</strong>{{activoData?.modelo}}</p>
+                            <p><strong class="mx-2">#SERIE</strong>{{activoData?.num_serie}}</p>
+                            <p><strong class="mx-2">UBICACIÓN:</strong>{{activoData?.ubicacion}}</p>
+                        </div>
+
+                        <!-- Columna Derecha (Imagen) -->
+                        <div class="col-md-6 text-center">
+                            <img src={{activoData?.imagen_equipo}} width="300px" height="300px" alt="Imagen del Activo"
+                                class="img-fluid mx-auto d-block">
+                        </div>
+                    </div>
+
+                    <button data-bs-toggle="modal" data-bs-target="#Modal_registar_servicio" class="btn_ficha mb-2"><i
+                            class="fi fi-br-document me-2"></i>Adjuntar ficha técnica</button>
+
+                    <div class="text-center mb-4">
+                        <h2>Historial de Servicios</h2>
+                    </div>
+
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">ID SERV.</th>
+                                <th scope="col">FECHA EJECUCIÓN</th>
+                                <th scope="col">RESPONSABLE DE SERVICIO</th>
+                                <th scope="col">TIPO DE SERVICIO</th>
+                                <th scope="col">DESCRIPCIÓN</th>
+                                <th scope="col">INFORME</th>
+                                <th scope="col">COSTO</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let servicio of ServicioData">
+                                <td>{{servicio.numero_servicio}}</td>
+                                <td>{{servicio.fecha_ejecucion}}</td>
+                                <td>{{servicio.nombre_usuario}}</td>
+                                <td>{{servicio.tipo}}</td>
+                                <td>{{servicio.descripcion}}</td>
+                                
+                            </tr>
+                        </tbody>
+                    </table>
+
 
                 </div>
             </div>
 
         </div>
     </div>
-    
+
 </body>
+
 </html>

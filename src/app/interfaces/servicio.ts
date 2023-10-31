@@ -18,11 +18,12 @@ export interface ServicioDeActivo {
     descripcion:     string;
     fecha_ejecucion: string;
     id_servicio:     string;
-    informe:         null;
+    informe:         string;
     nombre_usuario:  string;
     numero_servicio: number;
     observaciones:   string;
     tipo:            string;
+    costo : string;
 }
 
 ////////////////////
