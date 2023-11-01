@@ -119,8 +119,8 @@
                                     </a>
 
                                     <!--Boton de adjuntar costo-->
-                                    <button *ngIf="!servicio.costo" data-bs-toggle="modal"
-                                        data-bs-target="#Modal_editar_activo" class="btn_opciones">
+                                    <button (click)="obtener_id_servicio(servicio)" *ngIf="!servicio.costo" data-bs-toggle="modal"
+                                        data-bs-target="#Modal_adjuntar_cotizacion" class="btn_opciones">
                                         <svg xmlns="http://www.w3.org/2000/svg"
                                             class="icon icon-tabler icon-tabler-paperclip" width="24" height="24"
                                             viewBox="0 0 24 24" stroke-width="1.5" stroke="#009988" fill="none"
@@ -150,7 +150,7 @@
                                     <div class="mb-3">
                                         <form [formGroup]="form_informe_servicio">
                                             <label for="formFile" class="form-label">Seleccione el archivo</label>
-                                            <input (change)="onFileSelectedInforme($event)" formControlName="informe"
+                                            <input (change)="onFileSelected($event)" formControlName="informe"
                                                 accept="application/pdf" class="form-control" type="file" id="formFile">
 
                                             <div *ngIf="form_informe_servicio.get('informe')?.hasError('required') && (submitted)"
@@ -164,7 +164,62 @@
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary"
                                         data-bs-dismiss="modal">Cerrar</button>
-                                    <button type="button" class="btn btn-primary" (click)="adjuntar_informe()">Adjuntar</button>
+                                    <button type="button" class="btn btn-primary"
+                                        (click)="adjuntar_informe()">Adjuntar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Modal adjuntar costo -->
+                    <div class="modal fade" id="Modal_adjuntar_cotizacion" tabindex="-1"
+                        aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Adjunar cotización</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="mb-3">
+                                        <form [formGroup]="form_costo_servicio">
+                                            <div class="row p-1">
+                                                <div class="col-md-6 ">
+                                                    <label for="">Ingrese el costo</label>
+                                                    <input formControlName="costo" type="number">
+
+                                                    <div *ngIf="form_costo_servicio.get('costo')?.hasError('required') && (submitted)"
+                                                        class="alert alert-primary" role="alert">
+                                                        <i class="fi fi-br-exclamation"></i>
+                                                        El costo es requerido.
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-6 ">
+                                                    <label for="formFile" class="form-label">Seleccione la
+                                                        cotización</label>
+                                                    <input formControlName="cotizacion"
+                                                        (change)="onFileSelected($event)" accept="application/pdf"
+                                                        class="form-control" type="file" id="formFile">
+
+                                                    <div *ngIf="form_costo_servicio.get('cotizacion')?.hasError('required') && (submitted)"
+                                                        class="alert alert-primary" role="alert">
+                                                        <i class="fi fi-br-exclamation"></i>
+                                                        El archivo es requerido.
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+                                        </form>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary"
+                                        data-bs-dismiss="modal">Cerrar</button>
+                                    <button  type="button"
+                                        class="btn btn-primary" (click)="adjuntar_cotizacion(form_costo_servicio.value)">Adjuntar</button>
                                 </div>
                             </div>
                         </div>
