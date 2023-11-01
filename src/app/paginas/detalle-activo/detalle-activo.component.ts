@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Activo } from 'src/app/interfaces/activo';
 import { Adjuntar_cotizacion, Adjuntar_informe_servicio, ServicioDeActivo } from 'src/app/interfaces/servicio';
@@ -8,6 +8,9 @@ import { ServicioService } from 'src/app/servicios/servicio/servicio.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
 import { CostoServicioService } from 'src/app/servicios/costo_servicio/costo-servicio.service';
+import { ADTSettings } from 'angular-datatables/src/models/settings';
+import { Subject } from 'rxjs';
+import { DataTableDirective } from 'angular-datatables';
 
 
 @Component({
@@ -22,6 +25,12 @@ export class DetalleActivoComponent {
   submitted = false;
   activoData: Activo | null = null;
   ServicioData: ServicioDeActivo[] = [];
+
+  // DataTable
+  dtOptions: ADTSettings = {};
+  dtTrigger: Subject<any> = new Subject;
+  @ViewChild(DataTableDirective, { static: false })
+  dtElement!: DataTableDirective;
 
   selectedFile: File | null = null;
   imageName: string | null = null;
@@ -46,6 +55,10 @@ export class DetalleActivoComponent {
     this.obtener_activo();
     this.obtener_servicios();
 
+    this.dtOptions = {
+      language: { url: '//cdn.datatables.net/plug-ins/1.13.4/i18n/es-ES.json' }
+    };
+
     this.communicationService.sidebarOpen$.subscribe(isOpen => {
       this.isOpen = isOpen;
     });
@@ -60,6 +73,7 @@ export class DetalleActivoComponent {
   obtener_servicios() { //obtiene el historial de servicios del activo
     this.servicio_service.obtener_servicio(this.id_activo).subscribe(data => {
       this.ServicioData = data;
+      this.dtTrigger.next(null);
     })
 
   }
@@ -129,7 +143,10 @@ export class DetalleActivoComponent {
                 footer: `<a href="${data.url_archivo}" target="_blank">Ver informe</a>`
               }).then((result) => {
                 if (result.isConfirmed) {
-                  this.obtener_servicios();
+                  this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {  //Renderizar datatable
+                    dtInstance.destroy();
+                    this.obtener_servicios();
+                  });
                 }
                 this.submitted = false;
               });
@@ -181,7 +198,10 @@ export class DetalleActivoComponent {
                 footer: `<a href="${data.url_archivo}" target="_blank">Ver Cotización</a>`
               }).then((result) => {
                 if (result.isConfirmed) {
-                  this.obtener_servicios()
+                  this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {  //Renderizar datatable
+                    dtInstance.destroy();
+                    this.obtener_servicios();
+                  });
                 }
                 this.submitted = false;
               });
