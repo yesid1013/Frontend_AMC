@@ -75,7 +75,9 @@
                                 <td>{{servicio.nombre_usuario}}</td>
                                 <td>{{servicio.tipo}}</td>
                                 <td>{{servicio.descripcion}}</td>
-                                <td><a class="btn_opciones" *ngIf="servicio.informe" target="_blank"
+                                <td>
+                                    <!--Boton de ver informe-->
+                                    <a class="btn_opciones" *ngIf="servicio.informe" target="_blank"
                                         href={{servicio.informe}}>
                                         <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-eye"
                                             width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5"
@@ -87,7 +89,9 @@
                                         </svg>
                                     </a>
 
-                                    <button *ngIf="!servicio.informe" data-bs-toggle="modal" data-bs-target="#Modal_editar_activo"
+                                    <!--Boton de adjuntar informe-->
+                                    <button (click)="obtener_id_servicio(servicio)" *ngIf="!servicio.informe"
+                                        data-bs-toggle="modal" data-bs-target="#Modal_adjuntar_ficha"
                                         class="btn_opciones">
                                         <svg xmlns="http://www.w3.org/2000/svg"
                                             class="icon icon-tabler icon-tabler-paperclip" width="24" height="24"
@@ -101,6 +105,7 @@
                                 </td>
 
                                 <td>
+                                    <!--Boton de ver costo-->
                                     <a class="btn_opciones" *ngIf="servicio.costo" target="_blank"
                                         href={{servicio.costo}}>
                                         <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-eye"
@@ -113,8 +118,9 @@
                                         </svg>
                                     </a>
 
-                                    <button *ngIf="!servicio.costo" data-bs-toggle="modal" data-bs-target="#Modal_editar_activo"
-                                        class="btn_opciones">
+                                    <!--Boton de adjuntar costo-->
+                                    <button *ngIf="!servicio.costo" data-bs-toggle="modal"
+                                        data-bs-target="#Modal_editar_activo" class="btn_opciones">
                                         <svg xmlns="http://www.w3.org/2000/svg"
                                             class="icon icon-tabler icon-tabler-paperclip" width="24" height="24"
                                             viewBox="0 0 24 24" stroke-width="1.5" stroke="#009988" fill="none"
@@ -129,6 +135,40 @@
                             </tr>
                         </tbody>
                     </table>
+
+                    <!-- Modal adjuntar informe -->
+                    <div class="modal fade" id="Modal_adjuntar_ficha" tabindex="-1" aria-labelledby="exampleModalLabel"
+                        aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Adjunar informe</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="mb-3">
+                                        <form [formGroup]="form_informe_servicio">
+                                            <label for="formFile" class="form-label">Seleccione el archivo</label>
+                                            <input (change)="onFileSelectedInforme($event)" formControlName="informe"
+                                                accept="application/pdf" class="form-control" type="file" id="formFile">
+
+                                            <div *ngIf="form_informe_servicio.get('informe')?.hasError('required') && (submitted)"
+                                                class="alert alert-primary" role="alert">
+                                                <i class="fi fi-br-exclamation"></i>
+                                                El archivo es requerido.
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary"
+                                        data-bs-dismiss="modal">Cerrar</button>
+                                    <button type="button" class="btn btn-primary" (click)="adjuntar_informe()">Adjuntar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
 
                 </div>
