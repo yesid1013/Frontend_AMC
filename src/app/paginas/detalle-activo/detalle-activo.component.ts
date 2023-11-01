@@ -26,7 +26,7 @@ export class DetalleActivoComponent {
       this.id_activo = params.get('id_activo');
     });
     this.obtener_activo();
-    this.obtener_servicios()
+    this.obtener_servicios();
 
     this.communicationService.sidebarOpen$.subscribe(isOpen => {
       this.isOpen = isOpen;
