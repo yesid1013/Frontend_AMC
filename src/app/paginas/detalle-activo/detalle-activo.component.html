@@ -49,8 +49,12 @@
                         </div>
                     </div>
 
-                    <button data-bs-toggle="modal" data-bs-target="#Modal_registar_servicio" class="btn_ficha mb-2"><i
+                    <button *ngIf="!activoData?.ficha_tecnica" data-bs-toggle="modal"
+                        data-bs-target="#Modal_adjuntar_ficha" class="btn_ficha mb-2"><i
                             class="fi fi-br-document me-2"></i>Adjuntar ficha técnica</button>
+
+                    <a *ngIf="activoData?.ficha_tecnica" href={{activoData?.ficha_tecnica}} target="_blank"
+                        class="btn_ficha mb-2"><i class="fi fi-br-document me-2"></i>Ver ficha técnica</a>
 
                     <div class="text-center mb-4">
                         <h2>Historial de Servicios</h2>
@@ -91,7 +95,7 @@
 
                                     <!--Boton de adjuntar informe-->
                                     <button (click)="obtener_id_servicio(servicio)" *ngIf="!servicio.informe"
-                                        data-bs-toggle="modal" data-bs-target="#Modal_adjuntar_ficha"
+                                        data-bs-toggle="modal" data-bs-target="#Modal_adjuntar_informe"
                                         class="btn_opciones">
                                         <svg xmlns="http://www.w3.org/2000/svg"
                                             class="icon icon-tabler icon-tabler-paperclip" width="24" height="24"
@@ -119,8 +123,9 @@
                                     </a>
 
                                     <!--Boton de adjuntar costo-->
-                                    <button (click)="obtener_id_servicio(servicio)" *ngIf="!servicio.costo" data-bs-toggle="modal"
-                                        data-bs-target="#Modal_adjuntar_cotizacion" class="btn_opciones">
+                                    <button (click)="obtener_id_servicio(servicio)" *ngIf="!servicio.costo"
+                                        data-bs-toggle="modal" data-bs-target="#Modal_adjuntar_cotizacion"
+                                        class="btn_opciones">
                                         <svg xmlns="http://www.w3.org/2000/svg"
                                             class="icon icon-tabler icon-tabler-paperclip" width="24" height="24"
                                             viewBox="0 0 24 24" stroke-width="1.5" stroke="#009988" fill="none"
@@ -137,7 +142,7 @@
                     </table>
 
                     <!-- Modal adjuntar informe -->
-                    <div class="modal fade" id="Modal_adjuntar_ficha" tabindex="-1" aria-labelledby="exampleModalLabel"
+                    <div class="modal fade" id="Modal_adjuntar_informe" tabindex="-1" aria-labelledby="exampleModalLabel"
                         aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="modal-content">
@@ -218,8 +223,44 @@
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary"
                                         data-bs-dismiss="modal">Cerrar</button>
-                                    <button  type="button"
-                                        class="btn btn-primary" (click)="adjuntar_cotizacion(form_costo_servicio.value)">Adjuntar</button>
+                                    <button type="button" class="btn btn-primary"
+                                        (click)="adjuntar_cotizacion(form_costo_servicio.value)">Adjuntar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Modal adjuntar ficha tecnica -->
+                    <div class="modal fade" id="Modal_adjuntar_ficha" tabindex="-1" aria-labelledby="exampleModalLabel"
+                        aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Adjunar ficha técnica</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="mb-3">
+                                        <form [formGroup]="form_ficha_tecnica">
+                                            <label for="formFile" class="form-label">Seleccione el archivo</label>
+                                            <input formControlName="ficha_tecnica" (change)="onFileSelected($event)"
+                                                accept="application/pdf" class="form-control" type="file" id="formFile">
+
+                                            <div *ngIf="form_ficha_tecnica.get('ficha_tecnica')?.hasError('required') && (submitted)"
+                                                class="alert alert-primary" role="alert">
+                                                <i class="fi fi-br-exclamation"></i>
+                                                El archivo es requerido.
+                                            </div>
+                                        </form>
+
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary"
+                                        data-bs-dismiss="modal">Cerrar</button>
+                                    <button (click)="adjuntar_ficha_tecnica(form_ficha_tecnica.value)" type="button"
+                                        class="btn btn-primary">Adjuntar</button>
                                 </div>
                             </div>
                         </div>

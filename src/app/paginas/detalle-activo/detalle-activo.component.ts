@@ -1,6 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Activo } from 'src/app/interfaces/activo';
+import { Activo, Adjuntar_ficha_tecnica } from 'src/app/interfaces/activo';
 import { Adjuntar_cotizacion, Adjuntar_informe_servicio, ServicioDeActivo } from 'src/app/interfaces/servicio';
 import { ActivoService } from 'src/app/servicios/activo/activo.service';
 import { ComunicationService } from 'src/app/servicios/comunication.service';
@@ -19,7 +19,7 @@ import { DataTableDirective } from 'angular-datatables';
   styleUrls: ['./detalle-activo.component.css']
 })
 export class DetalleActivoComponent {
-  id_activo: string | null = null;
+  id_activo: any = null;
   id_servicio: any = null;
   isOpen = false;
   submitted = false;
@@ -37,7 +37,7 @@ export class DetalleActivoComponent {
   imageMimeType: string | null = null;
   imageContent: string | null = null;
 
-  constructor(private route: ActivatedRoute,private communicationService: ComunicationService,private activoService: ActivoService,private servicio_service: ServicioService,private fb: FormBuilder,private costo_servicio_service : CostoServicioService){}
+  constructor(private route: ActivatedRoute,private communicationService: ComunicationService,private activoService: ActivoService,private servicio_service: ServicioService,private fb: FormBuilder,private costo_servicio_service : CostoServicioService,private activo_service: ActivoService){}
 
   form_informe_servicio: FormGroup = this.fb.group({
     informe: this.fb.control(null, [Validators.required])
@@ -46,6 +46,10 @@ export class DetalleActivoComponent {
   form_costo_servicio: FormGroup = this.fb.group({
     costo: this.fb.control(null,[Validators.required]),
     cotizacion: this.fb.control(null,[Validators.required])
+  });
+
+  form_ficha_tecnica: FormGroup = this.fb.group({
+    ficha_tecnica: this.fb.control(null, [Validators.required])
   });
 
   ngOnInit(){
@@ -212,6 +216,62 @@ export class DetalleActivoComponent {
 
         }
       })
+
+    }
+  }
+
+  adjuntar_ficha_tecnica(value: any) {
+    this.submitted = true;
+    if (this.form_ficha_tecnica.valid) {
+      Swal.fire({
+        title: '¿Estás seguro de adjuntar esta ficha tecnica?',
+        showDenyButton: true,
+        confirmButtonText: 'Adjuntar',
+        denyButtonText: `Cancelar`,
+      }).then((result) => {
+        if (result.isConfirmed) {
+          const ficha_tecnica: Adjuntar_ficha_tecnica = {
+            ficha_tecnica: {
+              name: this.imageName,
+              mimeType: this.imageMimeType,
+              content: this.imageContent
+            }
+          }
+
+          Swal.fire({
+            title: 'Cargando...',
+            allowOutsideClick: false,  // Impide que el usuario cierre el diálogo haciendo clic fuera
+            didOpen: () => {
+              Swal.showLoading();  // Muestra el spinner
+            }
+          });
+
+          this.activo_service.adjuntar_ficha_tecnica(this.id_activo, ficha_tecnica).subscribe({
+            next: (data) => {
+              Swal.close();
+              Swal.fire({
+                icon: 'success',
+                title: 'Servicio exitoso',
+                text: 'Ficha técnica adjuntada correctamente',
+                allowOutsideClick: false,
+                footer: `<a href="${data.url_archivo}" target="_blank">Ver ficha técnica</a>`
+              }).then((result) => {
+                if (result.isConfirmed) {
+                  this.obtener_activo()
+                }
+                this.submitted = false;
+              });
+
+            }
+          }
+          );
+
+        }
+      })
+
+
+
+
 
     }
   }
