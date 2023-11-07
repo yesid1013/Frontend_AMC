@@ -31,24 +31,15 @@
                 <div class="bg-light rounded h-100">
                     <h1 class="h3 mb-4 text-gray-800">Activos</h1>
 
-                    <div class="row">
-                        <div class="col-md-2 pe-0">
-                            <!-- Button trigger modal -->
-                            <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                data-bs-target="#Modal_registar_activo">
-                                <i class="fas fa-plus-circle"></i> Registrar activo
-                            </button>
-                        </div>
+                    <button class="btn_register mx-2 mb-2" data-bs-toggle="modal"
+                        data-bs-target="#Modal_registar_activo"><i class="fi fi-br-add me-2"></i>Registrar
+                        activo</button>
 
-                        <div class="col-md-2
-                        ">
-                            <!-- Segundo botón -->
-                            <button type="button" (click)="listar_activos_eliminados()" class="btn btn-primary"
-                                data-bs-toggle="modal" data-bs-target="#ModalActivosEliminados">
-                                <i class="fi fi-br-time-delete me-2"></i>Activos eliminados
-                            </button>
-                        </div>
-                    </div>
+                    <button class="btn_register mx-2 mb-2" [routerLink]="'/permisos_recibidos'" ><i class="fi fi-br-devices me-2"></i>Compartido conmigo</button>
+
+                    <button (click)="listar_activos_eliminados()" class="btn_register mx-2 mb-2" data-bs-toggle="modal"
+                        data-bs-target="#ModalActivosEliminados"><i class="fi fi-br-time-delete me-2"></i>Activos
+                        eliminados</button>
 
                     <div class="col-md-2 pe-0">
 
@@ -341,7 +332,8 @@
                                             </svg>
                                         </button>
 
-                                        <button class="btn_opciones" [routerLink]="['/detalle_activo', activo.id_activo]" >
+                                        <button class="btn_opciones"
+                                            [routerLink]="['/detalle_activo', activo.id_activo]">
                                             <svg xmlns="http://www.w3.org/2000/svg"
                                                 class="icon icon-tabler icon-tabler-eye" width="24" height="24"
                                                 viewBox="0 0 24 24" stroke-width="1.5" stroke="#00abfb" fill="none"
