@@ -304,6 +304,7 @@
                                     <td>{{activo.tipo_de_equipo}}</td>
                                     <td>{{activo.fecha_registro}}</td>
                                     <td>
+                                        <!--Boton editar activo-->
                                         <button (click)="set_form_edit_activo(activo)" data-bs-toggle="modal"
                                             data-bs-target="#Modal_editar_activo" class="btn_opciones">
                                             <svg xmlns="http://www.w3.org/2000/svg"
@@ -317,7 +318,8 @@
                                                 <path d="M16 5l3 3" />
                                             </svg>
                                         </button>
-
+                                        
+                                        <!--Boton eliminar activo-->
                                         <button (click)="eliminar_activo(activo.id_activo)" class="btn_opciones">
                                             <svg xmlns="http://www.w3.org/2000/svg"
                                                 class="icon icon-tabler icon-tabler-trash" width="24" height="24"
@@ -332,6 +334,7 @@
                                             </svg>
                                         </button>
 
+                                        <!--Boton ver activo-->
                                         <button class="btn_opciones"
                                             [routerLink]="['/detalle_activo', activo.id_activo]">
                                             <svg xmlns="http://www.w3.org/2000/svg"
