@@ -9,6 +9,10 @@ import { FormBuilder, FormControl, FormGroup, Validator, Validators } from '@ang
 import { SubclienteService } from 'src/app/servicios/subcliente/subcliente.service';
 import { Subcliente } from 'src/app/interfaces/subcliente';
 import Swal from 'sweetalert2';
+import { Usuarios } from 'src/app/interfaces/usuario';
+import { Registrar_permiso } from 'src/app/interfaces/permiso';
+import { PermisosService } from 'src/app/servicios/permisos/permisos.service';
+import { UsuarioService } from 'src/app/servicios/usuario/usuario.service';
 
 @Component({
   selector: 'app-activos',
@@ -28,9 +32,12 @@ export class ActivosComponent {
   info_ficha_tecnica: string = ""
   info_codigo_qr: string = "";
   id_activo: any = null;
+  selectedUsuarioId: string = '';
+  seEjecuto_UsuarioSelect = false;
   listaActivos: Activo[] = [];
   listaActivosEliminados: Activo[] = [];
   listaSubclientes: Subcliente[] = [];
+  listaUsuarios: Usuarios[] = [];
 
   selectedFile: File | null = null;
   imageName: string | null = null;
@@ -43,7 +50,7 @@ export class ActivosComponent {
   @ViewChild(DataTableDirective, { static: false })
   dtElement!: DataTableDirective;
 
-  constructor(private communicationService: ComunicationService, private activo_service: ActivoService, private fb: FormBuilder, private subclienteService: SubclienteService) { }
+  constructor(private communicationService: ComunicationService, private activo_service: ActivoService, private fb: FormBuilder, private subclienteService: SubclienteService,private permisos_service : PermisosService,private usuario_service : UsuarioService) { }
 
   // Formulario de registrar activo
   form_activo: FormGroup = this.fb.group({
@@ -74,6 +81,15 @@ export class ActivosComponent {
     publico: this.fb.control(0,[Validators.required])
   });
 
+  form_registrar_permiso: FormGroup = this.fb.group({
+    usuario: this.fb.control('', [Validators.required]),
+    ver_informacion_basica: this.fb.control(0,[Validators.required]),
+    ver_historial_servicios: this.fb.control(0,[Validators.required]),
+    ver_novedades: this.fb.control(0,[Validators.required]),
+    registrar_servicio: this.fb.control(0,[Validators.required]),
+    registrar_novedad: this.fb.control(0,[Validators.required])
+  });
+
   ngOnInit(): void {
     this.listar_activos();
     this.dtOptions = {
@@ -83,6 +99,7 @@ export class ActivosComponent {
       this.isOpen = isOpen;
     });
     this.listar_subclientes();
+    this.obtener_usuarios();
   }
 
   listar_activos() {
@@ -324,6 +341,67 @@ export class ActivosComponent {
         });
       }
     })
+  }
+
+  obtener_usuarios(){
+    this.usuario_service.listar_usuarios().subscribe(data => {
+      this.listaUsuarios = data;
+    })
+  }
+
+  onUsuarioSelect(event: Event) { //Para saber el id_usuario seleccionado en el datalist del formulario de registro
+    const selectedText = (event.target as HTMLInputElement).value;
+    const selectedOption = this.listaUsuarios.find(usuario => usuario.correo === selectedText);
+
+    if (selectedOption) {
+      this.selectedUsuarioId = selectedOption.id_usuario;
+      this.seEjecuto_UsuarioSelect = true; // Se ejecutó la función
+    }
+  }
+
+  obtener_id_activo(activo : Activo){
+    this.id_activo = activo.id_activo;
+  }
+
+  registrar_permiso(value : any){
+    this.submitted = true;
+    if(this.form_registrar_permiso.valid){
+      Swal.fire({
+        title: '¿Estas seguro de compartir este activo?',
+        showDenyButton: true,
+        confirmButtonText: 'Compartir',
+        denyButtonText: `Cancelar`,
+      }).then((result) => {
+        if (result.isConfirmed) {
+          const permiso : Registrar_permiso = {
+            id_activo : this.id_activo,
+            id_usuario : this.selectedUsuarioId,
+            ver_informacion_basica : value.ver_informacion_basica,
+            ver_historial_servicios : value.ver_historial_servicios,
+            ver_novedades : value.ver_novedades,
+            registrar_servicio : value.registrar_servicio,
+            registrar_novedad : value.registrar_novedad
+          }
+
+          this.permisos_service.registrar_permiso(permiso).subscribe(data => {
+            this.submitted = false;
+            Swal.fire({
+              icon: 'success',
+              title: 'Registro exitoso',
+              text: 'Permiso creado correctamente',
+              allowOutsideClick: false,
+            }).then((result) => {
+              if (result.isConfirmed) {
+              }
+            });
+          })
+
+        }
+
+      })
+      
+    }
+
   }
 
 }
