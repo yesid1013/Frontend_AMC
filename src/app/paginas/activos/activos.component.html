@@ -583,68 +583,6 @@
                             </div>
                         </div>
 
-                        <!-- Modal ver mas -->
-                        <div class="modal fade" id="Modal_ver_mas" tabindex="-1" aria-labelledby="exampleModalLabel"
-                            aria-hidden="true">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">Información de activo</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                            aria-label="Close"></button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <!-- Mostrar la imagen de portada del activo centrada -->
-                                        <img loading="lazy" id="imagenPortadaActivo" src={{info_imagen}} width="200px"
-                                            height="200px" alt="Imagen de Portada" class="img-fluid mx-auto d-block">
-                                        <div class="row mt-3">
-                                            <div class="col-md-12">
-                                                <!-- Mostrar el número de serie del activo -->
-                                                <h6>Cliente:</h6>
-                                                <p>{{info_subcliente}}</p>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <!-- Mostrar el modelo del activo -->
-                                                <h6>Modelo:</h6>
-                                                <p>{{info_modelo}}</p>
-                                            </div>
-                                            <div class="col-md-12">
-                                                <!-- Mostrar el fabricante del activo -->
-                                                <h6>Fabricante:</h6>
-                                                <p>{{info_fabricante}}</p>
-                                            </div>
-                                            <div class="col-md-12">
-                                                <!-- Mostrar el número de serie del activo -->
-                                                <h6>Número de Serie:</h6>
-                                                <p>{{info_num_serie}}</p>
-                                            </div>
-                                            <div class="col-md-12">
-                                                <!-- Mostrar el número de serie del activo -->
-                                                <h6>Datos relevantes:</h6>
-                                                <p>{{info_datos_relevantes}}</p>
-                                            </div>
-                                            <div class="col-md-12">
-                                                <!-- Mostrar el número de serie del activo -->
-                                                <h6>Ubicacion:</h6>
-                                                <p>{{info_ubicacion}}</p>
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary"
-                                            data-bs-dismiss="modal">Cerrar</button>
-                                        <a *ngIf="info_ficha_tecnica" href={{info_ficha_tecnica}} target="_blank"
-                                            rel="noopener noreferrer" type="button" class="btn btn-primary"><i
-                                                class="fi fi-br-document me-2"></i>Ver ficha técnica</a>
-                                        <a href={{info_codigo_qr}} target="_blank" rel="noopener noreferrer"
-                                            type="button" class="btn btn-primary"><i class="fas fa-qrcode me-2"></i>Ver
-                                            código QR</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
                         <!-- Modal compartir activo o dar permisos -->
                         <div class="modal fade" id="Modal_compartir_activo" tabindex="-1"
                             aria-labelledby="exampleModalLabel" aria-hidden="true">

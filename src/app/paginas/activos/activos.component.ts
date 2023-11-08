@@ -115,17 +115,6 @@ export class ActivosComponent {
     });
   }
 
-  ver_mas(subcliente: string, modelo: string, fabricante: string, num_serie: string, datos_relevantes: string, ubicacion: string, imagen: string, ficha_tecnica: string, codigo_qr: string) {
-    this.info_imagen = imagen;
-    this.info_subcliente = subcliente;
-    this.info_modelo = modelo;
-    this.info_fabricante = fabricante;
-    this.info_num_serie = num_serie;
-    this.info_datos_relevantes = datos_relevantes;
-    this.info_ubicacion = ubicacion;
-    this.info_ficha_tecnica = ficha_tecnica;
-    this.info_codigo_qr = codigo_qr;
-  }
 
   onFileSelected(event: any) {
     const file = event.target.files[0];
