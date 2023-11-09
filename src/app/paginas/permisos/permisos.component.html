@@ -70,7 +70,7 @@
                                         <p *ngIf="permiso.registrar_novedad == 1; else elseRegistrarNovedad">Si</p>
                                         <ng-template #elseRegistrarNovedad>No</ng-template>
                                     </td>
-                                    <td><button  type="button"
+                                    <td><button type="button" (click)="set_form_edit_permisos(permiso)"
                                             class="btn btn-success" data-bs-toggle="modal"
                                             data-bs-target="#Modal_editar_permisos">
                                             <i class="fi fi-br-edit me-2"></i>Editar
@@ -94,19 +94,7 @@
                                     <div class="modal-body">
                                         <form [formGroup]="form_editar_permiso">
                                             <div class="row p-1">
-                                                <div class="col-md-6 ">
-                                                    <label for="DatalistActivos" class="form-label">Seleccione el
-                                                        activo:</label>
-                                                    <input (change)="onActivoSelect($event)" formControlName="activo"
-                                                        class="form-control" list="datalistactivos" id="DatalistActivos"
-                                                        placeholder="Escriba para buscar">
-                                                    <datalist id="datalistactivos">
-                                                        <option *ngFor="let activo of listaActivos"
-                                                            [value]="activo.id_primario">{{activo.tipo_de_equipo}}
-                                                        </option>
-                                                    </datalist>
-                                                </div>
-
+                                                
                                                 <div class="col-md-6 ">
                                                     <label for="Datalistusuarios" class="form-label">Seleccione el
                                                         usuario:</label>

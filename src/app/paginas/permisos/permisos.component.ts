@@ -57,7 +57,6 @@ export class PermisosComponent {
   });
 
   form_editar_permiso: FormGroup = this.fb.group({
-    activo: this.fb.control('', [Validators.required]),
     usuario: this.fb.control('', [Validators.required]),
     ver_informacion_basica: this.fb.control(0,[Validators.required]),
     ver_historial_servicios: this.fb.control(0,[Validators.required]),
@@ -73,6 +72,7 @@ export class PermisosComponent {
       this.id_activo = params.get('id_activo');
     });
     this.obtener_permisos_de_activo();
+    this.obtener_usuarios();
     this.communicationService.sidebarOpen$.subscribe(isOpen => {
       this.isOpen = isOpen;
     });
@@ -112,11 +112,7 @@ export class PermisosComponent {
   }
 
   
-  set_form_edit_permisos(permiso : Permisos_creados){
-    const selectedOptionActivo = this.listaActivos.find(activo => activo.id_primario === permiso.activo_id_primario);
-    if (selectedOptionActivo) {
-      this.edit_activo_id = selectedOptionActivo.id_activo;
-    }
+  set_form_edit_permisos(permiso : PermisosDeActivo){
 
     const selectedOptionUsuario = this.listaUsuarios.find(usuario => usuario.correo === permiso.usuario_correo);
     if (selectedOptionUsuario) {
@@ -124,7 +120,6 @@ export class PermisosComponent {
     }
 
     this.form_editar_permiso.setValue({
-      activo : permiso.activo_id_primario,
       usuario : permiso.usuario_correo,
       ver_informacion_basica : permiso.ver_informacion_basica,
       ver_historial_servicios : permiso.ver_historial_servicios,
@@ -199,15 +194,11 @@ export class PermisosComponent {
           denyButtonText: `Cancelar`,
         }).then((result => {
           if (result.isConfirmed){
-            if (this.seEjecuto_ActivoSelect){
-              this.edit_activo_id = this.selectedActivoId;
-            }
             if(this.seEjecuto_UsuarioSelect){
               this.edit_usuario_id = this.selectedUsuarioId;
             }
 
             const editar_permiso : Editar_permiso ={
-              id_activo : this.edit_activo_id,
               id_usuario : this.edit_usuario_id,
               ver_informacion_basica : value.ver_informacion_basica,
               ver_historial_servicios : value.ver_historial_servicios,
@@ -224,9 +215,11 @@ export class PermisosComponent {
                 allowOutsideClick: false,
               }).then((result) => {
                 if (result.isConfirmed) {
-                  this.seEjecuto_ActivoSelect = false;
+                  this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {  //Renderizar datatable
+                    dtInstance.destroy();
+                    this.obtener_permisos_de_activo();
+                  });
                   this.seEjecuto_UsuarioSelect = false;
-                  this.obtener_permisos_creados();
                 }
               });
             })
