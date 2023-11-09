@@ -57,7 +57,7 @@ const routes: Routes = [
     component: SpinnerComponent
   },
   {
-    path : 'permisos',
+    path : 'permisos/:id_activo',
     component : PermisosComponent,
     canActivate : [AuthGuard]
   },

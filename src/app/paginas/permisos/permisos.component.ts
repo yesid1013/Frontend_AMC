@@ -6,11 +6,12 @@ import { ComunicationService } from 'src/app/servicios/comunication.service';
 import { UsuarioService } from 'src/app/servicios/usuario/usuario.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { PermisosService } from 'src/app/servicios/permisos/permisos.service';
-import { Editar_permiso, Permisos_creados, Registrar_permiso } from 'src/app/interfaces/permiso';
+import { Editar_permiso, PermisosDeActivo, Permisos_creados, Registrar_permiso } from 'src/app/interfaces/permiso';
 import Swal from 'sweetalert2';
 import { ADTSettings } from 'angular-datatables/src/models/settings';
 import { Subject } from 'rxjs';
 import { DataTableDirective } from 'angular-datatables';
+import { ActivatedRoute } from '@angular/router';
 
 
 
@@ -21,6 +22,7 @@ import { DataTableDirective } from 'angular-datatables';
 })
 export class PermisosComponent {
   id_permiso: any = null;
+  id_activo: any = null;
   edit_activo_id : string = "";
   edit_usuario_id : string = "";
   selectedActivoId: string = '';
@@ -31,6 +33,7 @@ export class PermisosComponent {
   listaActivos: Activo[] = [];
   listaUsuarios: Usuarios[] = [];
   listaPermisosCreados: Permisos_creados[] = [];
+  listaPermisosDeActivo: PermisosDeActivo[] = []
   submitted = false;
 
   // DataTable
@@ -41,7 +44,7 @@ export class PermisosComponent {
 
 
 
-  constructor(private communicationService: ComunicationService, private activo_service: ActivoService, private usuario_service : UsuarioService,private fb: FormBuilder, private permisos_service : PermisosService){}
+  constructor(private communicationService: ComunicationService, private activo_service: ActivoService, private usuario_service : UsuarioService,private fb: FormBuilder, private permisos_service : PermisosService,private route: ActivatedRoute){}
 
   form_registrar_permiso: FormGroup = this.fb.group({
     activo: this.fb.control('', [Validators.required]),
@@ -66,15 +69,23 @@ export class PermisosComponent {
   
 
   ngOnInit(){
+    this.route.paramMap.subscribe(params => {
+      this.id_activo = params.get('id_activo');
+    });
+    this.obtener_permisos_de_activo();
     this.communicationService.sidebarOpen$.subscribe(isOpen => {
       this.isOpen = isOpen;
     });
-    this.obtener_permisos_creados();
-    this.obtener_activos();
-    this.obtener_usuarios();
     this.dtOptions = {
       language: { url: '//cdn.datatables.net/plug-ins/1.13.4/i18n/es-ES.json' }
     };
+  }
+
+  obtener_permisos_de_activo(){
+    this.permisos_service.permisos_de_activo(this.id_activo).subscribe(data => {
+      this.listaPermisosDeActivo = data;
+      this.dtTrigger.next(null);
+    })
   }
 
   obtener_activos() { //Para mostrar los activos en el formulario

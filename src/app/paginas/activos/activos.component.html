@@ -35,7 +35,8 @@
                         data-bs-target="#Modal_registar_activo"><i class="fi fi-br-add me-2"></i>Registrar
                         activo</button>
 
-                    <button class="btn_register mx-2 mb-2" [routerLink]="'/permisos_recibidos'" ><i class="fi fi-br-devices me-2"></i>Compartido conmigo</button>
+                    <button class="btn_register mx-2 mb-2" [routerLink]="'/permisos_recibidos'"><i
+                            class="fi fi-br-devices me-2"></i>Compartido conmigo</button>
 
                     <button (click)="listar_activos_eliminados()" class="btn_register mx-2 mb-2" data-bs-toggle="modal"
                         data-bs-target="#ModalActivosEliminados"><i class="fi fi-br-time-delete me-2"></i>Activos
@@ -318,7 +319,7 @@
                                                 <path d="M16 5l3 3" />
                                             </svg>
                                         </button>
-                                        
+
                                         <!--Boton eliminar activo-->
                                         <button (click)="eliminar_activo(activo.id_activo)" class="btn_opciones">
                                             <svg xmlns="http://www.w3.org/2000/svg"
@@ -351,16 +352,32 @@
 
                                     <td>
                                         <!--Boton de compartir activo-->
-                                        <button class="btn_opciones" (click)="obtener_id_activo(activo)" data-bs-toggle="modal"
-                                        data-bs-target="#Modal_compartir_activo">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-share" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                                <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                        <button class="btn_opciones" (click)="obtener_id_activo(activo)"
+                                            data-bs-toggle="modal" data-bs-target="#Modal_compartir_activo">
+                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                class="icon icon-tabler icon-tabler-share" width="24" height="24"
+                                                viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none"
+                                                stroke-linecap="round" stroke-linejoin="round">
+                                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                                                 <path d="M6 12m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0" />
                                                 <path d="M18 6m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0" />
                                                 <path d="M18 18m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0" />
                                                 <path d="M8.7 10.7l6.6 -3.4" />
                                                 <path d="M8.7 13.3l6.6 3.4" />
-                                              </svg>
+                                            </svg>
+                                        </button>
+                                        
+                                        <!--Boton de ver permisos-->
+                                        <button class="btn_opciones" [routerLink]="['/permisos',activo.id_activo]">
+                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                class="icon icon-tabler icon-tabler-eye" width="24" height="24"
+                                                viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none"
+                                                stroke-linecap="round" stroke-linejoin="round">
+                                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                                <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+                                                <path
+                                                    d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6" />
+                                            </svg>
                                         </button>
                                     </td>
                                     <!-- <td><button type="button" class="btn btn-success"

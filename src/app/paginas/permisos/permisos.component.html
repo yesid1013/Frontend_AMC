@@ -29,230 +29,12 @@
                 <div class="bg-light rounded h-100">
                     <h1 class="h3 mb-4 text-gray-800">Permisos</h1>
 
-                    <div class="row">
-                        <div class="col-md-2 pe-0">
-                            <!-- Button trigger modal -->
-                            <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                data-bs-target="#Modal_compartir_activo">
-                                <i class="fi fi-br-user-add me-2"></i>Compartir activo
-                            </button>
-                        </div>
-
-                    </div>
-
-                    <div class="col-md-2 pe-0">
-                        <!-- Modal compartir activo o dar permisos -->
-                        <div class="modal fade" id="Modal_compartir_activo" tabindex="-1"
-                            aria-labelledby="exampleModalLabel" aria-hidden="true">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">Compartir activo</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                            aria-label="Close"></button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <form [formGroup]="form_registrar_permiso">
-                                            <div class="row p-1">
-                                                <div class="col-md-6 ">
-                                                    <label for="DataListActivos" class="form-label">Seleccione el
-                                                        activo:</label>
-                                                    <input (change)="onActivoSelect($event)" formControlName="activo"
-                                                        class="form-control" list="datalistactivos" id="DataListActivos"
-                                                        placeholder="Escriba para buscar">
-                                                    <datalist id="datalistactivos">
-                                                        <option *ngFor="let activo of listaActivos"
-                                                            [value]="activo.id_primario">{{activo.tipo_de_equipo}}
-                                                        </option>
-                                                    </datalist>
-
-                                                    <div *ngIf="form_registrar_permiso.get('activo')?.hasError('required') && (submitted)"
-                                                        class="alert alert-primary" role="alert">
-                                                        <i class="fi fi-br-exclamation"></i>
-                                                        El activo es requerido.
-                                                    </div>
-
-
-                                                </div>
-
-                                                <div class="col-md-6 ">
-                                                    <label for="Datalistusuarios" class="form-label">Seleccione el
-                                                        usuario:</label>
-                                                    <input formControlName="usuario" (change)="onUsuarioSelect($event)"
-                                                        class="form-control" list="datalistusuarios"
-                                                        id="Datalistusuarios" placeholder="Escriba para buscar">
-                                                    <datalist id="datalistusuarios">
-                                                        <option *ngFor="let usuario of listaUsuarios"
-                                                            [value]="usuario.correo">{{usuario.nombre}}</option>
-                                                    </datalist>
-
-                                                    <div *ngIf="form_registrar_permiso.get('usuario')?.hasError('required') && (submitted)"
-                                                        class="alert alert-primary" role="alert">
-                                                        <i class="fi fi-br-exclamation"></i>
-                                                        El usuario es requerido.
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="row p-1">
-                                                <div class="col-md-6 ">
-                                                    <label for="flexRadioDefault1">Ver información basica:</label>
-                                                    <div class="form-check">
-                                                        <input formControlName="ver_informacion_basica"
-                                                            class="form-check-input" [value]="1" type="radio"
-                                                            id="flexRadioDefault1">
-                                                        <label class="form-check-label" for="flexRadioDefault1">
-                                                            Sí
-                                                        </label>
-                                                    </div>
-                                                    <div class="form-check">
-                                                        <input formControlName="ver_informacion_basica"
-                                                            class="form-check-input" [value]="0" type="radio"
-                                                            id="flexRadioDefault2" checked>
-                                                        <label class="form-check-label" for="flexRadioDefault2">
-                                                            No
-                                                        </label>
-                                                    </div>
-                                                    <div *ngIf="form_registrar_permiso.get('ver_informacion_basica')?.hasError('required') && (submitted)"
-                                                        class="alert alert-primary" role="alert">
-                                                        <i class="fi fi-br-exclamation"></i>
-                                                        La descripcion es requerida.
-                                                    </div>
-
-                                                </div>
-
-                                                <div class="col-md-6 ">
-                                                    <label for="flexRadioDefault3">Ver historial de servicios:</label>
-                                                    <div class="form-check">
-                                                        <input formControlName="ver_historial_servicios"
-                                                            class="form-check-input" [value]="1" type="radio"
-                                                            id="flexRadioDefault3">
-                                                        <label class="form-check-label" for="flexRadioDefault3">
-                                                            Sí
-                                                        </label>
-                                                    </div>
-                                                    <div class="form-check">
-                                                        <input formControlName="ver_historial_servicios"
-                                                            class="form-check-input" [value]="0" type="radio"
-                                                            id="flexRadioDefault4" checked>
-                                                        <label class="form-check-label" for="flexRadioDefault4">
-                                                            No
-                                                        </label>
-                                                    </div>
-
-                                                    <div *ngIf="form_registrar_permiso.get('ver_historial_servicios')?.hasError('required') && (submitted)"
-                                                        class="alert alert-primary" role="alert">
-                                                        <i class="fi fi-br-exclamation"></i>
-                                                        La descripcion es requerida.
-                                                    </div>
-
-                                                </div>
-
-                                            </div>
-
-                                            <div class="row p-1">
-                                                <div class="col-md-6 ">
-                                                    <label for="flexRadioDefault5">Ver Novedades:</label>
-                                                    <div class="form-check">
-                                                        <input formControlName="ver_novedades" class="form-check-input"
-                                                            [value]="1" type="radio" id="flexRadioDefault5">
-                                                        <label class="form-check-label" for="flexRadioDefault5">
-                                                            Sí
-                                                        </label>
-                                                    </div>
-                                                    <div class="form-check">
-                                                        <input formControlName="ver_novedades" class="form-check-input"
-                                                            [value]="0" type="radio" name="ver_novedades"
-                                                            id="flexRadioDefault6" checked>
-                                                        <label class="form-check-label" for="flexRadioDefault6">
-                                                            No
-                                                        </label>
-                                                    </div>
-
-                                                    <div *ngIf="form_registrar_permiso.get('ver_novedades')?.hasError('required') && (submitted)"
-                                                        class="alert alert-primary" role="alert">
-                                                        <i class="fi fi-br-exclamation"></i>
-                                                        La descripcion es requerida.
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-md-6 ">
-                                                    <label for="flexRadioDefault7">Registrar servicio:</label>
-                                                    <div class="form-check">
-                                                        <input formControlName="registrar_servicio"
-                                                            class="form-check-input" [value]="1" type="radio"
-                                                            id="flexRadioDefault7">
-                                                        <label class="form-check-label" for="flexRadioDefault7">
-                                                            Sí
-                                                        </label>
-                                                    </div>
-                                                    <div class="form-check">
-                                                        <input formControlName="registrar_servicio"
-                                                            class="form-check-input" [value]="0" type="radio"
-                                                            name="registrar_servicio" id="flexRadioDefault8" checked>
-                                                        <label class="form-check-label" for="flexRadioDefault8">
-                                                            No
-                                                        </label>
-                                                    </div>
-
-                                                    <div *ngIf="form_registrar_permiso.get('registrar_servicio')?.hasError('required') && (submitted)"
-                                                        class="alert alert-primary" role="alert">
-                                                        <i class="fi fi-br-exclamation"></i>
-                                                        La descripcion es requerida.
-                                                    </div>
-                                                </div>
-
-                                            </div>
-
-                                            <div class="row p-1">
-                                                <div class="col-md-6 ">
-                                                    <label for="flexRadioDefault9">Registrar Novedad:</label>
-                                                    <div class="form-check">
-                                                        <input formControlName="registrar_novedad"
-                                                            class="form-check-input" [value]="1" type="radio"
-                                                            name="registrar_novedad" id="flexRadioDefault9">
-                                                        <label class="form-check-label" for="flexRadioDefault1">
-                                                            Sí
-                                                        </label>
-                                                    </div>
-                                                    <div class="form-check">
-                                                        <input formControlName="registrar_novedad"
-                                                            class="form-check-input" [value]="0" type="radio"
-                                                            name="registrar_novedad" id="flexRadioDefault10" checked>
-                                                        <label class="form-check-label" for="flexRadioDefault2">
-                                                            No
-                                                        </label>
-                                                    </div>
-
-                                                    <div *ngIf="form_registrar_permiso.get('registrar_novedad')?.hasError('required') && (submitted)"
-                                                        class="alert alert-primary" role="alert">
-                                                        <i class="fi fi-br-exclamation"></i>
-                                                        La descripcion es requerida.
-                                                    </div>
-                                                </div>
-
-                                            </div>
-
-                                        </form>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary"
-                                            data-bs-dismiss="modal">Cerrar</button>
-                                        <button type="button" class="btn btn-primary"
-                                            (click)="registrar_permiso(form_registrar_permiso.value)">Compartir</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
 
                     <div class="col-12 pt-4">
                         <h6 class="mb-4">Historial de permisos</h6>
                         <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table table-striped">
                             <thead>
                                 <tr>
-                                    <th scope="col">Activo</th>
                                     <th scope="col">Usuario</th>
                                     <th scope="col">Información básica</th>
                                     <th scope="col">Historial de servicios</th>
@@ -264,9 +46,8 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr *ngFor="let permiso of listaPermisosCreados">
-                                    <td>{{permiso.activo}}</td>
-                                    <td>{{permiso.usuario}}</td>
+                                <tr *ngFor="let permiso of listaPermisosDeActivo">
+                                    <td>{{permiso.usuario_correo}}</td>
                                     <td>
                                         <p *ngIf="permiso.ver_informacion_basica == 1; else elseInformacion">Si</p>
                                         <ng-template #elseInformacion>No</ng-template>
@@ -289,7 +70,7 @@
                                         <p *ngIf="permiso.registrar_novedad == 1; else elseRegistrarNovedad">Si</p>
                                         <ng-template #elseRegistrarNovedad>No</ng-template>
                                     </td>
-                                    <td><button (click)="set_form_edit_permisos(permiso)" type="button"
+                                    <td><button  type="button"
                                             class="btn btn-success" data-bs-toggle="modal"
                                             data-bs-target="#Modal_editar_permisos">
                                             <i class="fi fi-br-edit me-2"></i>Editar
