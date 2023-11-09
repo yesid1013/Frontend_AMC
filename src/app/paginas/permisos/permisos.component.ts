@@ -245,7 +245,7 @@ export class PermisosComponent {
             Swal.fire('Permiso eliminado', '', 'success');
             this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {  //Renderizar datatable
               dtInstance.destroy();
-              this.obtener_permisos_creados();
+              this.obtener_permisos_de_activo();
             });
             
           }

@@ -381,6 +381,10 @@ export class ActivosComponent {
               allowOutsideClick: false,
             }).then((result) => {
               if (result.isConfirmed) {
+                this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {  //Renderizar datatable
+                  dtInstance.destroy();
+                  this.listar_activos();
+                });
               }
             });
           })
