@@ -71,14 +71,11 @@ const routes: Routes = [
     component : InformacionPermisosComponent,
     canActivate : [AuthGuard]
   },
-  {
 
-    path: 'qr_info_activo',
-    component : QRInfoActivoComponent
-  },
   {
     path : 'detalle_activo/:id_activo',
-    component : DetalleActivoComponent
+    component : DetalleActivoComponent,
+    canActivate : [AuthGuard]
   }
 
 ];
