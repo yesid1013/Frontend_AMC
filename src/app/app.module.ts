@@ -27,6 +27,7 @@ import { PermisosRecibidosComponent } from './paginas/permisos-recibidos/permiso
 import { SearchFilterPipe } from './utils/search-filter.pipe';
 import { InformacionPermisosComponent } from './paginas/informacion-permisos/informacion-permisos.component';
 import { DetalleActivoComponent } from './paginas/detalle-activo/detalle-activo.component';
+import { QrActivoComponent } from './paginas/qr-activo/qr-activo.component';
 
 
 
@@ -48,6 +49,7 @@ import { DetalleActivoComponent } from './paginas/detalle-activo/detalle-activo.
     SearchFilterPipe,
     InformacionPermisosComponent,
     DetalleActivoComponent,
+    QrActivoComponent,
   ],
   imports: [
     BrowserModule,

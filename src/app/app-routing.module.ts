@@ -13,6 +13,7 @@ import { PermisosComponent } from './paginas/permisos/permisos.component';
 import { PermisosRecibidosComponent } from './paginas/permisos-recibidos/permisos-recibidos.component';
 import { InformacionPermisosComponent } from './paginas/informacion-permisos/informacion-permisos.component';
 import { DetalleActivoComponent } from './paginas/detalle-activo/detalle-activo.component';
+import { QrActivoComponent } from './paginas/qr-activo/qr-activo.component';
 
 
 const routes: Routes = [
@@ -75,6 +76,11 @@ const routes: Routes = [
     path : 'detalle_activo/:id_activo',
     component : DetalleActivoComponent,
     canActivate : [AuthGuard]
+  },
+
+  {
+    path : 'qractivo',
+    component : QrActivoComponent
   }
 
 ];
