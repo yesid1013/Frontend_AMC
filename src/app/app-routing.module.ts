@@ -12,7 +12,6 @@ import { CostoServicioComponent } from './paginas/costo-servicio/costo-servicio.
 import { PermisosComponent } from './paginas/permisos/permisos.component';
 import { PermisosRecibidosComponent } from './paginas/permisos-recibidos/permisos-recibidos.component';
 import { InformacionPermisosComponent } from './paginas/informacion-permisos/informacion-permisos.component';
-import { QRInfoActivoComponent } from './qrinfo-activo/qrinfo-activo.component';
 import { DetalleActivoComponent } from './paginas/detalle-activo/detalle-activo.component';
 
 
