@@ -79,7 +79,7 @@ const routes: Routes = [
   },
 
   {
-    path : 'qractivo',
+    path : 'qractivo/:id_activo',
     component : QrActivoComponent
   }
 

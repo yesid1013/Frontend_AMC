@@ -12,20 +12,19 @@
         <div class="card">
             <div class="card__corner"></div>
             <div class="card__img">
-                <a rel="noreferrer" href="https://homecenterco.scene7.com/is/image/SodimacCO/316189" target="_blank">
-                    <img src="https://homecenterco.scene7.com/is/image/SodimacCO/316189"
+                <a rel="noreferrer" href={{activoData?.imagen_equipo}} target="_blank">
+                    <img src={{activoData?.imagen_equipo}}
                     class="img-fluid" width="220px" height="220px" alt="Foto de activo">
                 </a>
             </div>
             <div class="card-int">
-                <p class="card-int__title">Tipo de equipo</p>
-                <p class="excerpt"><strong>ID primario: </strong>1013</p>
-                <p class="excerpt"><strong>ID secundario: </strong>1013</p>
-                <p class="excerpt"><strong>Fecha de registro: </strong>27/10/2023</p>
-                <p class="excerpt"><strong>Ubicación: </strong>Calle 29</p>
-                <p class="excerpt"><strong>Fabricante: </strong>Olimpo</p>
-                <p class="excerpt"><strong>Modelo: </strong>2019</p>
-                <p class="excerpt"><strong>Número de serie: </strong>099933813</p>
+                <p class="card-int__title">{{activoData?.tipo_de_equipo}}</p>
+                <p class="excerpt"><strong>ID primario: </strong>{{activoData?.id_primario}}</p>
+                <p class="excerpt"><strong>ID secundario: </strong>{{activoData?.id_secundario}}</p>
+                <p class="excerpt"><strong>Ubicación: </strong>{{activoData?.ubicacion}}</p>
+                <p class="excerpt"><strong>Fabricante: </strong>{{activoData?.fabricante}}</p>
+                <p class="excerpt"><strong>Modelo: </strong>{{activoData?.modelo}}</p>
+                <p class="excerpt"><strong>Número de serie: </strong>{{activoData?.num_serie}}</p>
                 <button class="card-int__button">Ver</button>
             </div>
         </div>

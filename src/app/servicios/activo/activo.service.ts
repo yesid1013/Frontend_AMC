@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Activo, Adjuntar_ficha_tecnica, Editar_activo, Registro_activo } from 'src/app/interfaces/activo';
+import { Activo, Adjuntar_ficha_tecnica, Editar_activo, InfoActivoQr, Registro_activo } from 'src/app/interfaces/activo';
 
 @Injectable({
   providedIn: 'root'
@@ -17,6 +17,10 @@ export class ActivoService {
 
   info_activo(id_activo : any):Observable<Activo>{
     return this.http.get<Activo>(`${this.url}info_activo/${id_activo}`);
+  }
+
+  info_activo_qr(id_activo : any):Observable<InfoActivoQr>{
+    return this.http.get<InfoActivoQr>(`${this.url}info_activo_qr/${id_activo}`);
   }
 
   registrar_activo(activo : Registro_activo):Observable<any>{

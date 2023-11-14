@@ -20,6 +20,18 @@ export interface Activo {
     codigo_qr : string;
   }
 
+  export interface InfoActivoQr {
+    datos_relevantes: string;
+    fabricante:       string;
+    id_primario:      string;
+    id_secundario:    string;
+    imagen_equipo:    string;
+    modelo:           string;
+    num_serie:        string;
+    tipo_de_equipo:   string;
+    ubicacion:        string;
+}
+
   export interface Registro_activo {
     id_primario: string;
     id_secundario: string | null;
