@@ -30,10 +30,19 @@ export class AddTokenInterceptor implements HttpInterceptor {
             title: 'Oops...',
             text: "Acceso denegado",
           });
+          this.router.navigate(['/login']);
+        }if(error.status === 403){
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: "El activo no es público"
+          });
           this.router.navigate(['/login'])
-        } if (error.error.message) {
+        }
+         if (error.error.message) {
           this.errorService.msjError(error);
-        } else {
+        }  
+        else {
           Swal.fire({
             icon: 'error',
             title: 'Oops...',
