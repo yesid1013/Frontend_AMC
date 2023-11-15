@@ -1,4 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
+import { DataTableDirective } from 'angular-datatables';
+import { ADTSettings } from 'angular-datatables/src/models/settings';
+import { Subject } from 'rxjs';
 import { Permisos_recibidos } from 'src/app/interfaces/permiso';
 import { ComunicationService } from 'src/app/servicios/comunication.service';
 import { PermisosService } from 'src/app/servicios/permisos/permisos.service';
@@ -14,10 +17,19 @@ export class PermisosRecibidosComponent {
   lista_permisos_recibidos : Permisos_recibidos[] = []
   activosFiltrados: any[] = [];
 
+
+  dtOptions: ADTSettings = {};
+  dtTrigger: Subject<any> = new Subject;
+  @ViewChild(DataTableDirective, { static: false })
+  dtElement!: DataTableDirective;
+
   constructor(private communicationService: ComunicationService,private permisos_service : PermisosService){}
 
   ngOnInit(){
-    this.obtener_permisos_recibidos()
+    this.obtener_permisos_recibidos();
+    this.dtOptions = {
+      language: { url: '//cdn.datatables.net/plug-ins/1.13.4/i18n/es-ES.json' }
+    };
     this.communicationService.sidebarOpen$.subscribe(isOpen => {
       this.isOpen = isOpen;
     });
@@ -32,6 +44,7 @@ export class PermisosRecibidosComponent {
   obtener_permisos_recibidos(){
     this.permisos_service.permisos_recibidos().subscribe(data => {
       this.lista_permisos_recibidos = data;
+      this.dtTrigger.next(null);
     })
   }
 
