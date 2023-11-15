@@ -41,6 +41,7 @@ export interface Permisos_recibidos {
     ver_historial_servicios: number;
     ver_informacion_basica:  number;
     ver_novedades:           number;
+    ver_costo_servicio :     number;
 }
 
 export interface Permiso {

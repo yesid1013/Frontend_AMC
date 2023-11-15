@@ -35,6 +35,7 @@
                                 <th scope="col">Tipo de equipo</th>
                                 <th scope="col">Información básica</th>
                                 <th scope="col">Historial de servicios</th>
+                                <th>Ver costo de servicios</th>
                                 <th>Ver novedades</th>
                                 <th>Registrar servicio</th>
                                 <th>Registrar Novedad</th>
@@ -56,6 +57,11 @@
                                 <td>
                                     <p *ngIf="permiso.ver_historial_servicios == 1; else elseHistorial">Si</p>
                                     <ng-template #elseHistorial>No</ng-template>
+                                </td>
+
+                                <td>
+                                    <p *ngIf="permiso.ver_costo_servicio == 1; else elseCosto">Si</p>
+                                    <ng-template #elseCosto>No</ng-template>
                                 </td>
 
                                 <td>
