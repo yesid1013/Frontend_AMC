@@ -26,6 +26,18 @@ export interface ServicioDeActivo {
     costo : string;
 }
 
+export interface ServiciosDeActivoSinCosto {
+    descripcion:     string;
+    fecha_ejecucion: string;
+    id_servicio:     string;
+    informe:         string;
+    nombre_usuario:  string;
+    numero_servicio: number;
+    observaciones:   string;
+    tipo:            string;
+}
+
+
 ////////////////////
 export interface RegistroServicio {
     fecha_ejecucion: string;

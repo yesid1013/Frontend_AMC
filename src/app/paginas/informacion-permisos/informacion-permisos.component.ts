@@ -7,7 +7,7 @@ import { ComunicationService } from 'src/app/servicios/comunication.service';
 import { PermisosService } from 'src/app/servicios/permisos/permisos.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
-import { RegistroServicio, ServicioDeActivo } from 'src/app/interfaces/servicio';
+import { RegistroServicio, ServicioDeActivo, ServiciosDeActivoSinCosto } from 'src/app/interfaces/servicio';
 import { ServicioService } from 'src/app/servicios/servicio/servicio.service';
 import { Novedad, Registro_novedad } from 'src/app/interfaces/novedad';
 import { NovedadService } from 'src/app/servicios/novedad/novedad.service';
@@ -28,6 +28,7 @@ export class InformacionPermisosComponent {
   permisoId: string | null = null;
   permisoData: Permiso | null = null;
   ServicioData: ServicioDeActivo[] = [];
+  ServicioSinCostoData: ServiciosDeActivoSinCosto[] = [];
   NovedadData: Novedad[] = [];
   activoData: Activo | null = null;
   loading: boolean = false;
@@ -37,6 +38,7 @@ export class InformacionPermisosComponent {
   ver_informacion_basica: number | undefined;
   ver_historial_servicios: number | undefined;
   ver_novedades: number | undefined;
+  ver_costo_servicio: number | undefined;
   registrar_servicio: number | undefined;
   registrar_novedad: number | undefined;
   id_activo: string = '';
@@ -135,15 +137,22 @@ export class InformacionPermisosComponent {
       this.ver_informacion_basica = this.permisoData.ver_informacion_basica;
       this.ver_historial_servicios = this.permisoData.ver_historial_servicios;
       this.ver_novedades = this.permisoData.ver_novedades;
+      this.ver_costo_servicio = this.permisoData.ver_costo_servicio;
       this.registrar_servicio = this.permisoData.registrar_servicio;
       this.registrar_novedad = this.permisoData.registrar_novedad;
 
       if (this.ver_informacion_basica === 1) { // si tiene permisos de ver informaciom basica, llamo la funcion para obtener la informacion de ese activo
-        this.obtener_activo()
+        this.obtener_activo();
       }
-      if (this.ver_historial_servicios === 1) {
-        this.obtener_servicios()
+
+      if (this.ver_historial_servicios === 1 && this.ver_costo_servicio === 0) { //Si tiene permisos de ver historial de servicios pero no de costo, se llama a la funcion que obtiene solo los servicios
+        this.obtener_servicios_sin_costo();
       }
+
+      if (this.ver_historial_servicios === 1 && this.ver_costo_servicio === 1) { //Si tiene permisos de ver historial de servicios y de costo, se llama a la funcion que obtiene los servicios con el costo
+        this.obtener_servicios();
+      }
+
       if (this.ver_novedades === 1) {
         this.obtener_novedades();
       }
@@ -209,12 +218,18 @@ export class InformacionPermisosComponent {
 
   }
 
-  obtener_servicios() { //obtiene el historial de servicios del activo
+  obtener_servicios() { //obtiene el historial de servicios del activo con el costo
     this.servicio_service.obtener_servicio(this.id_activo).subscribe(data => {
       this.ServicioData = data;
       this.dtTrigger.next(null);
     })
+  }
 
+  obtener_servicios_sin_costo() { //obtiene el historial de servicios del activo sin el costo
+    this.servicio_service.obtener_servicio_sin_costo(this.id_activo).subscribe(data => {
+      this.ServicioSinCostoData = data;
+      this.dtTrigger.next(null);
+    })
   }
 
   crear_novedad(value: any) {

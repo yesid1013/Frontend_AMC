@@ -62,8 +62,8 @@
                             class="fi fi-br-bullhorn me-2"></i> Registrar
                         Novedad</button>
 
-                    <div *ngIf="ver_historial_servicios === 1" class="seccion_historial_servicios mt-4">
-                        <!-- Sección de Historial de Servicios -->
+                    <div *ngIf="ver_historial_servicios === 1 && ver_costo_servicio === 1" class="seccion_historial_servicios mt-4">
+                        <!-- Sección de Historial de Servicios con costo -->
                         <div class="text-center mb-4">
                             <h2>Historial de Servicios</h2>
                         </div>
@@ -76,15 +76,62 @@
                             <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table">
                                 <thead>
                                     <tr>
-                                        <th scope="col">ID SERV.</th>
-                                        <th scope="col">FECHA EJECUCIÓN</th>
-                                        <th scope="col">RESPONSABLE DE SERVICIO</th>
-                                        <th scope="col">TIPO DE SERVICIO</th>
-                                        <th scope="col">DESCRIPCIÓN</th>
+                                        <th scope="col">Id serv.</th>
+                                        <th scope="col">Fecha de ejecución</th>
+                                        <th scope="col">Responsable de servicio</th>
+                                        <th scope="col">Tipo de servicio</th>
+                                        <th scope="col">Descripcion</th>
+                                        <th scope="col">Costo</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr *ngFor="let servicio of ServicioData">
+                                        <td>{{servicio.numero_servicio}}</td>
+                                        <td>{{servicio.fecha_ejecucion}}</td>
+                                        <td>{{servicio.nombre_usuario}}</td>
+                                        <td>{{servicio.tipo}}</td>
+                                        <td>{{servicio.descripcion}}</td>
+                                        <td><a class="btn_opciones" *ngIf="servicio.costo" target="_blank" href={{servicio.costo}}>
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-eye"
+                                                width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5"
+                                                stroke="#00abfb" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                                <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+                                                <path
+                                                    d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6" />
+                                            </svg>
+                                        </a></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                        </div>
+
+                    </div>
+
+                    <div *ngIf="ver_historial_servicios === 1 && ver_costo_servicio === 0" class="seccion_historial_servicios mt-4">
+                        <!-- Sección de Historial de Servicios sin costo -->
+                        <div class="text-center mb-4">
+                            <h2>Historial de Servicios</h2>
+                        </div>
+                        <button (click)="toggleTablaHistorial()" class="swallow__icon">
+                            <span></span>
+                        </button>
+
+                        <div class="transition-height" [ngClass]="{'colapsada': isTablaHistorialColapsada}">
+                            <!-- Tabla de Historial de Servicios -->
+                            <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Id serv.</th>
+                                        <th scope="col">Fecha de ejecución</th>
+                                        <th scope="col">Responsable de servicio</th>
+                                        <th scope="col">Tipo de servicio</th>
+                                        <th scope="col">Descripcion</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let servicio of ServicioSinCostoData">
                                         <td>{{servicio.numero_servicio}}</td>
                                         <td>{{servicio.fecha_ejecucion}}</td>
                                         <td>{{servicio.nombre_usuario}}</td>
