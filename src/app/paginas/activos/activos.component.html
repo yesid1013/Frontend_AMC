@@ -666,7 +666,7 @@
                                                     <div class="form-check">
                                                         <input formControlName="ver_historial_servicios"
                                                             class="form-check-input" [value]="1" type="radio"
-                                                            id="flexRadioDefault3">
+                                                            id="flexRadioDefault3" (change)="ajustarVerCosto()">
                                                         <label class="form-check-label" for="flexRadioDefault3">
                                                             Sí
                                                         </label>
@@ -674,7 +674,7 @@
                                                     <div class="form-check">
                                                         <input formControlName="ver_historial_servicios"
                                                             class="form-check-input" [value]="0" type="radio"
-                                                            id="flexRadioDefault4" checked>
+                                                            id="flexRadioDefault4" checked (change)="ajustarVerCosto()">
                                                         <label class="form-check-label" for="flexRadioDefault4">
                                                             No
                                                         </label>
