@@ -258,4 +258,13 @@ export class PermisosComponent {
     })
   }
 
+  ajustarVerCosto() {
+    const verHistorialServicios = this.form_editar_permiso.get('ver_historial_servicios')?.value;
+  
+    // Si ver_historial_servicios es "No", establecer ver_costo_servicio en "No"
+    if (verHistorialServicios === 0) {
+      this.form_editar_permiso.get('ver_costo_servicio')?.setValue(0);
+    }
+  }
+
 }
