@@ -38,6 +38,7 @@
                                     <th scope="col">Usuario</th>
                                     <th scope="col">Información básica</th>
                                     <th scope="col">Historial de servicios</th>
+                                    <th scope="col">Ver costo</th>
                                     <th scope="col">Ver novedades</th>
                                     <th scope="col">Registrar servicio</th>
                                     <th scope="col">Registrar Novedad</th>
@@ -55,6 +56,10 @@
                                     <td>
                                         <p *ngIf="permiso.ver_historial_servicios == 1; else elseHistorial">Si</p>
                                         <ng-template #elseHistorial>No</ng-template>
+                                    </td>
+                                    <td>
+                                        <p *ngIf="permiso.ver_costo_servicio == 1; else elseCosto">Si</p>
+                                        <ng-template #elseCosto>No</ng-template>
                                     </td>
                                     <td>
                                         <p *ngIf="permiso.ver_novedades == 1; else elseNovedades">Si</p>
@@ -138,9 +143,7 @@
                                                             [value]="usuario.correo">{{usuario.nombre}}</option>
                                                     </datalist>
                                                 </div>
-                                            </div>
 
-                                            <div class="row p-1">
                                                 <div class="col-md-6 ">
                                                     <label for="flexRadioDefault1">Ver información basica:</label>
                                                     <div class="form-check">
@@ -161,6 +164,31 @@
                                                     </div>
 
                                                 </div>
+                                            </div>
+
+                                            <div class="row p-1">
+
+                                                <div class="col-md-6 ">
+                                                    <label for="flexRadioDefault3">Ver costo de servicios:</label>
+                                                    <div class="form-check">
+                                                        <input formControlName="ver_costo_servicio"
+                                                            class="form-check-input" [value]="1" type="radio"
+                                                            id="flexRadioDefault11">
+                                                        <label class="form-check-label" for="flexRadioDefault1">
+                                                            Sí
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input formControlName="ver_costo_servicio"
+                                                            class="form-check-input" [value]="0" type="radio"
+                                                            id="flexRadioDefault12" checked>
+                                                        <label class="form-check-label" for="flexRadioDefault2">
+                                                            No
+                                                        </label>
+                                                    </div>
+
+                                                </div>
+                                                
 
                                                 <div class="col-md-6 ">
                                                     <label for="flexRadioDefault3">Ver historial de servicios:</label>

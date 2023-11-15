@@ -14,6 +14,7 @@ export interface Editar_permiso {
     ver_informacion_basica: number;
     ver_historial_servicios: number;
     ver_novedades: number;
+    ver_costo_servicio : number;
     registrar_servicio: number;
     registrar_novedad: number;
 }
@@ -27,6 +28,7 @@ export interface Permisos_creados {
     ver_informacion_basica: number;
     ver_historial_servicios: number;
     ver_novedades: number;
+    ver_costo_servicio : number;
     registrar_servicio: number;
     registrar_novedad: number;
 }
@@ -64,6 +66,7 @@ export interface PermisosDeActivo {
     ver_historial_servicios: number;
     ver_informacion_basica:  number;
     ver_novedades:           number;
+    ver_costo_servicio:      number;
 }
 
   

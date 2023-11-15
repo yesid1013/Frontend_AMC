@@ -62,7 +62,8 @@ export class PermisosComponent {
     ver_historial_servicios: this.fb.control(0,[Validators.required]),
     ver_novedades: this.fb.control(0,[Validators.required]),
     registrar_servicio: this.fb.control(0,[Validators.required]),
-    registrar_novedad: this.fb.control(0,[Validators.required])
+    registrar_novedad: this.fb.control(0,[Validators.required]),
+    ver_costo_servicio: this.fb.control(0,[Validators.required])
   });
 
   
@@ -125,7 +126,8 @@ export class PermisosComponent {
       ver_historial_servicios : permiso.ver_historial_servicios,
       ver_novedades : permiso.ver_novedades,
       registrar_servicio : permiso.registrar_servicio,
-      registrar_novedad : permiso.registrar_novedad
+      registrar_novedad : permiso.registrar_novedad,
+      ver_costo_servicio : permiso.ver_costo_servicio
     })
 
     this.id_permiso = permiso.id_permiso;
@@ -204,6 +206,7 @@ export class PermisosComponent {
               ver_informacion_basica : value.ver_informacion_basica,
               ver_historial_servicios : value.ver_historial_servicios,
               ver_novedades : value.ver_novedades,
+              ver_costo_servicio : value.ver_costo_servicio,
               registrar_servicio : value.registrar_servicio,
               registrar_novedad : value.registrar_novedad
             }
