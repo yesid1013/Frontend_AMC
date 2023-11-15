@@ -164,7 +164,8 @@ export class PermisosComponent {
         ver_historial_servicios : value.ver_historial_servicios,
         ver_novedades : value.ver_novedades,
         registrar_servicio : value.registrar_servicio,
-        registrar_novedad : value.registrar_novedad
+        registrar_novedad : value.registrar_novedad,
+        ver_costo_servicio : 1
       }
 
       this.permisos_service.registrar_permiso(permiso).subscribe(data => {

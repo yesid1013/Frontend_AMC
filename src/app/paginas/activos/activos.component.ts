@@ -10,9 +10,9 @@ import { SubclienteService } from 'src/app/servicios/subcliente/subcliente.servi
 import { Subcliente } from 'src/app/interfaces/subcliente';
 import Swal from 'sweetalert2';
 import { Usuarios } from 'src/app/interfaces/usuario';
-import { Registrar_permiso } from 'src/app/interfaces/permiso';
 import { PermisosService } from 'src/app/servicios/permisos/permisos.service';
 import { UsuarioService } from 'src/app/servicios/usuario/usuario.service';
+import { Registrar_permiso } from 'src/app/interfaces/permiso';
 
 @Component({
   selector: 'app-activos',
@@ -87,7 +87,9 @@ export class ActivosComponent {
     ver_historial_servicios: this.fb.control(0,[Validators.required]),
     ver_novedades: this.fb.control(0,[Validators.required]),
     registrar_servicio: this.fb.control(0,[Validators.required]),
-    registrar_novedad: this.fb.control(0,[Validators.required])
+    registrar_novedad: this.fb.control(0,[Validators.required]),
+    ver_costo_servicio: this.fb.control(0,[Validators.required])
+
   });
 
   ngOnInit(): void {
@@ -369,7 +371,9 @@ export class ActivosComponent {
             ver_historial_servicios : value.ver_historial_servicios,
             ver_novedades : value.ver_novedades,
             registrar_servicio : value.registrar_servicio,
-            registrar_novedad : value.registrar_novedad
+            registrar_novedad : value.registrar_novedad,
+            ver_costo_servicio : value.ver_costo_servicio
+
           }
 
           this.permisos_service.registrar_permiso(permiso).subscribe(data => {

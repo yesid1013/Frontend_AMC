@@ -631,9 +631,7 @@
                                                         El usuario es requerido.
                                                     </div>
                                                 </div>
-                                            </div>
 
-                                            <div class="row p-1">
                                                 <div class="col-md-6 ">
                                                     <label for="flexRadioDefault1">Ver información basica:</label>
                                                     <div class="form-check">
@@ -659,6 +657,9 @@
                                                     </div>
 
                                                 </div>
+                                            </div>
+
+                                            <div class="row p-1">
 
                                                 <div class="col-md-6 ">
                                                     <label for="flexRadioDefault3">Ver historial de servicios:</label>
@@ -686,6 +687,35 @@
                                                     </div>
 
                                                 </div>
+
+                                                <div *ngIf="form_registrar_permiso.get('ver_historial_servicios')?.value === 1" class="col-md-6 ">
+                                                    <label for="flexRadioDefault1">Ver costo de servicios:</label>
+                                                    <div class="form-check">
+                                                        <input formControlName="ver_costo_servicio"
+                                                            class="form-check-input" [value]="1" type="radio"
+                                                            id="flexRadioDefault11">
+                                                        <label class="form-check-label" for="flexRadioDefault11">
+                                                            Sí
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input formControlName="ver_costo_servicio"
+                                                            class="form-check-input" [value]="0" type="radio"
+                                                            id="flexRadioDefault12" checked>
+                                                        <label class="form-check-label" for="flexRadioDefault12">
+                                                            No
+                                                        </label>
+                                                    </div>
+                                                    <div *ngIf="form_registrar_permiso.get('ver_costo_servicio')?.hasError('required') && (submitted)"
+                                                        class="alert alert-primary" role="alert">
+                                                        <i class="fi fi-br-exclamation"></i>
+                                                        La descripcion es requerida.
+                                                    </div>
+
+                                                </div>
+                                                
+
+                                                
 
                                             </div>
 
