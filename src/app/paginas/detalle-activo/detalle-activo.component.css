@@ -7,6 +7,7 @@
   font-weight: Bold;
   transition: all 0.5s;
   -webkit-transition: all 0.5s;
+  text-decoration: none;
 }
 
 .btn_ficha:hover {
