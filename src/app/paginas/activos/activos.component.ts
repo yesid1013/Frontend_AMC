@@ -22,14 +22,6 @@ import { Registrar_permiso } from 'src/app/interfaces/permiso';
 export class ActivosComponent {
   submitted = false;
   isOpen = false;
-  info_subcliente: string = "";
-  info_modelo: string = "";
-  info_fabricante: string = "";
-  info_num_serie: string = "";
-  info_datos_relevantes: string = "";
-  info_ubicacion: string = "";
-  info_imagen: string = "";
-  info_ficha_tecnica: string = ""
   info_codigo_qr: string = "";
   id_activo: any = null;
   selectedUsuarioId: string = '';
