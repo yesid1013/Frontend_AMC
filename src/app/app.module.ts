@@ -9,6 +9,8 @@ import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { DataTablesModule } from "angular-datatables";
+import { ModalModule } from 'ngx-bootstrap/modal';
+
 
 // Componentes
 import { LoginComponent } from './paginas/login/login.component';
@@ -28,6 +30,8 @@ import { SearchFilterPipe } from './utils/search-filter.pipe';
 import { InformacionPermisosComponent } from './paginas/informacion-permisos/informacion-permisos.component';
 import { DetalleActivoComponent } from './paginas/detalle-activo/detalle-activo.component';
 import { QrActivoComponent } from './paginas/qr-activo/qr-activo.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 
 
 
@@ -57,7 +61,9 @@ import { QrActivoComponent } from './paginas/qr-activo/qr-activo.component';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    DataTablesModule
+    DataTablesModule,
+    BrowserAnimationsModule,
+    ModalModule.forRoot()
   ],
   providers: [
     {provide : HTTP_INTERCEPTORS, useClass: AddTokenInterceptor, multi : true}
