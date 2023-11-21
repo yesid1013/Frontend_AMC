@@ -72,7 +72,7 @@ export class QrActivoComponent {
 
           }).then((result) => {
             if (result.isConfirmed) {
-              
+              this.modalRef?.hide();
               this.router.navigateByUrl('/servicios')
             }
           });
@@ -89,9 +89,6 @@ export class QrActivoComponent {
     this.modalRef = this.modalService.show(template);
   }
 
-  cerrar(){
-    this.modalRef?.hide();
-  }
 
     
     
