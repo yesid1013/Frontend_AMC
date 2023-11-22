@@ -86,7 +86,8 @@ export class QrActivoComponent {
         next: (data) => {
           
           localStorage.setItem('token', data.token);
-          localStorage.setItem('nombre', data.nombre)
+          localStorage.setItem('nombre', data.nombre);
+          this.modalRef?.hide();
           Swal.fire({
             icon: 'success',
             title: 'Inicio de sesión exitoso',
@@ -95,7 +96,7 @@ export class QrActivoComponent {
 
           }).then((result) => {
             if (result.isConfirmed) {
-              this.modalRef?.hide();
+              
               this.router.navigateByUrl('/servicios')
             }
           });
