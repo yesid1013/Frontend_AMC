@@ -9,6 +9,7 @@ import Swal from 'sweetalert2';
 import { HttpErrorResponse } from '@angular/common/http';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { PermisosService } from 'src/app/servicios/permisos/permisos.service';
 
 
 
@@ -35,7 +36,7 @@ export class QrActivoComponent {
   //Modal
   modalRef?: BsModalRef;
 
-  constructor(private route: ActivatedRoute, private activoService : ActivoService,private fb: FormBuilder,private usarioService: UsuarioService, private router: Router,private modalService: BsModalService, private sanitizer: DomSanitizer){
+  constructor(private route: ActivatedRoute, private activoService : ActivoService,private fb: FormBuilder,private usarioService: UsuarioService, private router: Router,private modalService: BsModalService, private sanitizer: DomSanitizer, private permisoService : PermisosService){
     //Iconos para mostrar y ocultar constraseña
     const svgMostrar = `<svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-eye" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
     <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
@@ -97,7 +98,7 @@ export class QrActivoComponent {
           }).then((result) => {
             if (result.isConfirmed) {
               
-              this.router.navigateByUrl('/servicios')
+              this.buscar_permiso_por_activo_y_usuario();
             }
           });
         },
@@ -105,8 +106,25 @@ export class QrActivoComponent {
         }
       })
     }
+  }
 
-    
+  buscar_permiso_por_activo_y_usuario(){
+    this.permisoService.buscar_permiso_por_activo_y_usuario(this.id_activo).subscribe({
+      next: (data) => {
+        if (data.status == 200){
+          this.router.navigateByUrl(`/informacion_permisos/${data.id_permiso}`);
+        }
+        if (data.status == 403){
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: "No tienes permisos otrogados del activo",
+          });
+          this.router.navigateByUrl('/activos');
+        }
+        
+      },
+    })
   }
 
   openModal(template: TemplateRef<any>) {

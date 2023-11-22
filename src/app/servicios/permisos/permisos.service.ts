@@ -23,6 +23,10 @@ export class PermisosService {
     return this.http.get<Permisos_recibidos[]>(`${this.url}permisos`);
   }
 
+  buscar_permiso_por_activo_y_usuario(id_activo : any):Observable<any>{
+    return this.http.get(`${this.url}permiso_usuario/${id_activo}`);
+  }
+
   obtener_permiso(id_permiso : any):Observable<Permiso>{
     return this.http.get<Permiso>(`${this.url}permiso/${id_permiso}`);
   }
