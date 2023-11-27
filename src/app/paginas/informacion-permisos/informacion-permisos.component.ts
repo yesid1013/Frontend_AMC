@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, QueryList, ViewChild,ViewChildren } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Activo } from 'src/app/interfaces/activo';
 import { Permiso, Permisos_recibidos } from 'src/app/interfaces/permiso';
@@ -11,7 +11,6 @@ import { RegistroServicio, ServicioDeActivo, ServiciosDeActivoSinCosto } from 's
 import { ServicioService } from 'src/app/servicios/servicio/servicio.service';
 import { Novedad, Registro_novedad } from 'src/app/interfaces/novedad';
 import { NovedadService } from 'src/app/servicios/novedad/novedad.service';
-import { ADTSettings } from 'angular-datatables/src/models/settings';
 import { Subject } from 'rxjs';
 import { DataTableDirective } from 'angular-datatables';
 
@@ -48,16 +47,6 @@ export class InformacionPermisosComponent {
   fileMimeType: string | null = null;
   fileContent: string | null = null;
 
-  dtOptions: ADTSettings = {};
-  dtTrigger: Subject<any> = new Subject;
-  @ViewChild(DataTableDirective, { static: false })
-  dtElement!: DataTableDirective;
-
-  dtOptions2: ADTSettings = {};
-  dtTrigger2: Subject<any> = new Subject;
-  @ViewChild(DataTableDirective, { static: false })
-  dtElement2!: DataTableDirective;
-
   // Formulario de registrar servicio
   form_servicio: FormGroup = this.fb.group({
     tipo_de_servicio: this.fb.control(null, [Validators.required]),
@@ -76,7 +65,14 @@ export class InformacionPermisosComponent {
     imagenes: this.fb.control('', [])
   });
 
+  @ViewChildren(DataTableDirective)
+  dtElements!: QueryList<DataTableDirective>;
+  dtOptions: DataTables.Settings = {};
+  dtTrigger: Subject<any> = new Subject<any>();
+  dtTrigger2: Subject<any> = new Subject<any>();
+
   constructor(private route: ActivatedRoute, private permisoService: PermisosService, private communicationService: ComunicationService, private activoService: ActivoService, private fb: FormBuilder, private servicio_service: ServicioService, private novedad_service: NovedadService) { }
+
 
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
@@ -89,13 +85,38 @@ export class InformacionPermisosComponent {
       language: { url: '//cdn.datatables.net/plug-ins/1.13.4/i18n/es-ES.json' }
     };
 
-    this.dtOptions2 = {
-      language: { url: '//cdn.datatables.net/plug-ins/1.13.4/i18n/es-ES.json' }
-    };
-
     this.communicationService.sidebarOpen$.subscribe(isOpen => {
       this.isOpen = isOpen;
     });
+  }
+
+  rerender(rerender_novedad : boolean, rerender_servicio : boolean) { //Lo parametros de esta funcion son para saber que tabla se debe renderizar, se mandan desde las funcione de crear
+    
+    this.dtElements.forEach((dtElement: DataTableDirective) => {
+      if (dtElement.dtInstance)
+        dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+          dtInstance.destroy();
+        });
+    });
+    setTimeout(() => {
+      if (rerender_novedad == true){
+        this.obtener_novedades()
+      }
+      if (rerender_servicio == true){
+        if (this.ver_historial_servicios === 1 && this.ver_costo_servicio === 0) { //Si tiene permisos de ver historial de servicios pero no de costo, se llama a la funcion que obtiene solo los servicios
+          this.obtener_servicios_sin_costo();
+        } else {
+          this.obtener_servicios();
+        }
+      }
+    });
+
+  }
+
+  ngOnDestroy(): void {
+    // Do not forget to unsubscribe the event
+    this.dtTrigger.unsubscribe();
+    this.dtTrigger2.unsubscribe();
   }
 
   onFileSelected(event: any) {
@@ -204,10 +225,7 @@ export class InformacionPermisosComponent {
           }).then((result) => {
             if (result.isConfirmed) {
               this.submitted = false;
-              this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {  //Renderizar datatable
-                dtInstance.destroy();
-                this.obtener_servicios();
-              });
+              this.rerender(false,true)
 
             }
           });
@@ -266,10 +284,7 @@ export class InformacionPermisosComponent {
           }).then((result) => {
             if (result.isConfirmed) {
               this.submitted = false;
-              this.dtElement2.dtInstance.then((dtInstance: DataTables.Api) => {  //Renderizar datatable
-                dtInstance.destroy();
-                this.obtener_novedades();
-              });
+              this.rerender(true,false);
             }
           });
 
@@ -288,6 +303,7 @@ export class InformacionPermisosComponent {
       }
     })
   }
+
 
 
 }
