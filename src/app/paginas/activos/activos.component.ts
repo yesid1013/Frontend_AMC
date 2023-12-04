@@ -54,7 +54,7 @@ export class ActivosComponent {
     modelo: this.fb.control(null, []),
     num_serie: this.fb.control(null, []),
     datos_relevantes: this.fb.control(null, []),
-    imagen_equipo: this.fb.control(null),
+    imagen_equipo: this.fb.control(null,[Validators.required]),
     subcliente: this.fb.control(null, [Validators.required]),
     publico: this.fb.control(0,[Validators.required])
   });

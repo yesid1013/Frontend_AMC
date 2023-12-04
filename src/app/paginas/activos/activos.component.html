@@ -183,6 +183,11 @@
                                                             accept="image/jpeg, image/png" id="formFile">
                                                         <label for="formFile" class="form-label">Cargar imagen</label>
                                                     </div>
+                                                    <div *ngIf="form_activo.get('imagen_equipo')?.hasError('required') && (submitted)"
+                                                        class="alert alert-primary" role="alert">
+                                                        <i class="fi fi-br-exclamation"></i>
+                                                        La imagen es requerida.
+                                                    </div>
                                                 </div>
 
                                                 <div class="col-md-6 ">
