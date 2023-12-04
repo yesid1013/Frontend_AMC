@@ -23,7 +23,7 @@ export class NavbarComponent {
 
   logOut(){
     Swal.fire({
-      title: '¿Estas seguro de cerrar sesión?',
+      title: '¿Estás seguro de cerrar sesión?',
       text: "",
       icon: 'question',
       showCancelButton: true,
