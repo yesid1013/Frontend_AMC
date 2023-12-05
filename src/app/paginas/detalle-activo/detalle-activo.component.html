@@ -53,10 +53,36 @@
                         data-bs-target="#Modal_adjuntar_ficha" class="btn_ficha mb-2"><i
                             class="fi fi-br-document me-2"></i>Adjuntar ficha técnica</button>
 
-                    <a  *ngIf="activoData?.ficha_tecnica" href={{activoData?.ficha_tecnica}} target="_blank"
+                    <a *ngIf="activoData?.ficha_tecnica" href={{activoData?.ficha_tecnica}} target="_blank"
                         class="btn_ficha mb-2"><i class="fi fi-br-document me-2"></i>Ver ficha técnica</a>
-                    
-                    <a class="btn_ficha mx-3 mb-2" href={{activoData?.codigo_qr}}  target="_blank"><i class="fi fi-br-qrcode me-2"></i>Ver codigo qr</a>
+
+                    <!-- Boton para ver codigo QR -->
+                    <button type="button" class="btn btn_ficha mx-3 mb-2" data-bs-toggle="modal"
+                        data-bs-target="#ModalQR">
+                        <i class="fi fi-br-qrcode me-2"></i>Ver código QR
+                    </button>
+
+                    <!-- Modal de ver codigo QR -->
+                    <div class="modal fade" id="ModalQR" tabindex="-1" aria-labelledby="exampleModalLabel"
+                        aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <img src={{activoData?.codigo_qr_content_link}} alt="">
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary"
+                                        data-bs-dismiss="modal">Cerrar</button>
+                                    <a href={{activoData?.codigo_qr_content_link}} class="btn btn-primary">Descargar QR</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
                     <div class="text-center my-4">
                         <h2>Historial de Servicios</h2>
@@ -144,8 +170,8 @@
                     </table>
 
                     <!-- Modal adjuntar informe -->
-                    <div class="modal fade" id="Modal_adjuntar_informe" tabindex="-1" aria-labelledby="exampleModalLabel"
-                        aria-hidden="true">
+                    <div class="modal fade" id="Modal_adjuntar_informe" tabindex="-1"
+                        aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
