@@ -18,6 +18,7 @@ export interface Activo {
     ficha_tecnica:string;
 
     codigo_qr : string;
+    codigo_qr_content_link : string;
   }
 
   export interface InfoActivoQr {
