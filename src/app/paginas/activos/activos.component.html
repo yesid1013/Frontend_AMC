@@ -278,6 +278,7 @@
                                                     <th scope="col">Id secundario</th>
                                                     <th scope="col">Tipo de equipo</th>
                                                     <th scope="col">Ubicación</th>
+                                                    <th>Restaurar</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -286,10 +287,15 @@
                                                     <td>{{activo.id_secundario}}</td>
                                                     <td>{{activo.tipo_de_equipo}}</td>
                                                     <td>{{activo.ubicacion}}</td>
-                                                    <td><button type="button"
-                                                            (click)="restaurar_activo(activo.id_activo)"
-                                                            class="btn btn-success"><i
-                                                                class="fi fi-br-time-past me-2"></i>Restaurar</button>
+                                                    <td>
+                                                        <button class="btn_opciones" (click)="restaurar_activo(activo.id_activo)">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-restore" width="32" height="32" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                                                <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                                                <path d="M3.06 13a9 9 0 1 0 .49 -4.087" />
+                                                                <path d="M3 4.001v5h5" />
+                                                                <path d="M12 12m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
+                                                              </svg>
+                                                        </button>
                                                     </td>
                                                 </tr>
                                             </tbody>
