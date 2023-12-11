@@ -13,6 +13,8 @@ import { Usuarios } from 'src/app/interfaces/usuario';
 import { PermisosService } from 'src/app/servicios/permisos/permisos.service';
 import { UsuarioService } from 'src/app/servicios/usuario/usuario.service';
 import { Registrar_permiso } from 'src/app/interfaces/permiso';
+import { ServicioService } from 'src/app/servicios/servicio/servicio.service';
+import { RegistroServicio } from 'src/app/interfaces/servicio';
 
 @Component({
   selector: 'app-activos',
@@ -43,7 +45,7 @@ export class ActivosComponent {
   @ViewChild(DataTableDirective, { static: false })
   dtElement!: DataTableDirective;
 
-  constructor(private communicationService: ComunicationService, private activo_service: ActivoService, private fb: FormBuilder, private subclienteService: SubclienteService, private permisos_service: PermisosService, private usuario_service: UsuarioService) { }
+  constructor(private communicationService: ComunicationService, private activo_service: ActivoService, private fb: FormBuilder, private subclienteService: SubclienteService, private permisos_service: PermisosService, private usuario_service: UsuarioService, private servicio_service: ServicioService) { }
 
   // Formulario de registrar activo
   form_activo: FormGroup = this.fb.group({
@@ -87,7 +89,6 @@ export class ActivosComponent {
 
   // Formulario de registrar servicio
   form_servicio: FormGroup = this.fb.group({
-    activo: this.fb.control('', [Validators.required]),
     tipo_de_servicio: this.fb.control("Seleccione tipo de servicio", [Validators.required]),
     descripcion: this.fb.control(null, [Validators.required]),
     observaciones: this.fb.control(null, []),
@@ -197,6 +198,49 @@ export class ActivosComponent {
       });
 
 
+    }
+  }
+
+  registrar_servicio(value : any){
+    this.submitted = true;
+    const fecha = new Date(value.fecha_ejecucion);
+    const fechaFormateada = fecha.toISOString();
+    if (this.form_servicio.valid){
+
+      const servicio : RegistroServicio = {
+        fecha_ejecucion : fechaFormateada,
+        descripcion : value.descripcion,
+        id_tipo_servicio: value.tipo_de_servicio,
+        observaciones : value.observaciones,
+        observaciones_usuario : value.observaciones_usuario,
+
+        orden_de_servicio : {
+          name :this.fileName,
+          content : this.fileContent,
+          mimeType : this.fileMimeType
+        }
+      };
+
+      Swal.fire({
+        title: 'Cargando...',
+        allowOutsideClick: false,  // Impide que el usuario cierre el diálogo haciendo clic fuera
+        didOpen: () => {
+          Swal.showLoading();  // Muestra el spinner
+        }
+      });
+      
+      this.servicio_service.registrar_servicio(servicio,this.id_activo).subscribe(data => {
+        Swal.fire({
+          icon: 'success',
+          title: 'Registro exitoso',
+          text: 'Servicio creado correctamente',
+          allowOutsideClick: false,
+        }).then((result) => {
+          if (result.isConfirmed) {
+
+          }
+        });
+      });
     }
   }
 
