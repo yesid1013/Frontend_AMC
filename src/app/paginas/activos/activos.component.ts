@@ -122,28 +122,6 @@ export class ActivosComponent {
   }
 
 
-  // onFileSelected(event: any) {
-  //   const file = event.target.files[0];
-
-  //   if (file) {
-  //     this.selectedFile = file;
-  //     this.imageName = file.name;
-  //     this.imageMimeType = file.type;
-
-  //     const reader = new FileReader();
-  //     reader.onload = (e: any) => {
-  //       this.imageContent = e.target.result.split(',')[1];
-  //     };
-  //     reader.readAsDataURL(file);
-  //   } else {
-  //     // Si no se seleccionó un archivo, asignar valores nulos
-  //     this.selectedFile = null;
-  //     this.imageName = null;
-  //     this.imageMimeType = null;
-  //     this.imageContent = null;
-  //   }
-  // }
-
   onFileSelected(event: any) {
     const file = event.target.files[0];
 
