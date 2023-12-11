@@ -84,6 +84,17 @@ export class ActivosComponent {
 
   });
 
+  // Formulario de registrar servicio
+  form_servicio: FormGroup = this.fb.group({
+    activo: this.fb.control('', [Validators.required]),
+    tipo_de_servicio: this.fb.control("Seleccione tipo de servicio",[Validators.required]),
+    descripcion: this.fb.control(null, [Validators.required]),
+    observaciones: this.fb.control(null, []),
+    observaciones_usuario: this.fb.control(null, []),
+    fecha_ejecucion: this.fb.control('', [Validators.required]),
+    orden_de_servicio: this.fb.control('', [])
+  });
+
   ngOnInit(): void {
     this.listar_activos();
     this.dtOptions = {

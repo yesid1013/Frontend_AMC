@@ -52,9 +52,6 @@
                         </svg>
                     </button>
 
-
-
-
                     <div class="col-md-2 pe-0">
 
 
@@ -343,8 +340,10 @@
                                                 <path d="M16 5l3 3" />
                                             </svg>
                                         </button>
-
-                                        <button class="btn_opciones">
+                                        
+                                        <!--Boton registrar servicio-->
+                                        <button class="btn_opciones" data-bs-toggle="modal"
+                                        data-bs-target="#Modal_registar_servicio">
                                             <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-tool" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
                                                 <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
                                                 <path d="M7 10h3v-3l-3.5 -3.5a6 6 0 0 1 8 8l6 6a2 2 0 0 1 -3 3l-6 -6a6 6 0 0 1 -8 -8l3.5 3.5" />
@@ -841,6 +840,129 @@
                                             data-bs-dismiss="modal">Cerrar</button>
                                         <button type="button" class="btn btn-primary"
                                             (click)="registrar_permiso(form_registrar_permiso.value)">Compartir</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Modal Registrar servicio -->
+                        <div class="modal fade" id="Modal_registar_servicio" tabindex="-1"
+                            aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Registrar servicio</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form [formGroup]="form_servicio">
+
+                                            <div class="row p-1">
+                                                <div class="col-md-6 ">
+                                                    <label for="DataListActivos" class="form-label">Seleccione el
+                                                        activo</label>
+                                                    <input formControlName="activo" 
+                                                        class="form-control" list="datalistOptions" id="DataListActivos"
+                                                        placeholder="Escriba para buscar">
+                                                    <datalist id="datalistOptions">
+                                                        <option *ngFor="let activo of listaActivos"
+                                                            [value]="activo.id_primario">
+                                                            {{activo.tipo_de_equipo}}</option>
+                                                    </datalist>
+
+                                                    <div *ngIf="form_servicio.get('activo')?.hasError('required') && (submitted)"
+                                                        class="alert alert-primary" role="alert">
+                                                        <i class="fi fi-br-exclamation"></i>
+                                                        El activo es requerido.
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-6 ">
+                                                    <select formControlName="tipo_de_servicio"
+                                                        class="form-select form-select"
+                                                        aria-label=".form-select-sm example" id="select_tipo_servicio">
+                                                        <option selected>Seleccione tipo de servicio</option>
+                                                        <option [value]="1">Mantenimiento preventivo</option>
+                                                        <option [value]="2">Mantenimiento correctivo</option>
+                                                        <option [value]="3">Inspección y/o diagnostico</option>
+                                                    </select>
+
+                                                    <div *ngIf="form_servicio.get('tipo_de_servicio')?.hasError('required') && (submitted)"
+                                                        class="alert alert-primary" role="alert">
+                                                        <i class="fi fi-br-exclamation"></i>
+                                                        El tipo de servicio es requerido.
+                                                    </div>
+
+                                                </div>
+                                            </div>
+
+
+                                            <div class="row p-1">
+                                                <div class="col-md-6 ">
+                                                    <div class="form-floating mb-3">
+                                                        <textarea formControlName="descripcion" class="form-control"
+                                                            id="floatingInput"></textarea>
+                                                        <label for="floatingInput">Descripcion</label>
+                                                    </div>
+
+                                                    <div *ngIf="form_servicio.get('descripcion')?.hasError('required') && (submitted)"
+                                                        class="alert alert-primary" role="alert">
+                                                        <i class="fi fi-br-exclamation"></i>
+                                                        La descripcion es requerida.
+                                                    </div>
+
+                                                </div>
+
+                                                <div class="col-md-6 ">
+                                                    <div class="form-floating mb-3">
+                                                        <textarea formControlName="observaciones" class="form-control"
+                                                            id="floatingInput"></textarea>
+                                                        <label for="floatingInput">Observaciones</label>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                            <div class="row p-1">
+                                                <div class="col-md-6 ">
+                                                    <div class="form-floating mb-3">
+                                                        <textarea formControlName="observaciones_usuario"
+                                                            class="form-control" id="floatingInput"></textarea>
+                                                        <label for="floatingInput">Observación de usuario</label>
+                                                        <i class="fas fa-question-circle" data-bs-toggle="tooltip"
+                                                            title="Si no eres un usuario tecnico, por favor indicalo aquí"></i>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-6 ">
+                                                    <label for="fecha_ejecucion">Fecha de ejecución:</label><br>
+                                                    <input id="fecha_ejecucion" formControlName="fecha_ejecucion"
+                                                        type="datetime-local" name="horareunion">
+
+                                                    <div *ngIf="form_servicio.get('fecha_ejecucion')?.hasError('required') && (submitted)"
+                                                        class="alert alert-primary" role="alert">
+                                                        <i class="fi fi-br-exclamation"></i>
+                                                        La fecha de ejecucion es requerida.
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                            <div class="row p-1">
+                                                <input formControlName="orden_de_servicio"
+                                                    (change)="onFileSelected($event)" class="form-control" type="file"
+                                                    accept="application/pdf" id="formFile">
+                                                <label for="formFile" class="form-label">Adjuntar orden de
+                                                    servicio</label>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary"
+                                            data-bs-dismiss="modal">Cerrar</button>
+                                        <button type="button" class="btn btn-primary"
+                                            >Registrar</button>
                                     </div>
                                 </div>
                             </div>
