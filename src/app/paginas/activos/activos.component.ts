@@ -32,9 +32,10 @@ export class ActivosComponent {
   listaUsuarios: Usuarios[] = [];
 
   selectedFile: File | null = null;
-  imageName: string | null = null;
-  imageMimeType: string | null = null;
-  imageContent: string | null = null;
+
+  fileName: string | null = null;
+  fileMimeType: string | null = null;
+  fileContent: string | null = null;
 
   // DataTable
   dtOptions: ADTSettings = {};
@@ -42,7 +43,7 @@ export class ActivosComponent {
   @ViewChild(DataTableDirective, { static: false })
   dtElement!: DataTableDirective;
 
-  constructor(private communicationService: ComunicationService, private activo_service: ActivoService, private fb: FormBuilder, private subclienteService: SubclienteService,private permisos_service : PermisosService,private usuario_service : UsuarioService) { }
+  constructor(private communicationService: ComunicationService, private activo_service: ActivoService, private fb: FormBuilder, private subclienteService: SubclienteService, private permisos_service: PermisosService, private usuario_service: UsuarioService) { }
 
   // Formulario de registrar activo
   form_activo: FormGroup = this.fb.group({
@@ -54,9 +55,9 @@ export class ActivosComponent {
     modelo: this.fb.control(null, []),
     num_serie: this.fb.control(null, []),
     datos_relevantes: this.fb.control(null, []),
-    imagen_equipo: this.fb.control(null,[Validators.required]),
+    imagen_equipo: this.fb.control(null, [Validators.required]),
     subcliente: this.fb.control(null, [Validators.required]),
-    publico: this.fb.control(0,[Validators.required])
+    publico: this.fb.control(0, [Validators.required])
   });
 
   // Formulario de editar activo
@@ -70,24 +71,24 @@ export class ActivosComponent {
     num_serie: this.fb.control(null, []),
     datos_relevantes: this.fb.control(null, []),
     subcliente: this.fb.control(null, [Validators.required]),
-    publico: this.fb.control(0,[Validators.required])
+    publico: this.fb.control(0, [Validators.required])
   });
 
   form_registrar_permiso: FormGroup = this.fb.group({
     usuario: this.fb.control('', [Validators.required]),
-    ver_informacion_basica: this.fb.control(0,[Validators.required]),
-    ver_historial_servicios: this.fb.control(0,[Validators.required]),
-    ver_novedades: this.fb.control(0,[Validators.required]),
-    registrar_servicio: this.fb.control(0,[Validators.required]),
-    registrar_novedad: this.fb.control(0,[Validators.required]),
-    ver_costo_servicio: this.fb.control(0,[Validators.required])
+    ver_informacion_basica: this.fb.control(0, [Validators.required]),
+    ver_historial_servicios: this.fb.control(0, [Validators.required]),
+    ver_novedades: this.fb.control(0, [Validators.required]),
+    registrar_servicio: this.fb.control(0, [Validators.required]),
+    registrar_novedad: this.fb.control(0, [Validators.required]),
+    ver_costo_servicio: this.fb.control(0, [Validators.required])
 
   });
 
   // Formulario de registrar servicio
   form_servicio: FormGroup = this.fb.group({
     activo: this.fb.control('', [Validators.required]),
-    tipo_de_servicio: this.fb.control("Seleccione tipo de servicio",[Validators.required]),
+    tipo_de_servicio: this.fb.control("Seleccione tipo de servicio", [Validators.required]),
     descripcion: this.fb.control(null, [Validators.required]),
     observaciones: this.fb.control(null, []),
     observaciones_usuario: this.fb.control(null, []),
@@ -121,25 +122,47 @@ export class ActivosComponent {
   }
 
 
+  // onFileSelected(event: any) {
+  //   const file = event.target.files[0];
+
+  //   if (file) {
+  //     this.selectedFile = file;
+  //     this.imageName = file.name;
+  //     this.imageMimeType = file.type;
+
+  //     const reader = new FileReader();
+  //     reader.onload = (e: any) => {
+  //       this.imageContent = e.target.result.split(',')[1];
+  //     };
+  //     reader.readAsDataURL(file);
+  //   } else {
+  //     // Si no se seleccionó un archivo, asignar valores nulos
+  //     this.selectedFile = null;
+  //     this.imageName = null;
+  //     this.imageMimeType = null;
+  //     this.imageContent = null;
+  //   }
+  // }
+
   onFileSelected(event: any) {
     const file = event.target.files[0];
 
     if (file) {
       this.selectedFile = file;
-      this.imageName = file.name;
-      this.imageMimeType = file.type;
+      this.fileName = file.name;
+      this.fileMimeType = file.type;
 
       const reader = new FileReader();
       reader.onload = (e: any) => {
-        this.imageContent = e.target.result.split(',')[1];
+        this.fileContent = e.target.result.split(',')[1];
       };
       reader.readAsDataURL(file);
     } else {
       // Si no se seleccionó un archivo, asignar valores nulos
       this.selectedFile = null;
-      this.imageName = null;
-      this.imageMimeType = null;
-      this.imageContent = null;
+      this.fileName = null;
+      this.fileMimeType = null;
+      this.fileContent = null;
     }
   }
 
@@ -160,12 +183,12 @@ export class ActivosComponent {
         id_subcliente: value.subcliente,
 
         imagen_equipo: {
-          name: this.imageName,
-          mimeType: this.imageMimeType,
-          content: this.imageContent
+          name: this.fileName,
+          mimeType: this.fileMimeType,
+          content: this.fileContent
         },
 
-        publico : value.publico
+        publico: value.publico
       };
 
       Swal.fire({
@@ -202,9 +225,9 @@ export class ActivosComponent {
   imagen: boolean = false;
   set_form_edit_activo(activo: any) {
 
-    if(activo.imagen_equipo == null){
+    if (activo.imagen_equipo == null) {
       this.imagen = true
-    }else{
+    } else {
       this.imagen = false;
     }
 
@@ -218,7 +241,7 @@ export class ActivosComponent {
       num_serie: activo['num_serie'],
       datos_relevantes: activo['datos_relevantes'],
       subcliente: activo['id_subcliente'],
-      publico : activo['publico']
+      publico: activo['publico']
     });
     this.id_activo = activo.id_activo;
 
@@ -245,12 +268,12 @@ export class ActivosComponent {
               num_serie: value.num_serie,
               datos_relevantes: value.datos_relevantes,
               id_subcliente: value.subcliente,
-              publico : value.publico,
+              publico: value.publico,
 
               imagen_equipo: {
-                name: this.imageName,
-                mimeType: this.imageMimeType,
-                content: this.imageContent
+                name: this.fileName,
+                mimeType: this.fileMimeType,
+                content: this.fileContent
               }
             }
 
@@ -262,7 +285,7 @@ export class ActivosComponent {
               }
             });
 
-            this.activo_service.editar_activo(this.id_activo, editar_activo).subscribe({              
+            this.activo_service.editar_activo(this.id_activo, editar_activo).subscribe({
               next: (data) => {
                 Swal.close();
                 Swal.fire({
@@ -337,7 +360,7 @@ export class ActivosComponent {
     })
   }
 
-  obtener_usuarios(){
+  obtener_usuarios() {
     this.usuario_service.listar_usuarios().subscribe(data => {
       this.listaUsuarios = data;
     })
@@ -353,13 +376,13 @@ export class ActivosComponent {
     }
   }
 
-  obtener_id_activo(activo : Activo){
+  obtener_id_activo(activo: Activo) {
     this.id_activo = activo.id_activo;
   }
 
-  registrar_permiso(value : any){
+  registrar_permiso(value: any) {
     this.submitted = true;
-    if(this.form_registrar_permiso.valid){
+    if (this.form_registrar_permiso.valid) {
       Swal.fire({
         title: '¿Estas seguro de compartir este activo?',
         showDenyButton: true,
@@ -367,15 +390,15 @@ export class ActivosComponent {
         denyButtonText: `Cancelar`,
       }).then((result) => {
         if (result.isConfirmed) {
-          const permiso : Registrar_permiso = {
-            id_activo : this.id_activo,
-            id_usuario : this.selectedUsuarioId,
-            ver_informacion_basica : value.ver_informacion_basica,
-            ver_historial_servicios : value.ver_historial_servicios,
-            ver_novedades : value.ver_novedades,
-            registrar_servicio : value.registrar_servicio,
-            registrar_novedad : value.registrar_novedad,
-            ver_costo_servicio : value.ver_costo_servicio
+          const permiso: Registrar_permiso = {
+            id_activo: this.id_activo,
+            id_usuario: this.selectedUsuarioId,
+            ver_informacion_basica: value.ver_informacion_basica,
+            ver_historial_servicios: value.ver_historial_servicios,
+            ver_novedades: value.ver_novedades,
+            registrar_servicio: value.registrar_servicio,
+            registrar_novedad: value.registrar_novedad,
+            ver_costo_servicio: value.ver_costo_servicio
 
           }
 
@@ -399,19 +422,19 @@ export class ActivosComponent {
         }
 
       })
-      
+
     }
 
   }
 
   ajustarVerCosto() {
     const verHistorialServicios = this.form_registrar_permiso.get('ver_historial_servicios')?.value;
-  
+
     // Si ver_historial_servicios es "No", establecer ver_costo_servicio en "No"
     if (verHistorialServicios === 0) {
       this.form_registrar_permiso.get('ver_costo_servicio')?.setValue(0);
     }
   }
-  
+
 
 }
