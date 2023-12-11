@@ -10,6 +10,7 @@ export interface Activo {
     datos_relevantes: string;
     fecha_registro : string;
     subcliente : string;
+    usuario_propietario: string;
 
     imagen_equipo: string;
 
