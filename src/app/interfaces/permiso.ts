@@ -38,12 +38,14 @@ export interface Permisos_recibidos {
     activo_tipo_de_equipo:   string;
     id_activo:               string;
     id_permiso:              string;
+    usuario_propietario : string;
     registrar_novedad:       number;
     registrar_servicio:      number;
     ver_historial_servicios: number;
     ver_informacion_basica:  number;
     ver_novedades:           number;
     ver_costo_servicio :     number;
+    
 }
 
 export interface Permiso {

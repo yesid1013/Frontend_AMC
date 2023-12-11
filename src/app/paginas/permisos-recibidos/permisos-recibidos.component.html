@@ -33,6 +33,7 @@
                             <tr>
                                 <th scope="col">Id primario</th>
                                 <th scope="col">Tipo de equipo</th>
+                                <th scope="col">Dueño</th>
                                 <th scope="col">Información básica</th>
                                 <th scope="col">Historial de servicios</th>
                                 <th>Ver costo de servicios</th>
@@ -48,6 +49,8 @@
                                 <td>{{permiso.activo_id_primario}}</td>
 
                                 <td>{{permiso.activo_tipo_de_equipo}}</td>
+
+                                <td>{{permiso.usuario_propietario}}</td>
 
                                 <td>
                                     <p *ngIf="permiso.ver_informacion_basica == 1; else elseInformacion">Si</p>
