@@ -45,6 +45,7 @@ export class ActivosComponent {
   @ViewChild(DataTableDirective, { static: false })
   dtElement!: DataTableDirective;
 
+
   constructor(private communicationService: ComunicationService, private activo_service: ActivoService, private fb: FormBuilder, private subclienteService: SubclienteService, private permisos_service: PermisosService, private usuario_service: UsuarioService, private servicio_service: ServicioService) { }
 
   // Formulario de registrar activo
@@ -107,6 +108,18 @@ export class ActivosComponent {
     });
     this.listar_subclientes();
     this.obtener_usuarios();
+  }
+
+
+
+  
+
+  rerender(): void {
+    // Renderiza el DataTable nuevamente
+    this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+      dtInstance.destroy();
+      this.dtTrigger.next(null);
+    });
   }
 
   listar_activos() {

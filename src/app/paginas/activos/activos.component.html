@@ -53,6 +53,17 @@
                         </svg>
                     </button>
 
+                    <div class="row">
+                        <div class="col-4">
+                            <select class="form-select" aria-label="Default select example">
+                                <option selected>Seleccionar</option>
+                                <option value="propios">Activos Propios</option>
+                                <option value="compartidos">Activos Compartidos</option>
+                                <option value="todos">Todos los Activos</option>
+                            </select>
+                        </div>
+                    </div>
+
                     <div class="col-md-2 pe-0">
 
 
@@ -331,7 +342,7 @@
                                     <td>{{activo.id_secundario}}</td>
                                     <td>{{activo.tipo_de_equipo}}</td>
                                     <td>{{activo.fecha_registro}}</td>
-                                    <td>
+                                    <td >
                                         <!--Boton editar activo-->
                                         <button (click)="set_form_edit_activo(activo)" data-bs-toggle="modal"
                                             data-bs-target="#Modal_editar_activo" class="btn_opciones">
@@ -942,7 +953,8 @@
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary"
                                             data-bs-dismiss="modal">Cerrar</button>
-                                        <button (click)="registrar_servicio(form_servicio.value)" type="button" class="btn btn-primary">Registrar</button>
+                                        <button (click)="registrar_servicio(form_servicio.value)" type="button"
+                                            class="btn btn-primary">Registrar</button>
                                     </div>
                                 </div>
                             </div>
