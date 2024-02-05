@@ -91,6 +91,39 @@ export class DetalleActivoComponent {
     }
   }
 
+  descargarImagen() {
+    if(this.activoData?.imagen_equipo){
+      const fileRef = ref(this.storage, this.activoData.codigo_qr);
+      getDownloadURL(fileRef)
+      .then((url) => {
+        // `url` es la URL de descarga para 'images/stars.jpg'
+
+        // Descargar directamente usando XMLHttpRequest
+        const xhr = new XMLHttpRequest();
+        xhr.responseType = 'blob';
+        xhr.onload = () => {
+          const blob = xhr.response;
+          // Crear un enlace para iniciar la descarga
+          const a = document.createElement('a');
+          a.href = window.URL.createObjectURL(blob);
+          a.download = ''; // Nombre de archivo que deseas para la descarga
+          document.body.appendChild(a);
+          a.click();
+          document.body.removeChild(a);
+        };
+        xhr.open('GET', url);
+        xhr.send();
+      })
+      .catch((error) => {
+        // Manejar cualquier error
+        console.error('Error al obtener la URL de descarga:', error);
+      });
+
+    }
+    
+
+  }
+
   obtener_servicios() { //obtiene el historial de servicios del activo
     this.servicio_service.obtener_servicio(this.id_activo).subscribe(data => {
       this.ServicioData = data;
