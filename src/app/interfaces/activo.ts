@@ -44,11 +44,7 @@ export interface Activo {
     num_serie: string | null;
     datos_relevantes: string | null;
 
-    imagen_equipo: {
-      name : string | null;
-      mimeType: string | null;
-      content: string | null;
-    };
+    imagen_equipo: string | null;
 
     id_subcliente: string;
     publico : number;

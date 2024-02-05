@@ -15,6 +15,8 @@ import { UsuarioService } from 'src/app/servicios/usuario/usuario.service';
 import { Registrar_permiso } from 'src/app/interfaces/permiso';
 import { ServicioService } from 'src/app/servicios/servicio/servicio.service';
 import { RegistroServicio } from 'src/app/interfaces/servicio';
+import { Storage, ref, uploadBytes, listAll, getDownloadURL, deleteObject } from '@angular/fire/storage';
+
 
 @Component({
   selector: 'app-activos',
@@ -39,6 +41,10 @@ export class ActivosComponent {
   fileMimeType: string | null = null;
   fileContent: string | null = null;
 
+  file: any;
+  imgRef : any;
+  rutaImgaen : any;
+
   // DataTable
   dtOptions: ADTSettings = {};
   dtTrigger: Subject<any> = new Subject;
@@ -46,7 +52,7 @@ export class ActivosComponent {
   dtElement!: DataTableDirective;
 
 
-  constructor(private communicationService: ComunicationService, private activo_service: ActivoService, private fb: FormBuilder, private subclienteService: SubclienteService, private permisos_service: PermisosService, private usuario_service: UsuarioService, private servicio_service: ServicioService) { }
+  constructor(private communicationService: ComunicationService, private activo_service: ActivoService, private fb: FormBuilder, private subclienteService: SubclienteService, private permisos_service: PermisosService, private usuario_service: UsuarioService, private servicio_service: ServicioService,private storage: Storage) { }
 
   // Formulario de registrar activo
   form_activo: FormGroup = this.fb.group({
@@ -136,83 +142,151 @@ export class ActivosComponent {
   }
 
 
-  onFileSelected(event: any) {
-    const file = event.target.files[0];
+  onFileSelected($event: any) {
+    // const file = event.target.files[0];
 
-    if (file) {
-      this.selectedFile = file;
-      this.fileName = file.name;
-      this.fileMimeType = file.type;
+    // if (file) {
+    //   this.selectedFile = file;
+    //   this.fileName = file.name;
+    //   this.fileMimeType = file.type;
 
-      const reader = new FileReader();
-      reader.onload = (e: any) => {
-        this.fileContent = e.target.result.split(',')[1];
-      };
-      reader.readAsDataURL(file);
-    } else {
-      // Si no se seleccionó un archivo, asignar valores nulos
-      this.selectedFile = null;
-      this.fileName = null;
-      this.fileMimeType = null;
-      this.fileContent = null;
-    }
+    //   const reader = new FileReader();
+    //   reader.onload = (e: any) => {
+    //     this.fileContent = e.target.result.split(',')[1];
+    //   };
+    //   reader.readAsDataURL(file);
+    // } else {
+    //   // Si no se seleccionó un archivo, asignar valores nulos
+    //   this.selectedFile = null;
+    //   this.fileName = null;
+    //   this.fileMimeType = null;
+    //   this.fileContent = null;
+    // }
+    this.file = $event.target.files[0];
+
+    this.imgRef = ref(this.storage, `images/${this.file.name}`);
+
   }
 
+
+  // registrar_activo(value: any) {
+  //   this.submitted = true;
+  //   if (this.form_activo.valid) {
+
+  //     uploadBytes(this.imgRef, this.file).then(x => {
+  //       return this.rutaImgaen = x.ref.fullPath;
+  //     }).catch(error => console.log(error));
+
+  //     const activo: Registro_activo = {
+  //       id_primario: value.id_primario,
+  //       id_secundario: value.id_secundario,
+  //       ubicacion: value.ubicacion,
+  //       tipo_de_equipo: value.tipo_de_equipo,
+  //       fabricante: value.fabricante,
+  //       modelo: value.modelo,
+  //       num_serie: value.num_serie,
+  //       datos_relevantes: value.datos_relevantes,
+  //       id_subcliente: value.subcliente,
+
+  //       imagen_equipo: this.rutaImgaen,
+
+  //       publico: value.publico
+  //     };
+
+      
+
+  //     Swal.fire({
+  //       title: 'Cargando...',
+  //       allowOutsideClick: false,  // Impide que el usuario cierre el diálogo haciendo clic fuera
+  //       didOpen: () => {
+  //         Swal.showLoading();  // Muestra el spinner
+  //       }
+  //     });
+
+  //     this.activo_service.registrar_activo(activo).subscribe(data => {
+  //       Swal.close();
+  //       Swal.fire({
+  //         icon: 'success',
+  //         title: 'Servicio exitoso',
+  //         text: 'Activo creado correctamente',
+  //         allowOutsideClick: false,
+
+  //       }).then((result) => {
+  //         if (result.isConfirmed) {
+  //           this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {  //Renderizar datatable
+  //             dtInstance.destroy();
+  //             this.listar_activos();
+  //           });
+
+  //         }
+  //       });
+  //     });
+
+
+  //   }
+  // }
 
   registrar_activo(value: any) {
     this.submitted = true;
     if (this.form_activo.valid) {
-
-      const activo: Registro_activo = {
-        id_primario: value.id_primario,
-        id_secundario: value.id_secundario,
-        ubicacion: value.ubicacion,
-        tipo_de_equipo: value.tipo_de_equipo,
-        fabricante: value.fabricante,
-        modelo: value.modelo,
-        num_serie: value.num_serie,
-        datos_relevantes: value.datos_relevantes,
-        id_subcliente: value.subcliente,
-
-        imagen_equipo: {
-          name: this.fileName,
-          mimeType: this.fileMimeType,
-          content: this.fileContent
-        },
-
-        publico: value.publico
-      };
-
       Swal.fire({
         title: 'Cargando...',
-        allowOutsideClick: false,  // Impide que el usuario cierre el diálogo haciendo clic fuera
+        allowOutsideClick: false,
         didOpen: () => {
-          Swal.showLoading();  // Muestra el spinner
+          Swal.showLoading();
         }
       });
+      uploadBytes(this.imgRef, this.file)
+        .then(uploadResult => {
+          
 
-      this.activo_service.registrar_activo(activo).subscribe(data => {
-        Swal.close();
-        Swal.fire({
-          icon: 'success',
-          title: 'Servicio exitoso',
-          text: 'Activo creado correctamente',
-          allowOutsideClick: false,
-
-        }).then((result) => {
-          if (result.isConfirmed) {
-            this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {  //Renderizar datatable
-              dtInstance.destroy();
-              this.listar_activos();
-            });
-
-          }
+          this.rutaImgaen = uploadResult.ref.fullPath;
+  
+          const activo: Registro_activo = {
+            id_primario: value.id_primario,
+            id_secundario: value.id_secundario,
+            ubicacion: value.ubicacion,
+            tipo_de_equipo: value.tipo_de_equipo,
+            fabricante: value.fabricante,
+            modelo: value.modelo,
+            num_serie: value.num_serie,
+            datos_relevantes: value.datos_relevantes,
+            id_subcliente: value.subcliente,
+    
+            imagen_equipo: this.rutaImgaen,
+    
+            publico: value.publico
+          };
+  
+          
+  
+          // Llamada al servicio dentro del bloque then
+          return this.activo_service.registrar_activo(activo).toPromise(); // Convertir Observable a Promesa
+        })
+        .then(data => {
+          Swal.close();
+          Swal.fire({
+            icon: 'success',
+            title: 'Servicio exitoso',
+            text: 'Activo creado correctamente',
+            allowOutsideClick: false,
+          }).then((result) => {
+            if (result.isConfirmed) {
+              this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+                dtInstance.destroy();
+                this.listar_activos();
+              });
+            }
+          });
+        })
+        .catch(error => {
+          // Manejar el error aquí si es necesario
         });
-      });
-
-
     }
   }
+  
+
+  
 
   registrar_servicio(value : any){
     this.submitted = true;

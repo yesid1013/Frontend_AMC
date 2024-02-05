@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule,importProvidersFrom } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -10,6 +10,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { DataTablesModule } from "angular-datatables";
 import { ModalModule } from 'ngx-bootstrap/modal';
+import {provideFirebaseApp, initializeApp } from '@angular/fire/app';
+import { getStorage, provideStorage } from '@angular/fire/storage';
 
 //Social login
 import {
@@ -39,7 +41,14 @@ import { QrActivoComponent } from './paginas/qr-activo/qr-activo.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
-
+const firebaseConfig = {
+  apiKey: "AIzaSyCLsiCdQFqiUFRZ0RfNetVnHMoSHie0ydY",
+  authDomain: "storage-amc.firebaseapp.com",
+  projectId: "storage-amc",
+  storageBucket: "storage-amc.appspot.com",
+  messagingSenderId: "1055245546898",
+  appId: "1:1055245546898:web:12b8d0a25a80adfe063d4b"
+};
 
 @NgModule({
   declarations: [
@@ -73,6 +82,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     SocialLoginModule
   ],
   providers: [
+    importProvidersFrom([
+      provideFirebaseApp(() => initializeApp(firebaseConfig)),
+      provideStorage(() => getStorage())
+  
+    ]),
     {provide : HTTP_INTERCEPTORS, useClass: AddTokenInterceptor, multi : true},
     {
       provide: 'SocialAuthServiceConfig',
@@ -87,6 +101,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
       } as SocialAuthServiceConfig,
     },
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  
 })
 export class AppModule { }
