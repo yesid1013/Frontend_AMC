@@ -236,11 +236,11 @@ export class ActivosComponent {
           Swal.showLoading();
         }
       });
-      uploadBytes(this.imgRef, this.file)
+      uploadBytes(this.imgRef, this.file) //Alojar imagen en firebase storage
         .then(uploadResult => {
           
 
-          this.rutaImgaen = uploadResult.ref.fullPath;
+          this.rutaImgaen = uploadResult.ref.fullPath; //Obtengo la URL donde se encuentra la imagen
   
           const activo: Registro_activo = {
             id_primario: value.id_primario,
