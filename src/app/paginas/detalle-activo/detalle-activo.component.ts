@@ -38,7 +38,8 @@ export class DetalleActivoComponent {
   imageMimeType: string | null = null;
   imageContent: string | null = null;
 
-  imagen: any;
+  imagenActivo: any;
+  imagenQR: any;
 
   constructor(private route: ActivatedRoute,private communicationService: ComunicationService,private activoService: ActivoService,private servicio_service: ServicioService,private fb: FormBuilder,private costo_servicio_service : CostoServicioService,private activo_service: ActivoService, private storage : Storage){}
 
@@ -74,17 +75,31 @@ export class DetalleActivoComponent {
   obtener_activo() {
     this.activoService.info_activo(this.id_activo).subscribe(data => {
       this.activoData = data;
-      this.mostrarImagen();
+      this.mostrarImagenActivo();
+      this.mostrarImagenQR();
     });
   }
 
-  mostrarImagen() { //Mostrar imagen alojada en firebase
+  mostrarImagenActivo() { //Mostrar imagen alojada en firebase
     if (this.activoData && this.activoData.imagen_equipo) {
       const storageRef = ref(this.storage, this.activoData.imagen_equipo);
       
       // Obtener la URL de descarga
       getDownloadURL(storageRef).then(url => {
-        this.imagen = url;
+        this.imagenActivo = url;
+      }).catch(error => {
+        console.error('Error al obtener la URL de la imagen:', error);
+      });
+    }
+  }
+
+  mostrarImagenQR(){
+    if (this.activoData && this.activoData.codigo_qr) {
+      const storageRef = ref(this.storage, this.activoData.codigo_qr);
+      
+      // Obtener la URL de descarga
+      getDownloadURL(storageRef).then(url => {
+        this.imagenQR = url;
       }).catch(error => {
         console.error('Error al obtener la URL de la imagen:', error);
       });
@@ -92,7 +107,7 @@ export class DetalleActivoComponent {
   }
 
   descargarImagen() {
-    if(this.activoData?.imagen_equipo){
+    if(this.activoData?.codigo_qr){
       const fileRef = ref(this.storage, this.activoData.codigo_qr);
       getDownloadURL(fileRef)
       .then((url) => {

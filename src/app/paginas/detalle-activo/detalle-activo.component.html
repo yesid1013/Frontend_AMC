@@ -44,7 +44,7 @@
 
                         <!-- Columna Derecha (Imagen) -->
                         <div class="col-md-6 text-center">
-                            <img [src] = "imagen" width="300px" height="300px" alt="Imagen del Activo"
+                            <img [src] = "imagenActivo" width="300px" height="300px" alt="Imagen del Activo"
                                 class="img-fluid mx-auto d-block">
 
                             <button (click)="descargarImagen()">Descargar</button>
@@ -76,14 +76,14 @@
                                 </div>
                                 <div class="modal-body">
                                     <div class="text-center">
-                                        <img src={{activoData?.codigo_qr_content_link}} alt="">
+                                        <img src={{imagenQR}} alt="Codigo QR">
                                     </div>
                                     
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary"
                                         data-bs-dismiss="modal">Cerrar</button>
-                                    <a href={{activoData?.codigo_qr_content_link}} class="btn btn-primary">Descargar QR</a>
+                                    <button (click)="descargarImagen()" class="btn btn-primary">Descargar QR</button>
                                 </div>
                             </div>
                         </div>
