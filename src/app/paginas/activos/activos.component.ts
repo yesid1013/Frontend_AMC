@@ -15,7 +15,7 @@ import { UsuarioService } from 'src/app/servicios/usuario/usuario.service';
 import { Registrar_permiso } from 'src/app/interfaces/permiso';
 import { ServicioService } from 'src/app/servicios/servicio/servicio.service';
 import { RegistroServicio } from 'src/app/interfaces/servicio';
-import { Storage, ref, uploadBytes, listAll, getDownloadURL, deleteObject } from '@angular/fire/storage';
+import { Storage, ref, uploadBytes } from '@angular/fire/storage';
 
 
 @Component({
@@ -164,7 +164,7 @@ export class ActivosComponent {
     // }
     this.file = $event.target.files[0];
 
-    this.imgRef = ref(this.storage, `images/${this.file.name}`);
+    this.imgRef = ref(this.storage, `imagenes_activos/${this.file.name}`);
 
   }
 
