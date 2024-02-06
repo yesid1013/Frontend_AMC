@@ -39,28 +39,28 @@ export class DetalleActivoComponent {
   imageContent: string | null = null;
 
   file: any;
-  imgRef : any;
-  rutaArchivo : any;
+  imgRef: any;
+  rutaArchivo: any;
 
   imagenActivo: any;
   imagenQR: any;
 
-  constructor(private route: ActivatedRoute,private communicationService: ComunicationService,private activoService: ActivoService,private servicio_service: ServicioService,private fb: FormBuilder,private costo_servicio_service : CostoServicioService,private activo_service: ActivoService, private storage : Storage){}
+  constructor(private route: ActivatedRoute, private communicationService: ComunicationService, private activoService: ActivoService, private servicio_service: ServicioService, private fb: FormBuilder, private costo_servicio_service: CostoServicioService, private activo_service: ActivoService, private storage: Storage) { }
 
   form_informe_servicio: FormGroup = this.fb.group({
     informe: this.fb.control(null, [Validators.required])
   });
 
   form_costo_servicio: FormGroup = this.fb.group({
-    costo: this.fb.control(null,[Validators.required]),
-    cotizacion: this.fb.control(null,[Validators.required])
+    costo: this.fb.control(null, [Validators.required]),
+    cotizacion: this.fb.control(null, [Validators.required])
   });
 
   form_ficha_tecnica: FormGroup = this.fb.group({
     ficha_tecnica: this.fb.control(null, [Validators.required])
   });
 
-  ngOnInit(){
+  ngOnInit() {
     this.route.paramMap.subscribe(params => {
       this.id_activo = params.get('id_activo');
     });
@@ -87,7 +87,7 @@ export class DetalleActivoComponent {
   mostrarImagenActivo() { //Mostrar imagen alojada en firebase
     if (this.activoData && this.activoData.imagen_equipo) {
       const storageRef = ref(this.storage, this.activoData.imagen_equipo);
-      
+
       // Obtener la URL de descarga
       getDownloadURL(storageRef).then(url => {
         this.imagenActivo = url;
@@ -97,10 +97,10 @@ export class DetalleActivoComponent {
     }
   }
 
-  mostrarImagenQR(){
+  mostrarImagenQR() {
     if (this.activoData && this.activoData.codigo_qr) {
       const storageRef = ref(this.storage, this.activoData.codigo_qr);
-      
+
       // Obtener la URL de descarga
       getDownloadURL(storageRef).then(url => {
         this.imagenQR = url;
@@ -111,35 +111,35 @@ export class DetalleActivoComponent {
   }
 
   descargarImagen() {
-    if(this.activoData?.codigo_qr){
+    if (this.activoData?.codigo_qr) {
       const fileRef = ref(this.storage, this.activoData.codigo_qr);
       getDownloadURL(fileRef)
-      .then((url) => {
-        // `url` es la URL de descarga para 'images/stars.jpg'
+        .then((url) => {
+          // `url` es la URL de descarga para 'images/stars.jpg'
 
-        // Descargar directamente usando XMLHttpRequest
-        const xhr = new XMLHttpRequest();
-        xhr.responseType = 'blob';
-        xhr.onload = () => {
-          const blob = xhr.response;
-          // Crear un enlace para iniciar la descarga
-          const a = document.createElement('a');
-          a.href = window.URL.createObjectURL(blob);
-          a.download = ''; // Nombre de archivo que deseas para la descarga
-          document.body.appendChild(a);
-          a.click();
-          document.body.removeChild(a);
-        };
-        xhr.open('GET', url);
-        xhr.send();
-      })
-      .catch((error) => {
-        // Manejar cualquier error
-        console.error('Error al obtener la URL de descarga:', error);
-      });
+          // Descargar directamente usando XMLHttpRequest
+          const xhr = new XMLHttpRequest();
+          xhr.responseType = 'blob';
+          xhr.onload = () => {
+            const blob = xhr.response;
+            // Crear un enlace para iniciar la descarga
+            const a = document.createElement('a');
+            a.href = window.URL.createObjectURL(blob);
+            a.download = ''; // Nombre de archivo que deseas para la descarga
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+          };
+          xhr.open('GET', url);
+          xhr.send();
+        })
+        .catch((error) => {
+          // Manejar cualquier error
+          console.error('Error al obtener la URL de descarga:', error);
+        });
 
     }
-    
+
 
   }
 
@@ -157,15 +157,15 @@ export class DetalleActivoComponent {
     this.form_informe_servicio.reset();
   }
 
-  onFileSelected($event: any, carpeta : string) {
+  onFileSelected($event: any, carpeta: string) {
     this.file = $event.target.files[0];
 
     this.imgRef = ref(this.storage, `${carpeta}${this.file.name}`);
   }
 
-  adjuntar_informe(){
+  adjuntar_informe() {
     this.submitted = true;
-    if (this.form_informe_servicio.valid){
+    if (this.form_informe_servicio.valid) {
       Swal.fire({
         title: '¿Estás seguro de adjuntar este informe?',
         showDenyButton: true,
@@ -217,9 +217,9 @@ export class DetalleActivoComponent {
     }
   }
 
-  adjuntar_cotizacion(value : any){
+  adjuntar_cotizacion(value: any) {
     this.submitted = true;
-    if (this.form_costo_servicio.valid){
+    if (this.form_costo_servicio.valid) {
       Swal.fire({
         title: '¿Estás seguro de adjuntar esta cotización?',
         showDenyButton: true,
@@ -228,7 +228,7 @@ export class DetalleActivoComponent {
       }).then((result) => {
         if (result.isConfirmed) {
           const costo_servicio: Adjuntar_cotizacion = {
-            costo : value.costo,
+            costo: value.costo,
             documento_cotizacion: {
               name: this.imageName,
               mimeType: this.imageMimeType,
@@ -302,19 +302,27 @@ export class DetalleActivoComponent {
             return this.activo_service.adjuntar_ficha_tecnica(this.id_activo, ficha_tecnica).toPromise();
 
           }).then(data => {
-            Swal.close();
-            Swal.fire({
-              icon: 'success',
-              title: 'Servicio exitoso',
-              text: 'Ficha técnica adjuntada correctamente',
-              allowOutsideClick: false,
-              footer: `<a href="${data.url_archivo}" target="_blank">Ver ficha técnica</a>`
-            }).then((result) => {
-              if (result.isConfirmed) {
-                this.obtener_activo()
-              }
-              this.submitted = false;
+            const storageRef = ref(this.storage, data.url_archivo);
+            // Obtener la URL de descarga
+            getDownloadURL(storageRef).then(url => {
+              Swal.close();
+              Swal.fire({
+                icon: 'success',
+                title: 'Servicio exitoso',
+                text: 'Ficha técnica adjuntada correctamente',
+                allowOutsideClick: false,
+                footer: `<a href="${url}" target="_blank">Ver ficha técnica</a>`
+              }).then((result) => {
+                if (result.isConfirmed) {
+                  this.obtener_activo()
+                }
+                this.submitted = false;
+              });
+            }).catch(error => {
+              console.error('Error al obtener la URL de la imagen:', error);
             });
+            
+            
 
 
           })
@@ -330,6 +338,6 @@ export class DetalleActivoComponent {
     }
   }
 
-  
+
 
 }
