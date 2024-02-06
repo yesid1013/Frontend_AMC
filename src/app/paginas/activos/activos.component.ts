@@ -42,8 +42,8 @@ export class ActivosComponent {
   fileContent: string | null = null;
 
   file: any;
-  imgRef : any;
-  rutaImgaen : any;
+  refFile : any;
+  rutaArchivo : any;
 
   // DataTable
   dtOptions: ADTSettings = {};
@@ -142,29 +142,11 @@ export class ActivosComponent {
   }
 
 
-  onFileSelected($event: any) {
-    // const file = event.target.files[0];
+  onFileSelected($event: any, carpeta: string) {
 
-    // if (file) {
-    //   this.selectedFile = file;
-    //   this.fileName = file.name;
-    //   this.fileMimeType = file.type;
-
-    //   const reader = new FileReader();
-    //   reader.onload = (e: any) => {
-    //     this.fileContent = e.target.result.split(',')[1];
-    //   };
-    //   reader.readAsDataURL(file);
-    // } else {
-    //   // Si no se seleccionó un archivo, asignar valores nulos
-    //   this.selectedFile = null;
-    //   this.fileName = null;
-    //   this.fileMimeType = null;
-    //   this.fileContent = null;
-    // }
     this.file = $event.target.files[0];
 
-    this.imgRef = ref(this.storage, `imagenes_activos/${this.file.name}`);
+    this.refFile = ref(this.storage, `${carpeta}${this.file.name}`);
 
   }
 
@@ -236,11 +218,11 @@ export class ActivosComponent {
           Swal.showLoading();
         }
       });
-      uploadBytes(this.imgRef, this.file) //Alojar imagen en firebase storage
+      uploadBytes(this.refFile, this.file) //Alojar imagen en firebase storage
         .then(uploadResult => {
           
 
-          this.rutaImgaen = uploadResult.ref.fullPath; //Obtengo la URL donde se encuentra la imagen
+          this.rutaArchivo = uploadResult.ref.fullPath; //Obtengo la ruta donde se encuentra la imagen
   
           const activo: Registro_activo = {
             id_primario: value.id_primario,
@@ -253,7 +235,7 @@ export class ActivosComponent {
             datos_relevantes: value.datos_relevantes,
             id_subcliente: value.subcliente,
     
-            imagen_equipo: this.rutaImgaen,
+            imagen_equipo: this.rutaArchivo,
     
             publico: value.publico
           };
@@ -294,20 +276,6 @@ export class ActivosComponent {
     const fechaFormateada = fecha.toISOString();
     if (this.form_servicio.valid){
 
-      const servicio : RegistroServicio = {
-        fecha_ejecucion : fechaFormateada,
-        descripcion : value.descripcion,
-        id_tipo_servicio: value.tipo_de_servicio,
-        observaciones : value.observaciones,
-        observaciones_usuario : value.observaciones_usuario,
-
-        orden_de_servicio : {
-          name :this.fileName,
-          content : this.fileContent,
-          mimeType : this.fileMimeType
-        }
-      };
-
       Swal.fire({
         title: 'Cargando...',
         allowOutsideClick: false,  // Impide que el usuario cierre el diálogo haciendo clic fuera
@@ -315,8 +283,24 @@ export class ActivosComponent {
           Swal.showLoading();  // Muestra el spinner
         }
       });
-      
-      this.servicio_service.registrar_servicio(servicio,this.id_activo).subscribe(data => {
+
+      uploadBytes(this.refFile, this.file).then(uploadResult => {
+        this.rutaArchivo = uploadResult.ref.fullPath; //Obtengo la ruta donde se encuentra la imagen
+
+        const servicio : RegistroServicio = {
+          fecha_ejecucion : fechaFormateada,
+          descripcion : value.descripcion,
+          id_tipo_servicio: value.tipo_de_servicio,
+          observaciones : value.observaciones,
+          observaciones_usuario : value.observaciones_usuario,
+          orden_de_servicio : this.rutaArchivo
+        };
+
+        return this.servicio_service.registrar_servicio(servicio,this.id_activo).toPromise();
+
+
+      }).then(data => {
+        Swal.close();
         Swal.fire({
           icon: 'success',
           title: 'Registro exitoso',
@@ -327,7 +311,11 @@ export class ActivosComponent {
 
           }
         });
+
+      }).catch(error => {
+        console.log(error)
       });
+
     }
   }
 
