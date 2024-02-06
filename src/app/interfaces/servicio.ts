@@ -45,7 +45,7 @@ export interface RegistroServicio {
     descripcion: string;
     observaciones: string | null;
     observaciones_usuario: string | null;
-    orden_de_servicio: OrdenDeServicio;
+    orden_de_servicio: string | null;
 }
 
 export interface OrdenDeServicio {
