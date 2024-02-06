@@ -44,6 +44,7 @@ export class DetalleActivoComponent {
 
   imagenActivo: any;
   imagenQR: any;
+  urlFichaTecnica : any;
 
   constructor(private route: ActivatedRoute, private communicationService: ComunicationService, private activoService: ActivoService, private servicio_service: ServicioService, private fb: FormBuilder, private costo_servicio_service: CostoServicioService, private activo_service: ActivoService, private storage: Storage) { }
 
@@ -81,6 +82,7 @@ export class DetalleActivoComponent {
       this.activoData = data;
       this.mostrarImagenActivo();
       this.mostrarImagenQR();
+      this.verFichaTecnica()
     });
   }
 
@@ -107,6 +109,20 @@ export class DetalleActivoComponent {
       }).catch(error => {
         console.error('Error al obtener la URL de la imagen:', error);
       });
+    }
+  }
+
+  verFichaTecnica(){
+    if (this.activoData && this.activoData.ficha_tecnica){
+      const storageRef = ref(this.storage, this.activoData.ficha_tecnica);
+
+      // Obtener la URL de descarga
+      getDownloadURL(storageRef).then(url => {
+        this.urlFichaTecnica = url;
+      }).catch(error => {
+        console.error('Error al obtener la URL de la imagen:', error);
+      });
+
     }
   }
 
