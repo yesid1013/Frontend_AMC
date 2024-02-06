@@ -161,25 +161,6 @@ export class DetalleActivoComponent {
     this.file = $event.target.files[0];
 
     this.imgRef = ref(this.storage, `${carpeta}${this.file.name}`);
-    // const file = event.target.files[0];
-
-    // if (file) {
-    //   this.selectedFile = file;
-    //   this.imageName = file.name;
-    //   this.imageMimeType = file.type;
-
-    //   const reader = new FileReader();
-    //   reader.onload = (e: any) => {
-    //     this.imageContent = e.target.result.split(',')[1];
-    //   };
-    //   reader.readAsDataURL(file);
-    // } else {
-    //   // Si no se seleccionó un archivo, asignar valores nulos
-    //   this.selectedFile = null;
-    //   this.imageName = null;
-    //   this.imageMimeType = null;
-    //   this.imageContent = null;
-    // }
   }
 
   adjuntar_informe(){
@@ -338,25 +319,6 @@ export class DetalleActivoComponent {
 
           })
 
-          // this.activo_service.adjuntar_ficha_tecnica(this.id_activo, ficha_tecnica).subscribe({
-          //   next: (data) => {
-          //     Swal.close();
-          //     Swal.fire({
-          //       icon: 'success',
-          //       title: 'Servicio exitoso',
-          //       text: 'Ficha técnica adjuntada correctamente',
-          //       allowOutsideClick: false,
-          //       footer: `<a href="${data.url_archivo}" target="_blank">Ver ficha técnica</a>`
-          //     }).then((result) => {
-          //       if (result.isConfirmed) {
-          //         this.obtener_activo()
-          //       }
-          //       this.submitted = false;
-          //     });
-
-          //   }
-          // }
-          // );
 
         }
       })
