@@ -201,7 +201,7 @@
                                                 <div class="col-md-6 ">
                                                     <div class="mb-3">
                                                         <input formControlName="imagen_equipo" class="form-control"
-                                                            type="file" (change)="onFileSelected($event)"
+                                                            type="file" (change)="onFileSelected($event, 'imagenes_activos/')"
                                                             accept="image/jpeg, image/png" id="formFile">
                                                         <label for="formFile" class="form-label">Cargar imagen</label>
                                                     </div>
@@ -595,7 +595,7 @@
 
                                                 <div *ngIf="imagen" class="col-md-6">
                                                     <input class="form-control" type="file"
-                                                        (change)="onFileSelected($event)" accept="image/jpeg, image/png"
+                                                        (change)="onFileSelected($event,'imagenes_activos')" accept="image/jpeg, image/png"
                                                         id="formFile">
                                                     <label for="formFile" class="form-label">Cargar imagen</label>
 
@@ -943,7 +943,7 @@
 
                                             <div class="row p-1">
                                                 <input formControlName="orden_de_servicio"
-                                                    (change)="onFileSelected($event)" class="form-control" type="file"
+                                                    (change)="onFileSelected($event, 'ordenes_de_servicio/')" class="form-control" type="file"
                                                     accept="application/pdf" id="formFile">
                                                 <label for="formFile" class="form-label">Adjuntar orden de
                                                     servicio</label>
