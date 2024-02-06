@@ -38,6 +38,10 @@ export class DetalleActivoComponent {
   imageMimeType: string | null = null;
   imageContent: string | null = null;
 
+  file: any;
+  imgRef : any;
+  rutaArchivo : any;
+
   imagenActivo: any;
   imagenQR: any;
 
@@ -153,26 +157,29 @@ export class DetalleActivoComponent {
     this.form_informe_servicio.reset();
   }
 
-  onFileSelected(event: any) {
-    const file = event.target.files[0];
+  onFileSelected($event: any, carpeta : string) {
+    this.file = $event.target.files[0];
 
-    if (file) {
-      this.selectedFile = file;
-      this.imageName = file.name;
-      this.imageMimeType = file.type;
+    this.imgRef = ref(this.storage, `${carpeta}${this.file.name}`);
+    // const file = event.target.files[0];
 
-      const reader = new FileReader();
-      reader.onload = (e: any) => {
-        this.imageContent = e.target.result.split(',')[1];
-      };
-      reader.readAsDataURL(file);
-    } else {
-      // Si no se seleccionó un archivo, asignar valores nulos
-      this.selectedFile = null;
-      this.imageName = null;
-      this.imageMimeType = null;
-      this.imageContent = null;
-    }
+    // if (file) {
+    //   this.selectedFile = file;
+    //   this.imageName = file.name;
+    //   this.imageMimeType = file.type;
+
+    //   const reader = new FileReader();
+    //   reader.onload = (e: any) => {
+    //     this.imageContent = e.target.result.split(',')[1];
+    //   };
+    //   reader.readAsDataURL(file);
+    // } else {
+    //   // Si no se seleccionó un archivo, asignar valores nulos
+    //   this.selectedFile = null;
+    //   this.imageName = null;
+    //   this.imageMimeType = null;
+    //   this.imageContent = null;
+    // }
   }
 
   adjuntar_informe(){
@@ -295,13 +302,6 @@ export class DetalleActivoComponent {
         denyButtonText: `Cancelar`,
       }).then((result) => {
         if (result.isConfirmed) {
-          const ficha_tecnica: Adjuntar_ficha_tecnica = {
-            ficha_tecnica: {
-              name: this.imageName,
-              mimeType: this.imageMimeType,
-              content: this.imageContent
-            }
-          }
 
           Swal.fire({
             title: 'Cargando...',
@@ -311,25 +311,52 @@ export class DetalleActivoComponent {
             }
           });
 
-          this.activo_service.adjuntar_ficha_tecnica(this.id_activo, ficha_tecnica).subscribe({
-            next: (data) => {
-              Swal.close();
-              Swal.fire({
-                icon: 'success',
-                title: 'Servicio exitoso',
-                text: 'Ficha técnica adjuntada correctamente',
-                allowOutsideClick: false,
-                footer: `<a href="${data.url_archivo}" target="_blank">Ver ficha técnica</a>`
-              }).then((result) => {
-                if (result.isConfirmed) {
-                  this.obtener_activo()
-                }
-                this.submitted = false;
-              });
+          uploadBytes(this.imgRef, this.file).then(uploadResult => {
+            this.rutaArchivo = uploadResult.ref.fullPath;
 
+            const ficha_tecnica: Adjuntar_ficha_tecnica = {
+              ficha_tecnica: this.rutaArchivo
             }
-          }
-          );
+
+            return this.activo_service.adjuntar_ficha_tecnica(this.id_activo, ficha_tecnica).toPromise();
+
+          }).then(data => {
+            Swal.close();
+            Swal.fire({
+              icon: 'success',
+              title: 'Servicio exitoso',
+              text: 'Ficha técnica adjuntada correctamente',
+              allowOutsideClick: false,
+              footer: `<a href="${data.url_archivo}" target="_blank">Ver ficha técnica</a>`
+            }).then((result) => {
+              if (result.isConfirmed) {
+                this.obtener_activo()
+              }
+              this.submitted = false;
+            });
+
+
+          })
+
+          // this.activo_service.adjuntar_ficha_tecnica(this.id_activo, ficha_tecnica).subscribe({
+          //   next: (data) => {
+          //     Swal.close();
+          //     Swal.fire({
+          //       icon: 'success',
+          //       title: 'Servicio exitoso',
+          //       text: 'Ficha técnica adjuntada correctamente',
+          //       allowOutsideClick: false,
+          //       footer: `<a href="${data.url_archivo}" target="_blank">Ver ficha técnica</a>`
+          //     }).then((result) => {
+          //       if (result.isConfirmed) {
+          //         this.obtener_activo()
+          //       }
+          //       this.submitted = false;
+          //     });
+
+          //   }
+          // }
+          // );
 
         }
       })
