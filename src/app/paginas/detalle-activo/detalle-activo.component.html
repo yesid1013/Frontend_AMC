@@ -55,7 +55,7 @@
                             class="fi fi-br-document me-2"></i>Adjuntar ficha técnica</button>
 
                     <a *ngIf="activoData?.ficha_tecnica" href={{urlFichaTecnica}} target="_blank"
-                        class="btn_ficha mb-2"><i class="fi fi-br-document me-2"></i>Ver ficha técnica</a>
+                        class="btn btn_ficha mb-2"><i class="fi fi-br-document me-2"></i>Ver ficha técnica</a>
 
                     <!-- Boton para ver codigo QR -->
                     <button type="button" class="btn btn_ficha mx-3 mb-2" data-bs-toggle="modal"
@@ -113,8 +113,7 @@
                                 <td>{{servicio.descripcion}}</td>
                                 <td>
                                     <!--Boton de ver informe-->
-                                    <a class="btn_opciones" *ngIf="servicio.informe" target="_blank"
-                                        href={{servicio.informe}}>
+                                    <button (click)="verDocumento(servicio.informe)" class="btn_opciones" *ngIf="servicio.informe">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-eye"
                                             width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5"
                                             stroke="#00abfb" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -123,7 +122,7 @@
                                             <path
                                                 d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6" />
                                         </svg>
-                                    </a>
+                                    </button>
 
                                     <!--Boton de adjuntar informe-->
                                     <button (click)="obtener_id_servicio(servicio)" *ngIf="!servicio.informe"

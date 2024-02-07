@@ -127,6 +127,20 @@ export class DetalleActivoComponent {
     }
   }
 
+  verDocumento(rutaArchivo : string){
+    if(rutaArchivo){
+      const storageRef = ref(this.storage, rutaArchivo);
+      // Obtener la URL de descarga
+      getDownloadURL(storageRef).then(url => {
+        window.open(url, '_blank')
+      }).catch(error => {
+        console.error('Error al obtener la URL de la imagen:', error);
+      });
+
+    }
+
+  }
+
   descargarImagen() {
     if (this.activoData?.codigo_qr) {
       const fileRef = ref(this.storage, this.activoData.codigo_qr);
