@@ -201,11 +201,7 @@ export class InformacionPermisosComponent {
           observaciones: value.observaciones,
           observaciones_usuario: value.observaciones_usuario,
 
-          orden_de_servicio: {
-            name: this.fileName,
-            content: this.fileContent,
-            mimeType: this.fileMimeType
-          }
+          orden_de_servicio: ""
         };
 
         Swal.fire({
