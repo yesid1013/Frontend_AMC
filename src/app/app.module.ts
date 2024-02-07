@@ -30,7 +30,6 @@ import { FichaTecnicaComponent } from './paginas/ficha-tecnica/ficha-tecnica.com
 import { InformeServicioComponent } from './paginas/informe-servicio/informe-servicio.component';
 import { SpinnerComponent } from './componentes/spinner/spinner.component';
 import { AddTokenInterceptor } from './utils/add-token.interceptor';
-import { CostoServicioComponent } from './paginas/costo-servicio/costo-servicio.component';
 import { PermisosComponent } from './paginas/permisos/permisos.component';
 import { PermisosRecibidosComponent } from './paginas/permisos-recibidos/permisos-recibidos.component';
 import { SearchFilterPipe } from './utils/search-filter.pipe';
@@ -60,7 +59,6 @@ const firebaseConfig = {
     FichaTecnicaComponent,
     InformeServicioComponent,
     SpinnerComponent,
-    CostoServicioComponent,
     PermisosComponent,
     PermisosRecibidosComponent,
     SearchFilterPipe,
