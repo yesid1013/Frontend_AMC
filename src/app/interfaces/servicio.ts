@@ -67,11 +67,7 @@ export interface EditarServicio {
 }
 
 export interface Adjuntar_informe_servicio {
-    informe_servicio: {
-        name: string | null;
-        mimeType: string | null;
-        content: string | null;
-    };
+    informe_servicio: string | null;
 }
 
 export interface Adjuntar_cotizacion {
