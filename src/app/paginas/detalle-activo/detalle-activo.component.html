@@ -141,8 +141,7 @@
 
                                 <td>
                                     <!--Boton de ver costo-->
-                                    <a class="btn_opciones" *ngIf="servicio.costo" target="_blank"
-                                        href={{servicio.costo}}>
+                                    <button (click)="verDocumento(servicio.costo)" class="btn_opciones" *ngIf="servicio.costo">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-eye"
                                             width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5"
                                             stroke="#00abfb" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -151,7 +150,7 @@
                                             <path
                                                 d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6" />
                                         </svg>
-                                    </a>
+                                    </button>
 
                                     <!--Boton de adjuntar costo-->
                                     <button (click)="obtener_id_servicio(servicio)" *ngIf="!servicio.costo"
