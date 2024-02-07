@@ -12,6 +12,7 @@ import { ADTSettings } from 'angular-datatables/src/models/settings';
 import { Subject } from 'rxjs';
 import { DataTableDirective } from 'angular-datatables';
 import { Storage, ref, uploadBytes, getDownloadURL, deleteObject } from '@angular/fire/storage';
+import { data } from 'jquery';
 
 
 @Component({
@@ -189,13 +190,6 @@ export class DetalleActivoComponent {
         denyButtonText: `Cancelar`,
       }).then((result) => {
         if (result.isConfirmed) {
-          const informe_servicio: Adjuntar_informe_servicio = {
-            informe_servicio: {
-              name: this.imageName,
-              mimeType: this.imageMimeType,
-              content: this.imageContent
-            }
-          }
 
           Swal.fire({
             title: 'Cargando...',
@@ -205,15 +199,26 @@ export class DetalleActivoComponent {
             }
           });
 
-          this.servicio_service.adjuntar_informe(this.id_servicio, informe_servicio).subscribe({
-            next: (data) => {
+          uploadBytes(this.imgRef, this.file).then(uploadResult => {
+            this.rutaArchivo = uploadResult.ref.fullPath;
+
+            const informe_servicio: Adjuntar_informe_servicio = {
+              informe_servicio: this.rutaArchivo
+            }
+
+            return this.servicio_service.adjuntar_informe(this.id_servicio,informe_servicio).toPromise()
+
+          }).then(data => {
+            const storageRef = ref(this.storage, data.url_archivo);
+
+            getDownloadURL(storageRef).then(url => {
               Swal.close();
               Swal.fire({
                 icon: 'success',
                 title: 'Servicio exitoso',
                 text: 'Informe adjuntado correctamente',
                 allowOutsideClick: false,
-                footer: `<a href="${data.url_archivo}" target="_blank">Ver informe</a>`
+                footer: `<a href="${url}" target="_blank">Ver informe</a>`
               }).then((result) => {
                 if (result.isConfirmed) {
                   this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {  //Renderizar datatable
@@ -224,9 +229,12 @@ export class DetalleActivoComponent {
                 this.submitted = false;
               });
 
-            }
-          }
-          );
+            }).catch(error => {
+              console.error('Error al obtener la URL de la imagen:', error);
+            });
+            
+
+          })
         }
       })
 
