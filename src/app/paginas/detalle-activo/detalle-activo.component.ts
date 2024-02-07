@@ -141,7 +141,7 @@ export class DetalleActivoComponent {
 
   }
 
-  descargarImagen() {
+  descargarImagen() { //Funcion para descarga la imagen del codigo QR
     if (this.activoData?.codigo_qr) {
       const fileRef = ref(this.storage, this.activoData.codigo_qr);
       getDownloadURL(fileRef)
@@ -265,14 +265,6 @@ export class DetalleActivoComponent {
         denyButtonText: `Cancelar`,
       }).then((result) => {
         if (result.isConfirmed) {
-          const costo_servicio: Adjuntar_cotizacion = {
-            costo: value.costo,
-            documento_cotizacion: {
-              name: this.imageName,
-              mimeType: this.imageMimeType,
-              content: this.imageContent
-            }
-          }
 
           Swal.fire({
             title: 'Cargando...',
@@ -282,15 +274,27 @@ export class DetalleActivoComponent {
             }
           });
 
-          this.costo_servicio_service.adjuntar_cotizacion(this.id_servicio, costo_servicio).subscribe({
-            next: (data) => {
+          uploadBytes(this.imgRef, this.file).then(uploadResult => {
+            this.rutaArchivo = uploadResult.ref.fullPath;
+
+            const costo_servicio: Adjuntar_cotizacion = {
+              costo: value.costo,
+              documento_cotizacion: this.rutaArchivo
+            }
+
+            return this.costo_servicio_service.adjuntar_cotizacion(this.id_servicio, costo_servicio).toPromise()
+
+          }).then(data => {
+            const storageRef = ref(this.storage, data.url_archivo);
+
+            getDownloadURL(storageRef).then(url => {
               Swal.close();
               Swal.fire({
                 icon: 'success',
                 title: 'Servicio exitoso',
                 text: 'Cotización adjuntada correctamente',
                 allowOutsideClick: false,
-                footer: `<a href="${data.url_archivo}" target="_blank">Ver Cotización</a>`
+                footer: `<a href="${url}" target="_blank">Ver Cotización</a>`
               }).then((result) => {
                 if (result.isConfirmed) {
                   this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {  //Renderizar datatable
@@ -300,10 +304,9 @@ export class DetalleActivoComponent {
                 }
                 this.submitted = false;
               });
+            })
 
-            }
-          }
-          );
+          })
 
         }
       })

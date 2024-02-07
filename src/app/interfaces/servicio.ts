@@ -72,10 +72,6 @@ export interface Adjuntar_informe_servicio {
 
 export interface Adjuntar_cotizacion {
     costo : number;
-    documento_cotizacion: {
-        name: string | null;
-        mimeType: string | null;
-        content: string | null;
-    };
+    documento_cotizacion: string | null;
 }
 
