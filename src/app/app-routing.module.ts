@@ -3,7 +3,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { SidebarComponent } from './componentes/sidebar/sidebar.component';
 import { LoginComponent } from './paginas/login/login.component';
 import { ActivosComponent } from './paginas/activos/activos.component';
-import { InformeServicioComponent } from './paginas/informe-servicio/informe-servicio.component';
 import { SpinnerComponent } from './componentes/spinner/spinner.component';
 import { AuthGuard } from './utils/auth.guard';
 import { PermisosComponent } from './paginas/permisos/permisos.component';
@@ -28,11 +27,6 @@ const routes: Routes = [
   {
     path: 'login',
     component: LoginComponent
-  },
-  {
-    path: 'informe_servicio',
-    component: InformeServicioComponent,
-    canActivate : [AuthGuard]
   },
   {
     path : 'spinner',
