@@ -26,7 +26,6 @@ import { SidebarComponent } from './componentes/sidebar/sidebar.component';
 import { NavbarComponent } from './componentes/navbar/navbar.component';
 import { ActivosComponent } from './paginas/activos/activos.component';
 import { FooterComponent } from './componentes/footer/footer.component';
-import { FichaTecnicaComponent } from './paginas/ficha-tecnica/ficha-tecnica.component';
 import { InformeServicioComponent } from './paginas/informe-servicio/informe-servicio.component';
 import { SpinnerComponent } from './componentes/spinner/spinner.component';
 import { AddTokenInterceptor } from './utils/add-token.interceptor';
@@ -56,7 +55,6 @@ const firebaseConfig = {
     NavbarComponent,
     ActivosComponent,
     FooterComponent,
-    FichaTecnicaComponent,
     InformeServicioComponent,
     SpinnerComponent,
     PermisosComponent,
