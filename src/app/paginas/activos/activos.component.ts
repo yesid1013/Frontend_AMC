@@ -16,6 +16,7 @@ import { Registrar_permiso } from 'src/app/interfaces/permiso';
 import { ServicioService } from 'src/app/servicios/servicio/servicio.service';
 import { RegistroServicio } from 'src/app/interfaces/servicio';
 import { Storage, ref, uploadBytes } from '@angular/fire/storage';
+import { AuthGoogleService } from 'src/app/servicios/auth-google/auth-google.service';
 
 
 @Component({
@@ -52,7 +53,12 @@ export class ActivosComponent {
   dtElement!: DataTableDirective;
 
 
-  constructor(private communicationService: ComunicationService, private activo_service: ActivoService, private fb: FormBuilder, private subclienteService: SubclienteService, private permisos_service: PermisosService, private usuario_service: UsuarioService, private servicio_service: ServicioService,private storage: Storage) { }
+  constructor(private communicationService: ComunicationService, private activo_service: ActivoService, private fb: FormBuilder, private subclienteService: SubclienteService, private permisos_service: PermisosService, private usuario_service: UsuarioService, private servicio_service: ServicioService,private storage: Storage,private authGoogleService:  AuthGoogleService) { }
+
+  showData(){
+    const data= JSON.stringify(this.authGoogleService.getProfile());
+    console.log(data)
+  }
 
   // Formulario de registrar activo
   form_activo: FormGroup = this.fb.group({
