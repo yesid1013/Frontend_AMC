@@ -30,6 +30,7 @@ import { InformacionPermisosComponent } from './paginas/informacion-permisos/inf
 import { DetalleActivoComponent } from './paginas/detalle-activo/detalle-activo.component';
 import { QrActivoComponent } from './paginas/qr-activo/qr-activo.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { OAuthModule } from 'angular-oauth2-oidc';
 
 
 const firebaseConfig = {
@@ -66,6 +67,7 @@ const firebaseConfig = {
     DataTablesModule,
     BrowserAnimationsModule,
     ModalModule.forRoot(),
+    OAuthModule.forRoot()
   ],
   providers: [
     importProvidersFrom([
