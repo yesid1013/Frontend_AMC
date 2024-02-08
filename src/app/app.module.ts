@@ -13,12 +13,7 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 import {provideFirebaseApp, initializeApp } from '@angular/fire/app';
 import { getStorage, provideStorage } from '@angular/fire/storage';
 
-//Social login
-import {
-  SocialLoginModule,
-  SocialAuthServiceConfig,
-} from '@abacritt/angularx-social-login';
-import { GoogleLoginProvider } from '@abacritt/angularx-social-login';
+
 
 // Componentes
 import { LoginComponent } from './paginas/login/login.component';
@@ -71,7 +66,6 @@ const firebaseConfig = {
     DataTablesModule,
     BrowserAnimationsModule,
     ModalModule.forRoot(),
-    SocialLoginModule
   ],
   providers: [
     importProvidersFrom([
@@ -80,18 +74,6 @@ const firebaseConfig = {
   
     ]),
     {provide : HTTP_INTERCEPTORS, useClass: AddTokenInterceptor, multi : true},
-    {
-      provide: 'SocialAuthServiceConfig',
-      useValue: {
-        autoLogin: false,
-        providers: [
-          {
-            id: GoogleLoginProvider.PROVIDER_ID,
-            provider: new GoogleLoginProvider('166094090542-57ejomp43rk14js6c490p23up87k239r.apps.googleusercontent.com'),
-          },
-        ],
-      } as SocialAuthServiceConfig,
-    },
   ],
   bootstrap: [AppComponent],
   

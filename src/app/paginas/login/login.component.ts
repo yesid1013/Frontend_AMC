@@ -21,20 +21,7 @@ export class LoginComponent implements OnInit {
   constructor(private fb: FormBuilder, public router: Router, private usarioService: UsuarioService, private errorService : ErrorService) { }
   
   ngOnInit(): void {
-    google.accounts.id.initialize({
-      client_id: '166094090542-57ejomp43rk14js6c490p23up87k239r.apps.googleusercontent.com',
-      callback : (resp : any) =>{
-        console.log(resp);
 
-      }
-    });
-
-    google.accounts.id.renderButton(document.getElementById("google-btn"), {
-      theme: 'filled_blue',
-      size: 'large',
-      shape: 'pill',
-      width: 350,
-    })
   }
 
   // Formulario de login
