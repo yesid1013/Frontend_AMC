@@ -373,11 +373,6 @@ export class ActivosComponent {
               id_subcliente: value.subcliente,
               publico: value.publico,
 
-              imagen_equipo: {
-                name: this.fileName,
-                mimeType: this.fileMimeType,
-                content: this.fileContent
-              }
             }
 
             Swal.fire({

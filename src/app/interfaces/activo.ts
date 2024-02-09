@@ -62,11 +62,6 @@ export interface Activo {
     id_subcliente: string;
     publico : number;
 
-    imagen_equipo: {
-      name : string | null;
-      mimeType: string | null;
-      content: string | null;
-    };
   }
 
   export interface Adjuntar_ficha_tecnica {
