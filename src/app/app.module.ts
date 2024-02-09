@@ -31,10 +31,11 @@ import { DetalleActivoComponent } from './paginas/detalle-activo/detalle-activo.
 import { QrActivoComponent } from './paginas/qr-activo/qr-activo.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { OAuthModule } from 'angular-oauth2-oidc';
+import { environment } from 'src/environments/environment';
 
 
 const firebaseConfig = {
-  apiKey: "AIzaSyCLsiCdQFqiUFRZ0RfNetVnHMoSHie0ydY",
+  apiKey: environment.apiKey,
   authDomain: "storage-amc.firebaseapp.com",
   projectId: "storage-amc",
   storageBucket: "storage-amc.appspot.com",
