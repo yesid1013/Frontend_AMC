@@ -13,6 +13,8 @@ import { Novedad, Registro_novedad } from 'src/app/interfaces/novedad';
 import { NovedadService } from 'src/app/servicios/novedad/novedad.service';
 import { Subject } from 'rxjs';
 import { DataTableDirective } from 'angular-datatables';
+import { Storage, ref, getDownloadURL } from '@angular/fire/storage';
+
 
 
 
@@ -41,6 +43,8 @@ export class InformacionPermisosComponent {
   registrar_servicio: number | undefined;
   registrar_novedad: number | undefined;
   id_activo: string = '';
+
+  imagenActivo: any;
 
   selectedFile: File | null = null;
   fileName: string | null = null;
@@ -71,7 +75,7 @@ export class InformacionPermisosComponent {
   dtTrigger: Subject<any> = new Subject<any>();
   dtTrigger2: Subject<any> = new Subject<any>();
 
-  constructor(private route: ActivatedRoute, private permisoService: PermisosService, private communicationService: ComunicationService, private activoService: ActivoService, private fb: FormBuilder, private servicio_service: ServicioService, private novedad_service: NovedadService) { }
+  constructor(private route: ActivatedRoute, private permisoService: PermisosService, private communicationService: ComunicationService, private activoService: ActivoService, private fb: FormBuilder, private servicio_service: ServicioService, private novedad_service: NovedadService, private storage : Storage) { }
 
 
   ngOnInit() {
@@ -184,8 +188,24 @@ export class InformacionPermisosComponent {
   obtener_activo() {
     this.activoService.info_activo(this.id_activo).subscribe(data => {
       this.activoData = data;
+      this.mostrarImagenActivo()
     })
   }
+
+  mostrarImagenActivo() { //Mostrar imagen alojada en firebase
+    if (this.activoData && this.activoData.imagen_equipo) {
+      const storageRef = ref(this.storage, this.activoData.imagen_equipo);
+
+      // Obtener la URL de descarga
+      getDownloadURL(storageRef).then(url => {
+        this.imagenActivo = url;
+      }).catch(error => {
+        console.error('Error al obtener la URL de la imagen:', error);
+      });
+    }
+  }
+
+
 
   crear_servicio(value: any) {
     this.submitted = true;
