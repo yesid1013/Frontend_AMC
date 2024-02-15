@@ -17,7 +17,7 @@ const routes: Routes = [
   {
     path:'activos',
     component: ActivosComponent,
-    canActivate : [AuthGuard]
+    
   },
   {
     path:'',
