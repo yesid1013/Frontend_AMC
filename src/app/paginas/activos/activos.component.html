@@ -40,16 +40,15 @@
 
                     <button class="btn_activos_eliminados mx-2 mb-2" (click)="listar_activos_eliminados()"
                         data-bs-toggle="modal" data-bs-target="#ModalActivosEliminados">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-recycle" width="44"
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-trash" width="44"
                             height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#ffffff" fill="none"
                             stroke-linecap="round" stroke-linejoin="round">
                             <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                            <path d="M12 17l-2 2l2 2" />
-                            <path d="M10 19h9a2 2 0 0 0 1.75 -2.75l-.55 -1" />
-                            <path d="M8.536 11l-.732 -2.732l-2.732 .732" />
-                            <path d="M7.804 8.268l-4.5 7.794a2 2 0 0 0 1.506 2.89l1.141 .024" />
-                            <path d="M15.464 11l2.732 .732l.732 -2.732" />
-                            <path d="M18.196 11.732l-4.5 -7.794a2 2 0 0 0 -3.256 -.14l-.591 .976" />
+                            <path d="M4 7l16 0" />
+                            <path d="M10 11l0 6" />
+                            <path d="M14 11l0 6" />
+                            <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" />
+                            <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" />
                         </svg>
                     </button>
 
@@ -201,7 +200,8 @@
                                                 <div class="col-md-6 ">
                                                     <div class="mb-3">
                                                         <input formControlName="imagen_equipo" class="form-control"
-                                                            type="file" (change)="onFileSelected($event, 'imagenes_activos/')"
+                                                            type="file"
+                                                            (change)="onFileSelected($event, 'imagenes_activos/')"
                                                             accept="image/jpeg, image/png" id="formFile">
                                                         <label for="formFile" class="form-label">Cargar imagen</label>
                                                     </div>
@@ -342,7 +342,7 @@
                                     <td>{{activo.id_secundario}}</td>
                                     <td>{{activo.tipo_de_equipo}}</td>
                                     <td>{{activo.fecha_registro}}</td>
-                                    <td >
+                                    <td>
                                         <!--Boton editar activo-->
                                         <button (click)="set_form_edit_activo(activo)" data-bs-toggle="modal"
                                             data-bs-target="#Modal_editar_activo" class="btn_opciones">
@@ -374,15 +374,14 @@
                                         <!--Boton eliminar activo-->
                                         <button (click)="eliminar_activo(activo.id_activo)" class="btn_opciones">
                                             <svg xmlns="http://www.w3.org/2000/svg"
-                                                class="icon icon-tabler icon-tabler-trash" width="24" height="24"
+                                                class="icon icon-tabler icon-tabler-trash-x" width="24" height="24"
                                                 viewBox="0 0 24 24" stroke-width="1.5" stroke="#ff2825" fill="none"
                                                 stroke-linecap="round" stroke-linejoin="round">
                                                 <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                                <path d="M4 7l16 0" />
-                                                <path d="M10 11l0 6" />
-                                                <path d="M14 11l0 6" />
+                                                <path d="M4 7h16" />
                                                 <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" />
                                                 <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" />
+                                                <path d="M10 12l4 4m0 -4l-4 4" />
                                             </svg>
                                         </button>
 
@@ -936,8 +935,9 @@
 
                                             <div class="row p-1">
                                                 <input formControlName="orden_de_servicio"
-                                                    (change)="onFileSelected($event, 'ordenes_de_servicio/')" class="form-control" type="file"
-                                                    accept="application/pdf" id="formFile">
+                                                    (change)="onFileSelected($event, 'ordenes_de_servicio/')"
+                                                    class="form-control" type="file" accept="application/pdf"
+                                                    id="formFile">
                                                 <label for="formFile" class="form-label">Adjuntar orden de
                                                     servicio</label>
                                             </div>
