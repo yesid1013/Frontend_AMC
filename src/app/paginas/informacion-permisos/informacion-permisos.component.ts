@@ -123,6 +123,7 @@ export class InformacionPermisosComponent {
     this.dtTrigger2.unsubscribe();
   }
 
+
   onFileSelected(event: any) {
     const file = event.target.files[0];
 
@@ -257,6 +258,19 @@ export class InformacionPermisosComponent {
       this.ServicioData = data;
       this.dtTrigger.next(null);
     })
+  }
+
+  verDocumento(rutaArchivo : string){
+    if(rutaArchivo){
+      const storageRef = ref(this.storage, rutaArchivo);
+      // Obtener la URL de descarga
+      getDownloadURL(storageRef).then(url => {
+        window.open(url, '_blank')
+      }).catch(error => {
+        console.error('Error al obtener la URL de la imagen:', error);
+      });
+
+    }
   }
 
   obtener_servicios_sin_costo() { //obtiene el historial de servicios del activo sin el costo
