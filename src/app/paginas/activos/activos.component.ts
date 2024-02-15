@@ -17,6 +17,7 @@ import { ServicioService } from 'src/app/servicios/servicio/servicio.service';
 import { RegistroServicio } from 'src/app/interfaces/servicio';
 import { Storage, ref, uploadBytes } from '@angular/fire/storage';
 import { AuthGoogleService } from 'src/app/servicios/auth-google/auth-google.service';
+import { error } from 'jquery';
 
 
 @Component({
@@ -55,10 +56,7 @@ export class ActivosComponent {
 
   constructor(private communicationService: ComunicationService, private activo_service: ActivoService, private fb: FormBuilder, private subclienteService: SubclienteService, private permisos_service: PermisosService, private usuario_service: UsuarioService, private servicio_service: ServicioService,private storage: Storage,private authGoogleService:  AuthGoogleService) { }
 
-  showData(){
-    const data= JSON.stringify(this.authGoogleService.getProfile());
-    console.log(data)
-  }
+
 
   // Formulario de registrar activo
   form_activo: FormGroup = this.fb.group({
@@ -111,15 +109,40 @@ export class ActivosComponent {
   });
 
   ngOnInit(): void {
-    this.listar_activos();
+    setTimeout(() => {
+      if (sessionStorage.getItem('id_token')){
+        this.validateAccess();
+      } else {
+        this.listar_activos();
+        this.listar_subclientes();
+        this.obtener_usuarios();
+
+      } 
+
+    } , 1500);
+    
     this.dtOptions = {
       language: { url: '//cdn.datatables.net/plug-ins/1.13.4/i18n/es-ES.json' }
     };
     this.communicationService.sidebarOpen$.subscribe(isOpen => {
       this.isOpen = isOpen;
     });
-    this.listar_subclientes();
-    this.obtener_usuarios();
+    
+  }
+
+  validateAccess(){
+    this.authGoogleService.login_google().subscribe({
+      next : res => {
+        localStorage.setItem('token', res.token);
+        localStorage.setItem('nombre', res.nombre);
+        this.listar_activos();
+        this.listar_subclientes();
+        this.obtener_usuarios();
+      },
+      error : error => {
+        this.authGoogleService.logout();
+      }
+    })
   }
 
 
