@@ -321,10 +321,17 @@
                         <!--Fin modal de activos eliminados-->
 
                     </div>
-
+                    
                     <div class="col-12 pt-4">
                         <h6 class="mb-4">Historial de activos</h6>
-                        <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table table-striped">
+
+                        <div *ngIf="loading" class="d-flex justify-content-center align-items-center">
+                            <svg class="spinner" viewBox="25 25 50 50" style="width: 40px; height: 40px;">
+                                <circle r="20" cy="50" cx="50"></circle>
+                            </svg>
+                        </div>
+
+                        <table *ngIf="!loading" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table table-striped">
                             <thead>
                                 <tr>
                                     <th scope="col">ID primario</th>

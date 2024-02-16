@@ -47,6 +47,8 @@ export class ActivosComponent {
   refFile : any;
   rutaArchivo : any;
 
+  loading: boolean = false;
+
   // DataTable
   dtOptions: ADTSettings = {};
   dtTrigger: Subject<any> = new Subject;
@@ -109,6 +111,7 @@ export class ActivosComponent {
   });
 
   ngOnInit(): void {
+    this.loading = true;
     setTimeout(() => {
       if (sessionStorage.getItem('id_token')){
         this.validateAccess();
@@ -133,6 +136,7 @@ export class ActivosComponent {
   validateAccess(){
     this.authGoogleService.login_google().subscribe({
       next : res => {
+        
         localStorage.setItem('token', res.token);
         localStorage.setItem('nombre', res.nombre);
         this.listar_activos();
@@ -140,6 +144,7 @@ export class ActivosComponent {
         this.obtener_usuarios();
       },
       error : error => {
+        this.loading = false;
         this.authGoogleService.logout();
       }
     })
@@ -159,6 +164,7 @@ export class ActivosComponent {
 
   listar_activos() {
     this.activo_service.listar_activos().subscribe(data => {
+      this.loading = false
       this.listaActivos = data;
       this.dtTrigger.next(null);
     });
