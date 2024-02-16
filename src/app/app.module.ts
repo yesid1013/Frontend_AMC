@@ -32,6 +32,7 @@ import { QrActivoComponent } from './paginas/qr-activo/qr-activo.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { OAuthModule } from 'angular-oauth2-oidc';
 import { environment } from 'src/environments/environment';
+import { RegistroUsuarioComponent } from './paginas/registro-usuario/registro-usuario.component';
 
 
 const firebaseConfig = {
@@ -58,6 +59,7 @@ const firebaseConfig = {
     InformacionPermisosComponent,
     DetalleActivoComponent,
     QrActivoComponent,
+    RegistroUsuarioComponent,
   ],
   imports: [
     BrowserModule,
