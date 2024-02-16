@@ -1,1 +1,53 @@
-<p>registro-usuario works!</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+</head>
+<body >
+
+    <section class="wrapper">
+        <div class="container">
+            <div class="col-sm-8 offset-sm-2 col-lg-6 offset-lg-3 col-xl-4 offset-xl-4 text-center">
+                <div class="logo">
+                    <img src="../../../assets/agregar-usuario.png" class="img-fluid" alt="logo"> 
+                </div>
+
+                <form class="rounded bg-white shadow p-5">
+                    <h3 class="text-dark fw-bolder fs-4 mb-2">Registrarte</h3>
+                    <div class="fw-normal text-muted mb-4">
+
+                    </div>
+
+                    <div class="form-floating mb-3">
+                        <input  type="email" class="form-control" placeholder="Correo" id="floatingInput" formControlName = "correo" >
+                        <label for="floatingInput">Correo</label>
+                        
+                    </div>
+
+                    <div class="form-floating">
+                        <input type="password" formControlName = "contrasena" class="form-control" id="floatingPassword" placeholder="Password">
+                        <label for="floatingPassword">Contraseña</label>
+
+                    </div>
+
+                    <div class="mt-2 text-end">
+                        <a href="#" class="text-primary fw-bold text-decoration-none">Olvidé mi contraseña</a>
+                    </div>
+
+                    <button type="submit"  class="btn_login w-100 my-4">Iniciar sesión</button>
+
+
+                    <div class="text-center text-muted text-uppercase mb-3">
+
+                    </div>
+
+                </form>
+
+            </div>
+        </div>
+        
+    </section>
+</body>
+</html>
