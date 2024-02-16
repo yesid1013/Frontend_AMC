@@ -10,6 +10,7 @@ import { PermisosRecibidosComponent } from './paginas/permisos-recibidos/permiso
 import { InformacionPermisosComponent } from './paginas/informacion-permisos/informacion-permisos.component';
 import { DetalleActivoComponent } from './paginas/detalle-activo/detalle-activo.component';
 import { QrActivoComponent } from './paginas/qr-activo/qr-activo.component';
+import { RegistroUsuarioComponent } from './paginas/registro-usuario/registro-usuario.component';
 
 
 const routes: Routes = [
@@ -57,6 +58,11 @@ const routes: Routes = [
   {
     path : 'qractivo/:id_activo',
     component : QrActivoComponent
+  },
+
+  {
+    path : 'registro',
+    component : RegistroUsuarioComponent
   }
 
 ];
